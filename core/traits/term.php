@@ -119,8 +119,13 @@ trait Term {
         return false;
     }
 
-    public static function get_term_field($term = null, $field = 'name', $single = null) {      
+    public static function get_term_field($field = 'name', $term = null, $single = null) {      
         $value = null;
+        if (is_numeric($field) && intval($field)) {
+            $tmp = $term;
+            $term = $field;
+            $field = $tmp;
+        }
         $term = self::get_term($term);
         if ($term) {
             if (in_array($field, array('permalink', 'get_permalink', 'get_term_link', 'term_link'))) {

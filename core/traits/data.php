@@ -181,12 +181,14 @@ trait Data {
         return $data;
     }
     
-    public static function empty($source) {
+    public static function empty($source, $key = false) {
         if (is_array($source)) {
             $source = array_filter($source);
-        }               
-        return \Elementor\Utils::is_empty($source);
-        //return empty($data);
+        }        
+        if ($key) {
+            return \Elementor\Utils::is_empty($source);
+        }
+        return empty($source);
     }
 
 }
