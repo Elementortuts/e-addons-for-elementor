@@ -43,8 +43,13 @@ trait User {
         return $fields;
     }
 
-    public static function get_user_field($user_id = null, $field = 'display_name', $single = null) {
+    public static function get_user_field($field = 'display_name', $user_id = null, $single = null) {
         $value = null;
+        if (is_numeric($field) && intval($field)) {
+            $tmp = $user_id;
+            $user_id = $field;
+            $field = $tmp;
+        }
         $user_id = (is_int($user_id)) ? $user_id : get_current_user_id();
         $user_id = (is_int($user_id)) ? $user_id : get_the_author_meta('ID');
         $user = get_user_by('ID', $user_id);

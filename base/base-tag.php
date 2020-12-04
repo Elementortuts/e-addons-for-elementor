@@ -20,7 +20,23 @@ abstract class Base_Tag extends Tag {
     }
     
     public static function _group() {
-        return array('name' => 'e-addons', 'title' => 'e-addons');
+        return self::_groups('e-addons');
+    }
+    public static function _groups($group = '') {
+        $groups = array(
+            'e-addons' => array('name' => 'e-addons', 'title' => 'e-addons'),
+            'user' => array('name' => 'user', 'title' => __('User', 'e-addons-for-elementor')),
+            'term' => array('name' => 'term', 'title' => __('Term', 'e-addons-for-elementor')),
+            'post' => array('name' => 'post', 'title' => __('Post', 'e-addons-for-elementor')),
+            'author' => array('name' => 'author', 'title' => __('Author', 'e-addons-for-elementor')),
+        );
+        if ($group) {
+            if (isset($groups[$group])) {
+                return $groups[$group];
+            }
+            return reset($groups);
+        }
+        return $groups;
     }
 
     public function get_categories() {

@@ -42,8 +42,13 @@ trait Post {
         return $terms;
     }
 
-    public static function get_post_field($p_id = null, $field = 'post_title', $single = null) {
+    public static function get_post_field($field = 'post_title', $p_id = null, $single = null) {
         $value = null;
+        if (is_numeric($field) && intval($field)) {
+            $tmp = $p_id;
+            $p_id = $field;
+            $field = $tmp;
+        }
         $p_id = (is_int($p_id)) ? $p_id : get_the_ID();
         $post = get_post($p_id);
         if ($post) {
