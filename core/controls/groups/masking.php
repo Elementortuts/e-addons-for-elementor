@@ -58,6 +58,7 @@ class Masking extends Group_Control_Base {
         $controls['images_mask'] = [
             'label' => __('Select IMAGE mask', 'e-addons-for-elementor','smoothscroll'),
             'type' => 'ui_selector',
+            'label_block' => true,
             'toggle' => false,
             'type_selector' => 'image',
             'columns_grid' => 4,
@@ -343,6 +344,7 @@ class Masking extends Group_Control_Base {
 			'label' => __('Predefined Clip-Path', 'e-addons-for-elementor'),
             'type' => 'ui_selector',
             'toggle' => false,
+            'label_block' => true,
             'type_selector' => 'image',
             'columns_grid' => 5,
             'default' => 'polygon(50% 0%, 0% 100%, 100% 100%)',
