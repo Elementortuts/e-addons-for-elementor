@@ -219,3 +219,8 @@
 .eadd-dynamic-tag-author-email:before { content: '\e8a8'; } /* '' */
 .eadd-dynamic-tag-author-avatar:before { content: '\e8a9'; } /* '' */
 .eadd-dynamic-tag-author-archiveurl:before { content: '\e8aa'; } /* '' */
+.eadd-dynamic-tag-options-site-field:before { content: '\e88b'; } /* '' */
+.eadd-dynamic-tag-options-site-image:before { content: '\e8ab'; } /* '' */
+.eadd-dynamic-tag-options:before { content: '\e8ac'; } /* '' */
+.eadd-infinite-pagination:before { content: '\e8ad'; } /* '' */
+.eadd-numeric-pagination:before { content: '\e8ae'; } /* '' */
