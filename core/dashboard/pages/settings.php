@@ -140,7 +140,11 @@ $e_addons_plugins = \EAddonsForElementor\Plugin::instance()->get_addons(true);
                                             <?php } ?>
                                             <ul class="e_addon_plugin_modules">
                                                 <?php
-                                                $modules = $modules_manager->find_modules($e_plugin['path']);                                                
+                                                $modules = $modules_manager->find_modules($e_plugin['path']);      
+                                                if ($key = array_search('disable', $modules)) {
+                                                    unset($modules[$key]);
+                                                    $modules[] = 'disable';
+                                                }
                                                 foreach ($modules as $amod) {
                                                     $unique_mod = $e_plugin['TextDomain'] . '_' . $amod;            
                                                     ?>

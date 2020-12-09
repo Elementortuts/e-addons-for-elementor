@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 abstract class Base_Tag extends Tag {
-    
+
     public $data = false;
 
     use \EAddonsForElementor\Base\Traits\Base;
@@ -18,10 +18,11 @@ abstract class Base_Tag extends Tag {
     public function get_group() {
         return 'e-addons';
     }
-    
+
     public static function _group() {
         return self::_groups('e-addons');
     }
+
     public static function _groups($group = '') {
         $groups = array(
             'e-addons' => array('name' => 'e-addons', 'title' => 'e-addons'),
@@ -29,6 +30,7 @@ abstract class Base_Tag extends Tag {
             'term' => array('name' => 'term', 'title' => __('Term', 'e-addons-for-elementor')),
             'post' => array('name' => 'post', 'title' => __('Post', 'e-addons-for-elementor')),
             'author' => array('name' => 'author', 'title' => __('Author', 'e-addons-for-elementor')),
+            'site' => array('name' => 'site', 'title' => __('Site', 'e-addons-for-elementor')),
         );
         if ($group) {
             if (isset($groups[$group])) {
@@ -42,7 +44,7 @@ abstract class Base_Tag extends Tag {
     public function get_categories() {
         return Utils::get_dynamic_tags_categories();
     }
-    
+
     /**
      * @since 2.0.0
      * @access public
@@ -61,24 +63,28 @@ abstract class Base_Tag extends Tag {
             $this->render();
             $value = ob_get_clean();
         }
-        
-        if ( ! Utils::empty( $value ) ) {
-                // TODO: fix spaces in `before`/`after` if WRAPPED_TAG ( conflicted with .elementor-tag { display: inline-flex; } );
-                if ( ! Utils::empty( $settings, 'before' ) ) {
-                        $value = wp_kses_post( $settings['before'] ) . $value;
-                }
 
-                if ( ! Utils::empty( $settings, 'after' ) ) {
-                        $value .= wp_kses_post( $settings['after'] );
-                }
-
-                if ( static::WRAPPED_TAG ) :
-                        $value = '<span id="elementor-tag-' . esc_attr( $this->get_id() ) . '" class="elementor-tag">' . $value . '</span>';
-                endif;
-
-        } elseif ( ! Utils::empty( $settings, 'fallback' ) ) {
+        if (Utils::empty($value)) {
+            if (!Utils::empty($settings, 'fallback')) {
                 $value = $settings['fallback'];
                 $value = Utils::get_dynamic_data($value);
+            }
+        }
+
+        if (!Utils::empty($value) && !$this->data) {
+
+            // TODO: fix spaces in `before`/`after` if WRAPPED_TAG ( conflicted with .elementor-tag { display: inline-flex; } );
+            if (!Utils::empty($settings, 'before')) {
+                $value = wp_kses_post($settings['before']) . $value;
+            }
+
+            if (!Utils::empty($settings, 'after')) {
+                $value .= wp_kses_post($settings['after']);
+            }
+
+            if (static::WRAPPED_TAG) :
+                $value = '<span id="elementor-tag-' . esc_attr($this->get_id()) . '" class="elementor-tag">' . $value . '</span>';
+            endif;
         }
 
         return $value;

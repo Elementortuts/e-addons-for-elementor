@@ -50,8 +50,8 @@ trait User {
             $user_id = $field;
             $field = $tmp;
         }
-        $user_id = (is_int($user_id)) ? $user_id : get_current_user_id();
-        $user_id = (is_int($user_id)) ? $user_id : get_the_author_meta('ID');
+        $user_id = (is_numeric($user_id) && intval($user_id)) ? intval($user_id) : get_current_user_id();
+        $user_id = (is_numeric($user_id) && intval($user_id)) ? intval($user_id) : get_the_author_meta('ID');
         $user = get_user_by('ID', $user_id);
         if ($user) {
             $value = self::get_wp_object_field($user, $field, $single);            
