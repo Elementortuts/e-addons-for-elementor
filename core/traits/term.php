@@ -138,7 +138,10 @@ trait Term {
         return self::adjust_data($value, $single);
     }
     
-    public static function get_term_url($id = null) {
-        return get_term_link($id);
+    public static function get_term_url($id = null, $taxonomy = '') {
+        if (!$taxonomy) {
+            $taxonomy = self::get_term_taxonomy($id);
+        }
+        return get_term_link($id, $taxonomy);
     }
 }

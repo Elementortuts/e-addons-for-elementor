@@ -234,8 +234,10 @@ trait Base {
         return $wp_plugin_dir . DIRECTORY_SEPARATOR . $this->get_plugin_name() . '/';
     }
 
-    public function get_module() {
-        $slug = $this->get_module_slug();
+    public function get_module($slug = '') {
+        if (!$slug) {
+            $slug = $this->get_module_slug();
+        }
         $module = \EAddonsForElementor\Plugin::instance()->modules_manager->get_modules($slug);        
         return $module;
     }

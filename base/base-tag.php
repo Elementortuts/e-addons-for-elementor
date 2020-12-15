@@ -44,6 +44,10 @@ abstract class Base_Tag extends Tag {
     public function get_categories() {
         return Utils::get_dynamic_tags_categories();
     }
+    
+    /*public function get_panel_template_setting_key() {
+            return 'key';
+    }*/
 
     /**
      * @since 2.0.0

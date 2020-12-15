@@ -51,6 +51,7 @@
     -ms-flex-negative: 0;        
 }
 
+/*
 @media (prefers-color-scheme: dark) {
     .elementor-control-type-e-query .e-addons-elementor-control-quick-edit {
         background-color: #34383C;
@@ -58,6 +59,7 @@
         color: #E0E1E3;
     }
 }
+*/
 .elementor-control-type-e-query .e-addons-elementor-control-quick-edit a {
     display: block;
     width: 100%;

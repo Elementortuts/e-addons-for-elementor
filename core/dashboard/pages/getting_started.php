@@ -23,7 +23,7 @@ if (!current_user_can('manage_options')) {
                     <img src="<?php echo E_ADDONS_URL; ?>/assets/img/e-addons-anim.svg">
                 </div>
                 <div class="e-addons-start-page__content_first e-addons-start-page__scheme">
-                    <h4 class="e-addons-version">2.0</h4>
+                    <h4 class="e-addons-version">2.1</h4>
                     <h2>Welcome to <b>e-addons</b> <br>for Elementor</h2>
                     <p class="e-addons-evidence">The plugin has been completely revamped.<br>Once installed, remember to activate the desired features.</p>
                     <a href="https://e-addons.com/the-evolution/" target="_blank" class="button button-primary button-hero button-e-addons">Read More</a>

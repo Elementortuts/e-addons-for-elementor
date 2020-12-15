@@ -4,7 +4,7 @@ Donate link: https://e-addons.com/donate/
 Tags: elementor, addons, extension, dynamic, template, token, widget, module, design
 Requires at least: 5.0
 Tested up to: 5.5.1
-Stable tag: 2.0
+Stable tag: 2.1
 Requires PHP: 7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -95,6 +95,12 @@ Absolutely not! But for an advanced use it's better to understand Wordpress logi
 3. **More e-addons** enable only wanted and really needed features
 
 == Changelog ==
+
+= 2.1 - 14-12-2020 =
+* Increase: support for Actions
+* Increase: support for Dynamic Tags Data
+* Update: e-addons Icon Library
+* Fix: minor fixes
 
 = 2.0.1 - 30-11-2020 =
 * Tweak: module switcher on Settings and Restore
