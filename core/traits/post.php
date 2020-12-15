@@ -49,7 +49,7 @@ trait Post {
             $p_id = $field;
             $field = $tmp;
         }
-        $p_id = (is_int($p_id)) ? $p_id : get_the_ID();
+        $p_id = (is_numeric($p_id) && intval($p_id)) ? intval($p_id) : get_the_ID();
         $post = get_post($p_id);
         if ($post) {
             switch ($field) {
@@ -76,7 +76,7 @@ trait Post {
 
             }
             if ($value === null) {
-                $value = self::get_wp_object_field($post, $field, $single);
+                $value = self::get_wp_object_field($post, $field, $single);                
             }
             if ($value === null) {
                 $value = self::get_post_terms($p_id, $field);

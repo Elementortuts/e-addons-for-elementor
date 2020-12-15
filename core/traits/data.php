@@ -186,7 +186,7 @@ trait Data {
             $source = array_filter($source);
         }        
         if ($key) {
-            return \Elementor\Utils::is_empty($source);
+            return \Elementor\Utils::is_empty($source, $key);
         }
         return empty($source);
     }
