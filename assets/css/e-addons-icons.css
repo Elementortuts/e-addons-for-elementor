@@ -225,3 +225,9 @@
 .eadd-dynamic-tag-options:before { content: '\e8ac'; } /* '' */
 .eadd-infinite-pagination:before { content: '\e8ad'; } /* '' */
 .eadd-numeric-pagination:before { content: '\e8ae'; } /* '' */
+.eadd-el-form-pro-act-save-terms:before { content: '\e8af'; } /* '' */
+.eadd-el-form-pro-act-save-users:before { content: '\e8b0'; } /* '' */
+.eadd-el-form-pro-act-save-options:before { content: '\e8b1'; } /* '' */
+.eadd-el-form-pro-act-save-comments:before { content: '\e8b2'; } /* '' */
+.eadd-el-form-pro-act-save-db:before { content: '\e88c'; } /* '' */
+.eadd-el-form-pro-act-save-posts:before { content: '\e88d'; } /* '' */
