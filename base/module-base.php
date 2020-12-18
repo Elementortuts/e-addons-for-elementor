@@ -44,6 +44,7 @@ abstract class Module_Base extends Module {
         //add_action('elementor/frontend/after_register_styles', [$this, 'init_styles']);
         //add_action('elementor/frontend/after_register_scripts', [$this, 'init_scripts']);
 
+        $this->init_tabs();
         $this->init_extensions();
         
         $this->init_globals();
@@ -224,6 +225,16 @@ abstract class Module_Base extends Module {
         \EAddonsForElementor\Core\Managers\Assets::register_assets($assets_path, 'css');
     }
 
+    public function init_tabs() {        
+        $control_manager = \Elementor\Plugin::instance()->controls_manager;
+        foreach ($this->get_elements('tabs') as $ext) {
+            $class_name = $this->get_reflection()->getNamespaceName() . '\Tabs\\' . $ext;
+            $tab_obj = new $class_name();
+            $tab_obj->_register_tab();
+            //$control_manager::add_tab($tab_obj->get_id(), $tab_obj->get_title());
+        }
+    }
+    
     public function init_extensions() {        
         foreach ($this->get_elements('extensions') as $ext) {
             $class_name = $this->get_reflection()->getNamespaceName() . '\Extensions\\' . $ext;
