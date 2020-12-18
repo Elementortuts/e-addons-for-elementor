@@ -88,7 +88,7 @@
     border-top: 1px dotted #999;
 }
 .e-add-info-panel{
-    background-color: #eee;
+    background-color: rgba(200,200,200,0.2);
     padding: 15px;
     border-radius: 10px;
     font-size: 11px;
