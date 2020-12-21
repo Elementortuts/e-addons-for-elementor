@@ -47,6 +47,7 @@ class Plugin {
     public $version_manager;
     public $template_manager;
     public $licenses_manager;
+    public $ajax_manager;
     public $addons_manager = [];
 
     /**
@@ -160,8 +161,10 @@ class Plugin {
         $this->modules_manager = new Modules();
         $this->template_manager = new Template();        
         
+        $this->ajax_manager = new \EAddonsForElementor\Core\Ajax\Actions();
+                
         if (is_admin()) {
-            $ajax = new \EAddonsForElementor\Core\Ajax\Actions();
+            //$ajax = new \EAddonsForElementor\Core\Ajax\Actions();
             $dash = new \EAddonsForElementor\Core\Dashboard\Dashboard();
         }
 

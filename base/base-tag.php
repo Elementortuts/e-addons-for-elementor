@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 abstract class Base_Tag extends Tag {
 
-    public $data = false;
+    public $is_data = false;
 
     use \EAddonsForElementor\Base\Traits\Base;
 
@@ -59,8 +59,8 @@ abstract class Base_Tag extends Tag {
      */
     public function get_content(array $options = []) {
         $settings = $this->get_settings();
-
-        if ($this->data) {
+        
+        if ($this->is_data) {
             $value = $this->get_value($options);
         } else {
             ob_start();
@@ -75,7 +75,7 @@ abstract class Base_Tag extends Tag {
             }
         }
 
-        if (!Utils::empty($value) && !$this->data) {
+        if (!Utils::empty($value) && !$this->is_data) {
 
             // TODO: fix spaces in `before`/`after` if WRAPPED_TAG ( conflicted with .elementor-tag { display: inline-flex; } );
             if (!Utils::empty($settings, 'before')) {
@@ -92,6 +92,10 @@ abstract class Base_Tag extends Tag {
         }
 
         return $value;
+    }
+    
+    public function get_value(array $options = []) {
+        return false;
     }
 
 }
