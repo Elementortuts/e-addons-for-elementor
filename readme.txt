@@ -101,6 +101,7 @@ Absolutely not! But for an advanced use it's better to understand Wordpress logi
 * Add: methods on base action
 * Fix: jQuery in e-addons Dashboard
 * Fix: Data Dynamic Tags
+* Fix: Compatibility with Elementor 3.1.0
 
 = 2.1 - 14-12-2020 =
 * Increase: support for Actions

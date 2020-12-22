@@ -44,10 +44,42 @@ abstract class Base_Tag extends Tag {
     public function get_categories() {
         return Utils::get_dynamic_tags_categories();
     }
-    
-    /*public function get_panel_template_setting_key() {
-            return 'key';
-    }*/
+
+    /* public function register_controls() {
+      //parent::register_controls();
+      if (version_compare(ELEMENTOR_VERSION, '3.1.0') < 0) {
+      $this->_register_controls();
+      }
+      } */
+
+    public function _register_controls() {
+        //parent::register_controls();
+        if (version_compare(ELEMENTOR_VERSION, '3.1.0') < 0) {
+            $this->register_controls();
+        }
+    }
+
+    /**
+     * Register controls.
+     *
+     * Used to add new controls to any element type. For example, external
+     * developers use this method to register controls in a widget.
+     *
+     * Should be inherited and register new controls using `add_control()`,
+     * `add_responsive_control()` and `add_group_control()`, inside control
+     * wrappers like `start_controls_section()`, `start_controls_tabs()` and
+     * `start_controls_tab()`.
+     *
+     * @since 1.4.0
+     * @access protected
+     */
+    protected function register_controls() {
+        
+    }
+
+    /* public function get_panel_template_setting_key() {
+      return 'key';
+      } */
 
     /**
      * @since 2.0.0
@@ -59,7 +91,7 @@ abstract class Base_Tag extends Tag {
      */
     public function get_content(array $options = []) {
         $settings = $this->get_settings();
-        
+
         if ($this->is_data) {
             $value = $this->get_value($options);
         } else {
@@ -93,7 +125,7 @@ abstract class Base_Tag extends Tag {
 
         return $value;
     }
-    
+
     public function get_value(array $options = []) {
         return false;
     }
