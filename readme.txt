@@ -96,6 +96,12 @@ Absolutely not! But for an advanced use it's better to understand Wordpress logi
 
 == Changelog ==
 
+= 2.1.1 - 22-12-2020 =
+* Add: Ajax action Term Posts
+* Add: methods on base action
+* Fix: jQuery in e-addons Dashboard
+* Fix: Data Dynamic Tags
+
 = 2.1 - 14-12-2020 =
 * Increase: support for Actions
 * Increase: support for Dynamic Tags Data

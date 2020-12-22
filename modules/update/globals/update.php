@@ -29,7 +29,8 @@ class Update extends Base_Global {
         }
 
         if (is_admin() && !empty($_GET['page']) && in_array($_GET['page'], array('e_addons'))) {
-            wp_enqueue_script('e-addons-admin-dash-ajax', $this->get_module_url() . '/assets/js/e-addons-admin-dash-ajax.js');
+            wp_enqueue_script('jquery');
+            wp_enqueue_script('e-addons-admin-dash-ajax', $this->get_module_url() . 'assets/js/e-addons-admin-dash-ajax.js');
         }
 
         add_action('e_addons/dash/more', [$this, 'more_addons']);
