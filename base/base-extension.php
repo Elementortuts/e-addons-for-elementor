@@ -12,6 +12,8 @@ if (!defined('ABSPATH')) {
 
 abstract class Base_Extension extends Element_Base {
 
+    public $common = false;
+    
     public $common_sections_actions = array(
         'common' => array(
             'element' => 'common',
@@ -39,7 +41,17 @@ abstract class Base_Extension extends Element_Base {
         parent::__construct();
 
         // Add the advanced section required to display controls
-        $this->add_common_sections_actions();
+        if ($this->common && !empty($this->common_sections_actions)) {
+            foreach ($this->common_sections_actions as $action) {
+                //Activate action for elements
+                if ($action['element'] == 'common' || $action['element'] == 'widget') {
+                    add_action('elementor/element/after_section_end', [$this, '_add_sections'], 11, 3);
+                } else {
+                    add_action('elementor/element/' . $action['element'] . '/' . $action['action'] . '/after_section_end', [$this, '_add_common_sections'], 11, 2);
+                }            
+            }        
+            add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue']);
+        }
     }
 
     public function _enqueue_scripts() {
@@ -85,18 +97,6 @@ abstract class Base_Extension extends Element_Base {
         $this->_print_styles();
         $this->_print_scripts();
     }
-
-    public function add_common_sections_actions() {
-        foreach ($this->common_sections_actions as $action) {
-            //Activate action for elements
-            if ($action['element'] == 'common' || $action['element'] == 'widget') {
-                add_action('elementor/element/after_section_end', [$this, '_add_sections'], 11, 3);
-            } else {
-                add_action('elementor/element/' . $action['element'] . '/' . $action['action'] . '/after_section_end', [$this, '_add_common_sections'], 11, 2);
-            }            
-        }        
-        add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue']);
-    }
     
     public function _add_sections($element, $section_id, $args) {
         
@@ -136,14 +136,6 @@ abstract class Base_Extension extends Element_Base {
             return false;
         }
 
-        $this->add_control_section($section_name, $element);
-    }
-    
-    public function get_section_name() {
-        return 'e_section_' . $this->get_name() . '_advanced';
-    }
-    
-    public function add_control_section($section_name, $element) {
         $element->start_controls_section(
                 $section_name, [
             'tab' => Controls_Manager::TAB_ADVANCED,
@@ -152,6 +144,10 @@ abstract class Base_Extension extends Element_Base {
         );        
         $element->end_controls_section();
         self::$common_sections[$element->get_type()][] = $section_name; 
+    }
+    
+    public function get_section_name() {
+        return 'e_section_' . $this->get_name() . '_advanced';
     }
     
     public function add_heading($element, $heading = 'e-addons', $slug = '') {

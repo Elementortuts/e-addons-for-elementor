@@ -10,8 +10,8 @@ trait Elementor {
     public static $documents = [];
 
     public static function get_current_post_id() {
-        if (isset(Plugin::elementor()->documents)) {
-            return Plugin::elementor()->documents->get_current()->get_main_id();
+        if (isset(\Elementor\Plugin::instance()->documents)) {
+            return \Elementor\Plugin::instance()->documents->get_current()->get_main_id();
         }
         return get_the_ID();
     }

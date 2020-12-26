@@ -41,11 +41,10 @@ class Template {
     public static function get_builder_content($post_id, $with_css = false) {
         $content = '';
         $post_id = apply_filters('wpml_object_id', $post_id, 'elementor_library', true);
-        $is_elementor = get_post_meta($post_id, '_elementor_edit_mode', true);  
-        $is_elementor = get_post_meta($post_id, '_elementor_edit_mode', true);  
-        
+        $is_elementor = get_post_meta($post_id, '_elementor_edit_mode', true);
+        $is_elementor = get_post_meta($post_id, '_elementor_edit_mode', true);        
         if ($is_elementor) {
-            $content = \Elementor\Plugin::instance()->frontend->get_builder_content($post_id, $with_css);            
+            $content = \Elementor\Plugin::instance()->frontend->get_builder_content($post_id, $with_css);
             $content = self::fix_template_class($content, $post_id);
         } else {
             if ($post_id) {
@@ -89,12 +88,12 @@ class Template {
                 }
             }
             if (empty($args['css']) && !empty($_POST['css'])) {
-                $args['css'] = (bool)$_POST['css'];
+                $args['css'] = (bool) $_POST['css'];
             }
             if (empty($args['title']) && !empty($_POST['title'])) {
-                $args['title'] = (bool)$_POST['title'];
+                $args['title'] = (bool) $_POST['title'];
             }
-            
+
             if ($tpl_id) {
                 echo self::e_template($tpl_id, $args);
             }
@@ -120,10 +119,10 @@ class Template {
 
         if ($tpl_id) {
             global $wp_query, $post, $authordata, $user, $current_user, $term;
-            
+
             $initial_queried_object = $wp_query->queried_object;
             $initial_queried_object_id = $wp_query->queried_object_id;
-            if (!empty($args['post_id']) && intval($args['post_id'])) {                
+            if (!empty($args['post_id']) && intval($args['post_id'])) {
                 $initial_post = $post;
                 $post = get_post($args['post_id']);
                 if ($post) {
@@ -131,7 +130,7 @@ class Template {
                     $wp_query->queried_object_id = $args['post_id'];
                 }
             }
-            if (!empty($args['author_id']) && intval($args['author_id'])) {                
+            if (!empty($args['author_id']) && intval($args['author_id'])) {
                 $initial_author = $authordata;
                 $authordata = get_user_by('ID', $args['author_id']);
                 if ($authordata) {
@@ -139,7 +138,7 @@ class Template {
                     $wp_query->queried_object_id = $args['author_id'];
                 }
             }
-            if (!empty($args['user_id']) && intval($args['user_id'])) {                
+            if (!empty($args['user_id']) && intval($args['user_id'])) {
                 $initial_user = $current_user;
                 $user = $current_user = get_user_by('ID', $args['user_id']);
                 if ($user) {
@@ -148,32 +147,32 @@ class Template {
                 }
             }
 
-            if (!empty($args['term_id']) && intval($args['term_id'])) {                
+            if (!empty($args['term_id']) && intval($args['term_id'])) {
                 $term = get_term($args['term_id']);
                 if ($term) {
                     $wp_query->queried_object = $term;
                     $wp_query->queried_object_id = $args['term_id'];
                 }
             }
-            
+
             $with_css = (!empty($args['css']) && ($args['css'] == 'true' || $args['css'] === true));
-            if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
+            if (\Elementor\Plugin::$instance->editor->is_edit_mode() || wp_doing_ajax()) {
                 $with_css = true;
             }
-            
+
             if (!Utils::is_preview(true) && !empty($args['ajax'])) {
                 $with_css = true;
             }
-            
+
             $tpl_html = false;
-            
+
             if (!Utils::is_preview(true) && !empty($args['loading']) && $args['loading'] == 'lazy') {
                 $params = '';
-                $attributes = wp_slash(wp_json_encode($args));    
+                $attributes = wp_slash(wp_json_encode($args));
                 foreach ($args as $akey => $value) {
-                    if (in_array($attributes, array('post_id','user_id','term_id','author_id'))) {
+                    if (in_array($attributes, array('post_id', 'user_id', 'term_id', 'author_id'))) {
                         $key = str_replace('_id', '', $akey);
-                        $params .= ' data-'.$key.'="' . $value . '"';
+                        $params .= ' data-' . $key . '="' . $value . '"';
                     }
                 }
                 $tpl_html = '<div class="e-elementor-template-placeholder" data-id="' . $tpl_id . '"' . $params . '>';
@@ -181,36 +180,32 @@ class Template {
                 ?>
                 <script>
                     (function ($) {
-                        if (typeof e_load_templates !== "function") {
-                            function e_load_templates($scope) {
-                                var e_load_template = function (dir) {
-                                    var e_data = {
-                                        "action": "e_elementor_template",
-                                        "template_id": jQuery(this).data('id'),
-                                    };
-                                    jQuery.ajax({
-                                        url: "<?php echo admin_url('admin-ajax.php'); ?>",
-                                        dataType: "html",
-                                        context: jQuery(this),
-                                        type: "POST",
-                                        data: e_data,
-                                        error: function () {
-                                            console.log("error");
-                                        },
-                                        success: function (data, status, xhr) {
-                                            //console.log(data);
-                                            jQuery(this).html(data);
-                                            //jQuery(this).children(".elementor").addClass("e-elementor-template-loaded").unwrap().hide().fadeIn("slow");
-                                        },
-                                    });
-                                }
+                        jQuery(window).on("elementor/frontend/init", function () {
+                            elementorFrontend.hooks.addAction("frontend/element_ready/widget", function ($scope) {
                                 jQuery('.e-elementor-template-placeholder').each(function () {
-                                    elementorFrontend.waypoint(jQuery(this), e_load_template, {offset: "100%", triggerOnce: true});
+                                    elementorFrontend.waypoint(jQuery(this), function (dir) {
+                                        var e_data = {
+                                            "action": "e_elementor_template",
+                                            "template_id": jQuery(this).data('id'),
+                                        };
+                                        jQuery.ajax({
+                                            url: "<?php echo admin_url('admin-ajax.php'); ?>",
+                                            dataType: "html",
+                                            context: jQuery(this),
+                                            type: "POST",
+                                            data: e_data,
+                                            error: function () {
+                                                console.log("error");
+                                            },
+                                            success: function (data, status, xhr) {
+                                                //console.log(data);
+                                                jQuery(this).html(data);
+                                                //jQuery(this).children(".elementor").addClass("e-elementor-template-loaded").unwrap().hide().fadeIn("slow");
+                                            },
+                                        });
+                                    }, {offset: "100%", triggerOnce: true});
                                 });
                             }
-                        }
-                        jQuery(window).on("elementor/frontend/init", function () {
-                            elementorFrontend.hooks.addAction("frontend/element_ready/widget", e_load_templates);
                         });
                     })(jQuery);
                 </script>
@@ -225,7 +220,7 @@ class Template {
             if (!empty($args['title']) && $args['title']) {
                 $tpl_html = preg_replace('/data-elementor-id="/', 'data-title="' . wp_slash($post->post_title) . '" data-elementor-id="', $tpl_html, 1);
             }
-            
+
             if (!empty($args['post_id'])) {
                 $post = $initial_post;
             }
@@ -238,25 +233,30 @@ class Template {
             }
             $wp_query->queried_object = $initial_queried_object;
             $wp_query->queried_object_id = $initial_queried_object_id;
+            
+            /*if (wp_doing_ajax()) {
+                $tpl_html .= $this->render_style($element);
+            }*/
 
             return $tpl_html;
         }
     }
 
-    public static function fix_template_class($content = '', $tpl_id = 0) {        
-        if ($content) {            
+    public static function fix_template_class($content = '', $tpl_id = 0) {
+        if ($content) {
             $tpl_html_id = Utils::get_template_from_html($content);
             if ($tpl_id && $tpl_id != $tpl_html_id) {
                 $content = str_replace('class="elementor elementor-' . $tpl_html_id . ' ', 'class="elementor elementor-' . $tpl_id . ' ', $content);
             } else {
                 $tpl_id = $tpl_html_id;
             }
-            if ($tpl_id) {                
-                $template_type = get_post_meta($tpl_id, '_elementor_template_type', true);                
-                if (in_array($template_type, array('page', 'section'))) {
-                    $q_o = self::get_queried_object();                
+            if ($tpl_id) {
+                $template_type = get_post_meta($tpl_id, '_elementor_template_type', true);
+                if (in_array($template_type, array('page', 'section', 'single', 'single-post', 'single-page', 'product'))) {
+                    $q_o = self::get_queried_object();
                     $element_class = 'e-' . $q_o['type'] . '-' . $q_o['id'];
-                    if (Utils::is_preview(true) || strpos($content, $element_class) === false) {
+                    //if (Utils::is_preview(true) || strpos($content, $element_class) === false || wp_doing_ajax()) {
+                    if (strpos($content, ' '.$element_class) === false) {
                         $content = str_replace('class="elementor elementor-' . $tpl_id . ' ', 'class="elementor elementor-' . $tpl_id . ' ' . $element_class . ' ', $content);
                         $content = str_replace('class="elementor elementor-' . $tpl_id . '"', 'class="elementor elementor-' . $tpl_id . ' ' . $element_class . '"', $content);
                         $content = preg_replace('/data-elementor-id="/', 'data-' . $q_o['type'] . '-id="' . $q_o['id'] . '" data-obj-id="' . $q_o['id'] . '" data-elementor-id="', $content, 1);
@@ -266,7 +266,7 @@ class Template {
         }
         return $content;
     }
-    
+
     public static function get_queried_object() {
         $q_o = array('obj' => get_queried_object());
         $q_o['id'] = get_queried_object_id();
@@ -289,12 +289,12 @@ class Template {
         $element_controls = $element->get_controls();
         $q_o = self::get_queried_object();
         if (!empty($settings['__dynamic__'])) {
-            $style = '';            
+            $style = '';
             foreach (array_keys($settings['__dynamic__']) as $dynamic) {
                 $tmp = explode('_', $dynamic);
                 $device = end($tmp);
                 $devices = array('desktop' => $dynamic);
-                if (in_array($device, array('tablet','mobile'))) {
+                if (in_array($device, array('tablet', 'mobile'))) {
                     $devices = array($device => $dynamic);
                 }
                 foreach ($devices as $device => $device_value) {
@@ -305,7 +305,7 @@ class Template {
                     $wrapper = $selector . ' .elementor-element.elementor-element-' . $element_id;
                     if (!empty($element_controls[$device_value])) {
                         if (!empty($element_controls[$dynamic]['selectors'])) {
-                            foreach ($element_controls[$dynamic]['selectors'] as $skey => $svalue) {                                
+                            foreach ($element_controls[$dynamic]['selectors'] as $skey => $svalue) {
                                 $control_selector = str_replace('{{WRAPPER}}', $wrapper, $skey);
                                 if (!empty($settings[$device_value])) {
                                     $setting_value = '';
@@ -316,8 +316,8 @@ class Template {
                                     } else {
                                         $setting_value = str_replace('{{VALUE}}', $settings[$device_value], $svalue);
                                     }
-                                    $style .= ($setting_value) ? $control_selector . '{' . $setting_value . '}' : $setting_value;                                    
-                                }                                
+                                    $style .= ($setting_value) ? $control_selector . '{' . $setting_value . '}' : $setting_value;
+                                }
                             }
                         }
                     }
@@ -328,7 +328,9 @@ class Template {
                 if (!wp_doing_ajax()) {
                     $style = Assets::enqueue_style('template-dynamic-' . $element->get_id() . '-inline', $style);
                 }
-                echo '<style>' . $style . '</style>';
+                if (!empty($style)) {
+                    echo '<style>' . $style . '</style>';
+                }
             }
         }
     }

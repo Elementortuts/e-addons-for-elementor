@@ -3,9 +3,9 @@ Contributors: nerdsfarm, poglie, frapesce
 Donate link: https://e-addons.com/donate/
 Tags: elementor, addons, extension, dynamic, template, token, widget, module, design
 Requires at least: 5.0
-Tested up to: 5.5.1
+Tested up to: 5.6.1
 Stable tag: 2.1
-Requires PHP: 7.0
+Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -36,7 +36,7 @@ With E-ADDONS for Elementor you can offer your clients the most advanced feature
 = DOCUMENTATION AND SUPPORT =
 
 * For documentation and tutorials [go to our home page](https://e-addons.com/) and click the lefthand side menu.
-* If you have any more questions, [open a ticket on the E-ADDONS Support page](https://wordpress.org/support/plugin/e-addons-for-elementor/).
+* If you have any more questions, [open a ticket on the E-ADDONS Support page](https://e-addons.com/contact/).
 * If you wish to contribute or ask for future improvements and new specific widget drop us a line [on this E-ADDONS Requests page](https://e-addons.com/contact/).
 
 = LIKED E-ADDONS? =
@@ -98,7 +98,7 @@ Absolutely not! But for an advanced use it's better to understand Wordpress logi
 
 = 2.1.1 - 22-12-2020 =
 * Add: Ajax action Term Posts
-* Add: methods on base action
+* Add: methods on Base Action
 * Fix: jQuery in e-addons Dashboard
 * Fix: Data Dynamic Tags
 * Fix: Compatibility with Elementor 3.1.0

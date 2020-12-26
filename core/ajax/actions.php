@@ -116,7 +116,7 @@ class Actions {
         ];
     }
 
-    public function _search(array $params) {
+    public function _search(array $params, $format = '') {
         if (empty($params['query_type'])) {
             return false;
         }
@@ -127,6 +127,35 @@ class Actions {
         $control_options = array();
         if (method_exists($this, $method)) {
             $control_options = call_user_func([$this, $method], $params);
+        }
+        if ($format) {
+            if (!empty($control_options)) {
+                foreach ($control_options as $key => $aobj) {
+                    $text = $aobj['text'];
+                    $data = array();
+                    switch($params['query_type']) {
+                        case 'term_posts':
+                        case 'posts':
+                            $post = get_post($aobj['id']);
+                            $data = array('post' => $post);
+                            break;
+                        case 'terms':
+                            $term = Utils::get_term($aobj['id']);
+                            $data = array('term' => $term);
+                            break;
+                        case 'users':
+                            $user = get_user_by('ID', $aobj['id']);
+                            $data = array('user' => $user);
+                            break;
+                    }
+                    $text = Utils::get_dynamic_data($format, $data);
+                    if (empty($text) || $text == $format) {
+                        $text = $aobj['text'];
+                    }
+                    //$text = '['.$aobj['id'].'] '.$text;
+                    $control_options[$key]['text'] = $text;
+                }
+            }
         }
         $control_options = apply_filters('e_addons/e_query/search/' . $params['query_type'], $control_options, $params);
         return $control_options;
@@ -375,6 +404,9 @@ class Actions {
                     's' => $params['q'],
                     'posts_per_page' => -1,
                 ];
+                if (!is_ajax()) { //$object_type != 'any') {
+                    $query_params['post_status'] = 'publish';
+                }
                 if ('attachment' === $query_params['post_type']) {
                     $query_params['post_status'] = 'inherit';
                 }
