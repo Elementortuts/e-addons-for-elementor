@@ -394,13 +394,13 @@ class Plugin {
             if (file_exists($composer)) {
                 //var_dump(getcwd());
                 chdir($addon['path']);
-                $command = 'php '.$composer.' update 2>&1';
+                $command = 'php '.$composer.' update 2>&1';                
                 //$result = shell_exec('export COMPOSER_HOME='.$home.'./.config/composer;');
                 //shell_exec('COMPOSER_ALLOW_XDEBUG=1 php -d xdebug.remote_enable=0 -d xdebug.profiler_enable=0 -d xdebug.default_enable=0 composer.phar --version 2>&1');
                 //$result = shell_exec('php composer.phar --version 2>&1');
-
-                $result = shell_exec("export COMPOSER_HOME=".$home."/.config/composer; ".$command);
-                //var_dump($result);
+                $command = "export COMPOSER_HOME=".$home.".config/composer; ".$command;
+                $result = shell_exec($command);
+                //var_dump($command); var_dump($result); die();
                 //exec( $command, $output, $return_var ); var_dump($output);var_dump($return_var);
                 if ($result) {
                     $msg = __('All Vendors in '.$addon['Name'].' are succefully updated');

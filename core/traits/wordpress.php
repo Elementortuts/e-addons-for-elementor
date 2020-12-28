@@ -155,6 +155,12 @@ trait Wordpress {
     public static function get_metas($obj = 'post', $like = '', $info = true) {
         $metas = array();
 
+        $table_join = '';
+        if ($obj == 'attachment') {
+            $table_join .= " AND post_id IN ( SELECT id FROM " . $wpdb->prefix . "posts WHERE post_type LIKE '".$obj."' )";
+            $obj = 'post';
+        }
+        
         if ($obj == 'post') {
             // REGISTERED in FUNCTION
             $post_types = self::get_post_types();
@@ -176,7 +182,7 @@ trait Wordpress {
                 }
             }
         }
-
+        
         // FROM DB
         global $wpdb;
         $table = $wpdb->prefix . $obj . 'meta';
@@ -189,6 +195,8 @@ trait Wordpress {
         if (!empty($like) && is_string($like)) {
             $query .= " WHERE meta_key LIKE '%" . $like . "%'";
         }
+        $query .= $table_join;
+        
         $results = $wpdb->get_results($query);
         if (!empty($results)) {
             $db_metas = array();

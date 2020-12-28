@@ -19,8 +19,9 @@ class Actions {
     /*
       'options',
       'fields', // post, user, term, comment
+      'values', // post, user, term, comment
       'uploads', // dir, file
-      'metas', // post, user, term, comment
+      'metas', // post, user, term, comment, attachment
       'posts', // type, meta, post_type
       'term_posts',
       'terms', // taxonomy, post_type
@@ -362,6 +363,53 @@ class Actions {
                     $control_options[$field_key] = $field_name;
                 }
             }
+        }
+        return $control_options;
+    }
+    
+    public function get_values($params) {
+        $control_options = [];
+        global $wpdb;
+        $table = $wpdb->prefix . $params['object_type'] . 'meta';
+        //$query = 'SELECT meta_id, meta_value FROM ' . $table;
+        $query = 'SELECT DISTINCT meta_value FROM ' . $table;
+        $query .= " WHERE meta_key LIKE '" . $params['meta_key'] . "'";
+        if (!empty($params['q'])) {
+            $query .= " WHERE meta_value LIKE '%" . $params['q'] . "%'";
+        }
+        if ($params['object_type'] == 'post') {
+            $query .= " AND post_id IN ( SELECT id FROM " . $wpdb->prefix . "posts WHERE post_status LIKE 'publish' )";
+        }
+        $results = $wpdb->get_results($query);
+        if (!empty($results)) {
+            /*$values = array();
+            foreach ($results as $result) {
+                if (!isset($values[$result->meta_value])) {
+                    $values[$result->meta_value] = $result->meta_id;
+                }
+            }
+            $flipped = array_flip($values);            
+            foreach ($flipped as $id => $text) {
+                    $control_options[] = [
+                        'id' => $id,
+                        'text' => $text,
+                    ];
+            }*/
+            foreach ($results as $result) {
+                    $control_options[] = [
+                        'id' => $result->meta_value,
+                        'text' => $result->meta_value,
+                    ];
+            }
+        }
+        return $control_options;
+    }
+
+    public function _get_values($params) {
+        $uid = (array) $params['id'];
+        $control_options = [];
+        foreach ($uid as $aid) {
+            $control_options[$aid] = $aid;
         }
         return $control_options;
     }
