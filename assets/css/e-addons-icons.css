@@ -231,3 +231,9 @@
 .eadd-el-form-pro-act-save-comments:before { content: '\e8b2'; } /* '' */
 .eadd-el-form-pro-act-save-db:before { content: '\e88c'; } /* '' */
 .eadd-el-form-pro-act-save-posts:before { content: '\e88d'; } /* '' */
+.eadd-query-custom-db:before { content: '\e8b3'; } /* '' */
+.eadd-query-media:before { content: '\e8b4'; } /* '' */
+.eadd-query-users:before { content: '\e8b5'; } /* '' */
+.eadd-query-items:before { content: '\e8b6'; } /* '' */
+.eadd-query-posts:before { content: '\e8b7'; } /* '' */
+.eadd-query-terms:before { content: '\e8b8'; } /* '' */
