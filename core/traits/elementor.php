@@ -66,19 +66,18 @@ trait Elementor {
     }
 
     public static function get_element_instance_by_id($e_id, $p_id = null) {
-        if (!$p_id) {
-            if ($e_id) {
-                $p_id = self::get_template_by_element_id($e_id);
-            }
-            if (!$p_id) {
-                $p_id = get_the_ID();
-                if (!$p_id && !empty($_GET['post'])) {
-                    $p_id = absint($_GET['post']);
-                }
-                if (!$p_id && !empty($_POST['post_id'])) {
-                    $p_id = absint($_POST['post_id']);
-                }
-            }
+        
+        if (!$p_id && $e_id) {
+            $p_id = self::get_template_by_element_id($e_id);
+        }
+        if (!$p_id && !empty($_REQUEST['post_id'])) {
+            $p_id = absint($_REQUEST['post_id']);
+        }
+        if (!$p_id && !empty($_REQUEST['post'])) {
+            $p_id = absint($_REQUEST['post']);
+        }        
+        if (!$p_id) {                                
+            $p_id = get_the_ID();
         }
         if ($p_id) {
             $document = \Elementor\Plugin::$instance->documents->get($p_id);

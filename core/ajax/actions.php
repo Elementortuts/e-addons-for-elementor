@@ -528,8 +528,8 @@ class Actions {
             } else {
                 $the_query = new \WP_Query($args);
             }
-            $the_query = new \WP_Query($args);
-            foreach ($query->posts as $post) {
+            //$the_query = new \WP_Query($args);
+            foreach ($the_query->posts as $post) {
                 $control_options[$post->ID] = $post->post_title;
             }
         }
@@ -722,22 +722,8 @@ class Actions {
         return $control_options;
     }
 
-    public function _get_term_posts($params) {
-        $uid = (array) $params['id'];
-        $control_options = [];
-        foreach ($uid as $akey => $aid) {
-            $uid[$akey] = intval($aid);
-        }
-        $args = [
-            'post_type' => self::ANY,
-            'posts_per_page' => -1,
-            'post__in' => $uid,
-        ];
-        $the_query = new \WP_Query($args);
-        foreach ($query->posts as $post) {
-            $control_options[$post->ID] = $post->post_title;
-        }
-        return $control_options;
+    public function _get_term_posts($params) {        
+        return $this->_get_posts($params);
     }
 
 }

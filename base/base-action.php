@@ -63,25 +63,29 @@ if (!Utils::is_plugin_active('elementor-pro') || !class_exists('ElementorPro\Mod
 
         public function get_settings($dynamic = true, $fields = array()) {
             $post_id = !empty($_POST['post_id']) ? absint($_POST['post_id']) : false;
-            $form_id = !empty($_POST['form_id']) ? sanitize_title($_POST['form_id']) : false;
-            $document = false;
-            if ($post_id && $form_id) {
-                $document = \Elementor\Plugin::$instance->documents->get($post_id);
-            }
-            if ($document) {
-                $form = \ElementorPro\Modules\Forms\Module::find_element_recursive($document->get_elements_data(), $form_id);
-                if ($form) {
-                    $widget = \Elementor\Plugin::$instance->elements_manager->create_element_instance($form);
-                    if ($widget) {
-                        if ($dynamic) {
-                            $settings = $widget->get_settings_for_display();
-                        } else {
-                            $settings = $widget->get_settings();
+            $form_id = $this->get_form_id();
+            $document = $widget = false;
+            $settings = array();
+            if ($form_id) {
+                if ($post_id) {
+                    $document = \Elementor\Plugin::$instance->documents->get($post_id);            
+                    if ($document) {
+                        $form = \ElementorPro\Modules\Forms\Module::find_element_recursive($document->get_elements_data(), $form_id);
+                        if ($form) {
+                            $widget = \Elementor\Plugin::$instance->elements_manager->create_element_instance($form);
                         }
-                    }
+                    } 
                 }
-            } else {
-                $settings = $record->get('form_settings');
+                if (!$widget) {
+                    $widget = \EAddonsForElementor\Core\Utils::get_element_instance_by_id($form_id);
+                }
+            }
+            if ($widget) {
+                if ($dynamic) {
+                    $settings = $widget->get_settings_for_display();
+                } else {
+                    $settings = $widget->get_settings();
+                }
             }
             if ($dynamic) {
                 $settings = Utils::get_dynamic_data($settings, $fields);
@@ -90,14 +94,13 @@ if (!Utils::is_plugin_active('elementor-pro') || !class_exists('ElementorPro\Mod
         }
 
         public function get_form_id($settings = array()) {
-            $element_id = false;
             if (!empty($settings['id'])) {
-                $element_id = $settings['id'];
+                return $settings['id'];
             }
-            if (!empty($_POST['form_id'])) {
-                $element_id = !empty($_POST['form_id']) ? sanitize_title($_POST['form_id']) : $element_id;
+            if (!empty($_REQUEST['form_id'])) {
+                return sanitize_key($_REQUEST['form_id']);
             }
-            return $element_id;
+            return false;
         }
 
         /**
@@ -129,7 +132,7 @@ if (!Utils::is_plugin_active('elementor-pro') || !class_exists('ElementorPro\Mod
                     ]
             );
         }
-        
+
         public function fields_filter($fields) {
             $tmp = array();
             if (!empty($fields) && is_array($fields)) {

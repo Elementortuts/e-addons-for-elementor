@@ -264,6 +264,9 @@ trait Wordpress {
         return false;
     }
 
+    public static function get_link($obj = null) {
+        return self::get_permalink($obj);
+    }
     public static function get_permalink($obj = null, $type = 'post') {
         if (is_numeric($obj) || empty($obj)) {
             switch($type) {

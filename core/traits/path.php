@@ -86,7 +86,7 @@ trait Path {
     static public function url_to_path($url) {
         return substr(get_home_path(), 0, -1) . wp_make_link_relative($url);
     }
-    
+
     public static function path_to_url($path) {
         $wp_upload_dir = wp_upload_dir();
         $url = str_replace($wp_upload_dir["basedir"], $wp_upload_dir["baseurl"], $path);
@@ -108,9 +108,10 @@ trait Path {
     }
 
     /*
-    * License: DWTFYW
-    * https://gist.github.com/UziTech/3b65b2543cee57cd6d2ecfcccf846f20
-    */
+     * License: DWTFYW
+     * https://gist.github.com/UziTech/3b65b2543cee57cd6d2ecfcccf846f20
+     */
+
     static public function glob_recursive($path, $pattern, $flags = 0) {
         if (substr($path, -1) !== DIRECTORY_SEPARATOR) {
             $path .= DIRECTORY_SEPARATOR;
@@ -128,6 +129,40 @@ trait Path {
             }
         }
         return $files;
+    }
+
+    /**
+     *
+     *
+     * @return string
+     */
+    public static function get_current_url($post = false) {
+        
+        if ($post) {
+            if (!empty($_REQUEST['queried_id'])) {
+                return get_permalink($_REQUEST['queried_id']);
+            }
+            if (!empty(get_queried_object())) {
+                $queried_object_url = self::get_link(get_queried_object());
+                if ($queried_object_url) {
+                    return $queried_object_url;
+                }
+            }
+        }
+        
+        $url = ( is_ssl() ? 'https' : 'http' ) . "://";
+        $host = '';
+        if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST']) {
+            $host = $_SERVER['HTTP_HOST'];
+        } else if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME']) {
+            $host = $_SERVER['SERVER_NAME'];
+        }
+        if (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] && $_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443") {
+            $url .= $host . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+        } else {
+            $url .= $host . $_SERVER["REQUEST_URI"];
+        }
+        return $url;
     }
 
 }
