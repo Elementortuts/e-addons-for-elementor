@@ -22,6 +22,7 @@ jQuery(window).on('load', function () {
                             query_type: equery.model.get('query_type'),
                             object_type: equery.model.get('object_type'),
                         };
+                        //console.log(data);
                         return elementorCommon.ajax.addRequest('e_query_control_search', {
                             data: data,
                             success: success,
@@ -43,15 +44,19 @@ jQuery(window).on('load', function () {
             });
         },
         getValueTitles: function getValueTitles() {
-            let equery = this,
+            var equery = this,
                     ids = this.getControlValue(),
-                    query_type = this.model.get('query_type');
-            object_type = this.model.get('object_type');
+                    query_type = this.model.get('query_type'),
+                    object_type = this.model.get('object_type');
             if (!ids || !query_type)
                 return;
             if (!_.isArray(ids)) {
                 ids = [ids];
             }
+            /*console.log('e_query_control_options');
+            console.log(query_type);
+            console.log(object_type);
+            console.log(equery.cid + query_type);*/
             elementorCommon.ajax.loadObjects({
                 action: 'e_query_control_options',
                 ids: ids,
@@ -61,9 +66,14 @@ jQuery(window).on('load', function () {
                     unique_id: '' + equery.cid + query_type,
                 },
                 success: function success(data) {
+                    //console.log('success');
                     equery.isTitlesReceived = true;
                     equery.model.set('options', data);
                     equery.render();
+                },
+                error: function error(data) {
+                    console.log('error');
+                    console.log(data);
                 },
                 before: function before() {
                     equery.addSpinner();
@@ -77,10 +87,10 @@ jQuery(window).on('load', function () {
         onReady: function onReady() {
             setTimeout(elementor.modules.controls.Select2.prototype.onReady.bind(this));
             if (this.ui.select) {
-                let equery = this,
+                var equery = this,
                         ids = this.getControlValue(),
-                        query_type = this.model.get('query_type');
-                object_type = this.model.get('object_type');
+                        query_type = this.model.get('query_type'),
+                        object_type = this.model.get('object_type');
                 jQuery(this.ui.select).data('query_type', query_type);
                 if (object_type) {
                     jQuery(this.ui.select).data('object_type', object_type);

@@ -452,7 +452,7 @@ class Actions {
                     's' => $params['q'],
                     'posts_per_page' => -1,
                 ];
-                if (!is_ajax()) { //$object_type != 'any') {
+                if (!wp_doing_ajax()) { //$object_type != 'any') {
                     $query_params['post_status'] = 'publish';
                 }
                 if ('attachment' === $query_params['post_type']) {
