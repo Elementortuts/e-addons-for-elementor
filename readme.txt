@@ -4,7 +4,7 @@ Donate link: https://e-addons.com/donate/
 Tags: elementor, addons, extension, dynamic, template, token, widget, module, design
 Requires at least: 5.0
 Tested up to: 5.6.1
-Stable tag: 2.1
+Stable tag: 2.2
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -95,6 +95,14 @@ Absolutely not! But for an advanced use it's better to understand Wordpress logi
 3. **More e-addons** enable only wanted and really needed features
 
 == Changelog ==
+
+= 2.2 - 04-01-2021 =
+* Add: Control Element ID
+* Add: Ajax action Metas Attachment
+* Update: e-addons Icon Library
+* Update: removed default common sections on Extensions
+* Fix: Ajax action Posts
+* Fix: minor fixes
 
 = 2.1.1 - 22-12-2020 =
 * Add: Ajax action Term Posts
