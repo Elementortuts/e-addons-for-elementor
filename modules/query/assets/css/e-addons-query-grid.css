@@ -1,0 +1,510 @@
+/* bug icone... vedere se è meglio importare la libreria "awesome 5" */
+.fa,.fab,.fad,.fal,.far,.fas{
+    font-family:"Font Awesome 5 Free";
+    font-style:normal;
+    font-weight:400;
+    font-display:auto;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-font-smoothing:antialiased;
+    display:inline-block;
+    font-style:normal;
+    font-variant:normal;
+    text-rendering:auto;
+    line-height:1
+}
+
+
+
+
+
+
+/* questo nasconde il valore "ratio" che ho scritto nellla regola content: di :after per gestirla da js*/
+/* forse sarebbe meglio usare un --var ma per ora va bene così .... */
+.elementor-widget-e-query-posts:after,
+.elementor-widget-e-query-users:after,
+.elementor-widget-e-query-terms:after,
+.elementor-widget-e-query-media:after,
+.elementor-widget-e-query-itemslist:after{
+	display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ALIGNMENTS */
+/*--------------------------------------*/
+.e-add-item_image,
+.e-add-item_avatar{
+	display: flex;
+}
+/*--------------------------------------*/
+.e-add-align-left .e-add-item_image,
+.e-add-align-left .e-add-item_avatar,
+.e-add-align-left .e-add-post-author{
+	justify-content: flex-start;
+}
+.e-add-align-right .e-add-item_image,
+.e-add-align-right .e-add-item_avatar,
+.e-add-align-right .e-add-post-author{
+	justify-content: flex-end;
+}
+.e-add-align-center .e-add-item_image,
+.e-add-align-center .e-add-item_avatar,
+.e-add-align-center .e-add-post-author{
+	justify-content: center;
+}
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-left .e-add-item_image,
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-left .e-add-item_avatar,
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-left .e-add-post-author{
+	justify-content: flex-start;
+}
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-right .e-add-item_image,
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-right .e-add-item_avatar,
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-right .e-add-post-author{
+	justify-content: flex-end;
+}
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-center .e-add-item_image,
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-center .e-add-item_avatar,
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-center .e-add-post-author{
+	justify-content: center;
+}
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-left .e-add-item_image,
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-left .e-add-item_avatar,
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-left .e-add-post-author{
+	justify-content: flex-start;
+}
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-right .e-add-item_image,
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-right .e-add-item_avatar,
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-right .e-add-post-author{
+	justify-content: flex-end;
+}
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-center .e-add-item_image,
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-center .e-add-item_avatar,
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-center .e-add-post-author{
+	justify-content: center;
+}
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-left .e-add-item_image,
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-left .e-add-item_avatar,
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-left .e-add-post-author{
+	justify-content: flex-start;
+}
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-right .e-add-item_image,
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-right .e-add-item_avatar,
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-right .e-add-post-author{
+	justify-content: flex-end;
+}
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-center .e-add-item_image,
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-center .e-add-item_avatar,
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-center .e-add-post-author{
+	justify-content: center;
+}
+/*--------------------------------------*/
+/*.e-add-align-left .e-add-post-image{
+	margin: 0 auto 0 0;
+}
+.e-add-align-right .e-add-post-image{
+	margin: 0 0 0 auto;
+}
+.e-add-align-center .e-add-post-image{
+	margin: 0 auto;
+}
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-left .e-add-post-image{
+	margin: 0 auto 0 0;
+}
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-right .e-add-post-image{
+	margin: 0 0 0 auto;
+}
+[data-elementor-device-mode="desktop"] .e-add-align-desktop-center .e-add-post-image{
+	margin: 0 auto;
+}
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-left .e-add-post-image{
+	margin: 0 auto 0 0;
+}
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-right .e-add-post-image{
+	margin: 0 0 0 auto;
+}
+[data-elementor-device-mode="tablet"] .e-add-align-tablet-center .e-add-post-image{
+	margin: 0 auto;
+}
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-left .e-add-post-image{
+	margin: 0 auto 0 0;
+}
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-right .e-add-post-image{
+	margin: 0 0 0 auto;
+}
+[data-elementor-device-mode="mobile"] .e-add-align-mobile-center .e-add-post-image{
+	margin: 0 auto;
+}*/
+
+
+
+
+
+
+
+
+/*--------------------------------------*/
+/* MASK */
+.e-add-queryposts-mask{
+	position: absolute;
+    width: 0;
+    height: 0;
+}
+/* SVG */
+.e-add-queryposts-mask
+{
+    overflow: visible;
+}
+
+
+/*-------------------------------------------*/
+/* ----------------- LAYOUT ---------------- */
+/*-------------------------------------------*/
+/** 
+e-add-posts-container e-add-posts e-add-skin-grid e-add-skin-grid-
+
+.e-add-posts-container.e-add-posts article.e-add-post-item .e-add-post-block .e-add-item.e-add-item_NAME{
+	
+}
+**/
+
+/* ... (da vedere poi con gli altri come reagisce) */
+/*Skin Grid*/
+.e-add-posts-container.e-add-skin-grid .e-add-posts-wrapper{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	flex-wrap: wrap;
+}
+.e-add-posts-container.e-add-skin-grid .e-add-post-item{
+
+}
+
+.e-add-posts-container .e-add-post-item{
+	display: flex;
+	word-break: break-word;
+}
+
+
+/*i blocchi dentro all'item*/
+.e-add-posts-container .e-add-post-item .e-add-post-block{
+	width: 100%;
+	display: flex;
+}
+/* solo x default */
+.e-add-posts-layout-default .e-add-posts-container .e-add-post-item .e-add-post-block{
+	display: block;
+}
+
+
+
+/*---------- Flex --------*/
+.e-add-posts-container.e-add-skin-grid-flex .e-add-post-item{
+
+}
+/*---------- Masonry --------*/
+.e-add-posts-container.e-add-skin-grid-masonry .e-add-post-item{
+
+}
+/*---------- Blog --------*/
+.e-add-posts-container.e-add-skin-grid-blog .e-add-post-item{
+
+}
+
+/*Le 2 aree in caso di left, right, alternate ecc */
+.e-add-posts-container .e-add-post-item .e-add-item-area{
+	
+}
+.e-add-posts-container .e-add-post-item .e-add-item-area{
+	z-index: 2;
+}
+
+/*distribution*/
+.e-add-posts-layout-left .e-add-image-area, .e-add-posts-layout-left .e-add-content-area,
+.e-add-posts-layout-right .e-add-image-area, .e-add-posts-layout-right .e-add-content-area,
+.e-add-posts-layout-alternate .e-add-image-area, .e-add-posts-layout-alternate .e-add-content-area{
+	width: 50%
+}
+
+
+/*Top*/
+.e-add-posts-layout-default .e-add-post-item .e-add-post-block{
+	flex-direction: column;
+}
+
+/*Left*/
+.e-add-posts-layout-left .e-add-post-item .e-add-post-block{
+	flex-direction: row;
+}
+.e-add-posts-layout-left .e-add-image-area{
+
+}
+.e-add-posts-layout-left .e-add-content-area{
+	padding: 1rem;
+}
+
+/*Right*/
+.e-add-posts-layout-right .e-add-post-item .e-add-post-block{
+	flex-direction: row-reverse;
+}
+.e-add-posts-layout-right .e-add-image-area{
+
+}
+.e-add-posts-layout-right .e-add-content-area{
+	padding: 1rem;
+}
+
+/*Alternate*/
+.e-add-posts-layout-alternate .e-add-post-item:nth-child(odd) .e-add-post-block{
+	flex-direction: row;
+}
+.e-add-posts-layout-alternate .e-add-post-item:nth-child(even) .e-add-post-block{
+	flex-direction: row-reverse;
+}
+.e-add-posts-layout-alternate .e-add-image-area{
+
+}
+.e-add-posts-layout-alternate .e-add-content-area{
+	padding: 1rem;
+}
+
+/*Force default mobile ..yes*/
+[data-elementor-device-mode="mobile"] .force-default-mobile-yes .e-add-post-item .e-add-post-block{
+	flex-direction: column;
+}
+[data-elementor-device-mode="mobile"] .force-default-mobile-yes .e-add-image-area, 
+[data-elementor-device-mode="mobile"] .force-default-mobile-yes .e-add-content-area{
+	width: 100%;
+}
+
+/*Overlay*/
+.e-add-posts-layout-overlay .e-add-post-item .e-add-post-block{
+	flex-direction: column;
+}
+.e-add-posts-layout-overlay .e-add-image-area{
+
+}
+.e-add-posts-layout-overlay .e-add-content-area{
+	position: relative;
+
+	width: 80%;
+
+	margin-top: -20%;
+	margin-left: 10%;
+
+	background-color: #ffffff;
+
+	padding: 1rem;
+}
+
+/*Textzone*/
+.e-add-posts-layout-textzone .e-add-post-item .e-add-post-block{
+	flex-direction: column;
+}
+.e-add-posts-layout-textzone .e-add-image-area{
+	width: 80%;
+}
+.e-add-posts-layout-textzone .e-add-content-area{
+	position: relative;
+
+	width: 60%;
+
+	margin-top: -20%;
+	margin-left: 40%;
+
+	background-color: #ffffff;
+
+	padding: 1rem;
+}
+
+/*Float*/
+.e-add-posts-layout-float .e-add-post-item .e-add-post-block{
+	flex-direction: column;
+	position: relative;
+}
+.e-add-posts-layout-float .e-add-image-area{
+
+}
+.e-add-posts-layout-float .e-add-content-area{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+
+	padding: 1rem;
+	margin: 0;
+
+	-moz-user-select: none;
+  	-webkit-user-select: none;
+  	-ms-user-select: none;
+  	user-select: none;
+  
+  	pointer-events: none;
+}
+
+
+
+
+
+/* ------------------ PAGINAZIONE ---------------- */
+.e-add-pagination {
+	font-size:13px; /* Pagination text size */
+	line-height:1;
+	text-align: center;
+ 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+ }
+ .e-add-pagination i{
+   line-height: 0;
+ }
+ .e-add-pagination .pageprev i, .e-add-pagination .pagefirst i{
+   margin-right: 7px;
+ }
+ .e-add-pagination .pagenext i, .e-add-pagination .pagelast i{
+   margin-left: 7px;
+ }
+ .e-add-pagination span, .e-add-pagination a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 1px 0 0;
+	padding:10px;
+	text-decoration:none;
+	width:auto;
+	
+	color: #555;
+	background: #e4e4e4;
+ 
+	-webkit-transition: background-color .5s ease-in-out, color .5s ease-in-out;
+	-moz-transition: background-color .5s ease-in-out, color .5s ease-in-out;
+	-ms-transition: background-color .5s ease-in-out, color .5s ease-in-out;
+	-o-transition: background-color .5s ease-in-out, color .5s ease-in-out;
+	transition: background-color .5s ease-in-out, color .5s ease-in-out;
+ }
+ .e-add-pagination span:last-child, .e-add-pagination a:last-child{
+   margin: 0;
+ }
+ .e-add-pagination a:hover{
+	color:#fff;
+	background: #CCCCCC; /* Pagination background on hover */
+ }
+ .e-add-pagination .current{
+	background: #000000; /* Current page background */
+	color:#fff;
+ }
+ 
+ /* ------------------ e-add-InfiniteScroll ---------------- */
+.e-add-infiniteScroll{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+ .e-add-infiniteScroll .e-add-page-load-status {
+   display: none; /* hidden by default */
+   padding: 15px;
+   text-align: center;
+   color: #777;
+ }
+ .e-add-infiniteScroll button.e-add-view-more-button {
+   font-size: 20px;
+   padding: 10px 20px;
+   border-radius: 5px;
+   background: #CCC;
+   border: none;
+ 
+   -webkit-transition: background-color .5s ease-in-out, color .5s ease-in-out;
+	-moz-transition: background-color .5s ease-in-out, color .5s ease-in-out;
+	-ms-transition: background-color .5s ease-in-out, color .5s ease-in-out;
+	-o-transition: background-color .5s ease-in-out, color .5s ease-in-out;
+	transition: background-color .5s ease-in-out, color .5s ease-in-out;
+ }
+ 
+ /*.e-add-infiniteScroll .visible .scroller-status, 
+ .e-add-infiniteScroll .visible .infinite-scroll-last, 
+ .e-add-infiniteScroll .visible .infinite-scroll-error{
+   display: block !important;
+ }*/
+ 
+ .e-add-infiniteScroll .scroller-status,
+ .e-add-infiniteScroll .infinite-scroll-last,
+ .e-add-infiniteScroll .infinite-scroll-error {
+  display:none
+ }
+ .e-add-infiniteScroll .scroller-status {
+  margin-top:20px;
+  text-align:center;
+  clear:both
+ }
+ .e-add-infiniteScroll .scroller-status p {
+  margin:0
+ }
+ .e-add-infiniteScroll .loader-ellips {
+  font-size:12px;
+  position:relative;
+  width:3.5em;
+  height:1em;
+  margin:0 auto
+ }
+ .e-add-infiniteScroll .loader-ellips__dot {
+  display:block;
+  width:1em;
+  height:1em;
+  border-radius:0.5em;
+  background-color:#333;
+  position:absolute;
+  animation-duration:0.5s;
+  animation-timing-function:ease;
+  animation-iteration-count:infinite
+ }
+ .e-add-infiniteScroll .loader-ellips__dot:nth-child(1),
+ .e-add-infiniteScroll .loader-ellips__dot:nth-child(2) {
+  left:0
+ }
+ .e-add-infiniteScroll .loader-ellips__dot:nth-child(3) {
+  left:1.3em
+ }
+ .e-add-infiniteScroll .loader-ellips__dot:nth-child(4) {
+  left:2.6em
+ }
+ .e-add-infiniteScroll .loader-ellips__dot:nth-child(1) {
+  animation-name:reveal
+ }
+ .e-add-infiniteScroll .loader-ellips__dot:nth-child(2),
+ .e-add-infiniteScroll .loader-ellips__dot:nth-child(3) {
+  animation-name:slide
+ }
+ .e-add-infiniteScroll .loader-ellips__dot:nth-child(4) {
+  animation-name:reveal;
+  animation-direction:reverse
+ }
+ @keyframes reveal {
+  from {
+   transform:scale(0.001)
+  }
+  to {
+   transform:scale(1)
+  }
+ }
+ @keyframes slide {
+  to {
+   transform:translateX(1.3em)
+  }
+ }
+ .e-add-infiniteScroll .infinite-scroll-nav {
+  display:none
+ }
+
+
+
