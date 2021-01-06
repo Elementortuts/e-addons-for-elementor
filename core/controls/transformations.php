@@ -1,7 +1,7 @@
 <?php
 namespace EAddonsForElementor\Core\Controls;
 
-use Elementor\Control_Base_Multiple;
+use Elementor\Control_Base_Units;
 
 use Elementor\Controls_Manager;
 
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Transformations extends Control_Base_Multiple {
+class Transformations extends Control_Base_Units {
 
 	/**
 	 * Get control type.
@@ -79,6 +79,7 @@ class Transformations extends Control_Base_Multiple {
 				'translate_y' => 0,
 				'translate_z' => 0,
 				'scale' => 1,
+				'sizes' => [],
 			]
 		);
 	}
@@ -95,6 +96,7 @@ class Transformations extends Control_Base_Multiple {
 			parent::get_default_settings(), [
 				'show_label' => true,
 				'label_block' => false,
+
 			]
 		);
 	}
@@ -128,20 +130,21 @@ class Transformations extends Control_Base_Multiple {
 			],
 			'translate_x' => [
 				'label' => __( 'X', 'e-addons-for-elementor' ),
-				'min' => -1000,
-				'max' => 1000,
+				'size_units' => [ 'px','%' ],
+				'min' => -200,
+				'max' => 200,
 				'step' => 1
 			],
 			'translate_y' => [
 				'label' => __( 'Y', 'e-addons-for-elementor' ),
-				'min' => -1000,
-				'max' => 1000,
+				'min' => -200,
+				'max' => 200,
 				'step' => 1
 			],
 			'translate_z' => [
 				'label' => __( 'Z', 'e-addons-for-elementor' ),
-				'min' => -1000,
-				'max' => 1000,
+				'min' => -200,
+				'max' => 200,
 				'step' => 1
 			],
 			'scale' => [
@@ -170,6 +173,7 @@ class Transformations extends Control_Base_Multiple {
 		foreach ( $this->get_sliders() as $slider_name => $slider ) :
 			$control_uid = $this->get_control_uid( $slider_name );
 			?>
+			<?php $this->print_units_template(); ?>
 			<div class="elementor-control-field elementor-control-type-slider elementor-control-type-slider-transformations">
 				<label for="<?php echo esc_attr( $control_uid ); ?>" class="elementor-control-title-transformations"><?php echo $slider['label']; ?></label>
 				<div class="elementor-control-input-wrapper">
