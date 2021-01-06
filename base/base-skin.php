@@ -191,12 +191,19 @@ class Base_Skin extends \Elementor\Skin_Base {
             <?php
         }
 
-        protected function render_post_header($link = true) {
+        protected function render_post_header($post_id = 0) {
             global $post;
+            
+            if (!$post) {
+                $post = get_post($post_id);
+            }
 
-            $tags_classes = array_map(function($tag) {
-                return 'elementor-filter-' . $tag->term_id;
-            }, $post->tags);
+            $tags_classes = array();
+            if ($post->tags) {
+                $tags_classes = array_map(function($tag) {
+                    return 'elementor-filter-' . $tag->term_id;
+                }, $post->tags);
+            }
 
             $classes = [
                 'elementor-portfolio-item',
@@ -208,8 +215,7 @@ class Base_Skin extends \Elementor\Skin_Base {
             <?php
         }
 
-        protected function render_post_footer($link = true) { ?>
-            </a>
+        protected function render_post_footer() { ?>
             </article>
             <?php
         }

@@ -1,4 +1,5 @@
 <?php
+
 namespace EAddonsForElementor\Modules\Query\Skins\Traits;
 
 use EAddonsForElementor\Core\Utils;
@@ -11,10 +12,10 @@ use EAddonsForElementor\Core\Utils;
 trait Custommeta {
 
     protected function get_value_custommeta($metakey) {
-       
-        if ( !empty($metakey) ) {
+
+        if (!empty($metakey)) {
             $querytype = $this->parent->get_querytype();
-            
+
             //@p il meta è forzatamente singolo
             $meta_value = get_metadata($querytype, $this->current_id, $metakey, true);
 
@@ -22,6 +23,7 @@ trait Custommeta {
         }
         return false;
     }
+
     // questo vale per tutti Posts - Users - Terms
     protected function render_item_custommeta($metaitem) {
 
@@ -30,7 +32,7 @@ trait Custommeta {
 
         $_id = $metaitem['_id'];
 
-        if ( !empty($metafield_key) ) {
+        if (!empty($metafield_key)) {
 
 
             //il tipo di rendering per il custom_meta
@@ -47,7 +49,7 @@ trait Custommeta {
 
             $meta_html = '';
 
-            if ( !empty($meta_value) )
+            if (empty($meta_value))
                 return;
 
             switch ($metafield_type) {
@@ -112,12 +114,11 @@ trait Custommeta {
                         $this->parent->add_render_attribute($attribute_a_link, 'class', 'elementor-size-' . $metafield_button_size);
                     }
                     $this->parent->add_render_attribute($attribute_a_link, 'class', ['elementor-button-link', 'elementor-button', 'e-add-button']);
-
-
+                    
                     //l'icona
                     $show_icon = '';
-                    if ( !empty($metaitem['show_icon']) ) {
-                        $show_icon = $this->render_item_icon($metaitem,'show_icon','icon','e-add-query-icon');
+                    if (!empty($metaitem['show_icon'])) {
+                        $show_icon = $this->render_item_icon($metaitem, 'show_icon', 'icon', 'e-add-query-icon');
                         $this->parent->add_render_attribute($attribute_a_link, 'class', 'e-add-is_icon');
                     }
                     $meta_html = $show_icon . '<span>' . $metafield_button_label . '</span>';
@@ -156,7 +157,6 @@ trait Custommeta {
                     $metafield_label = $metaitem['metafield_file_label'];
 
                     if (is_string($meta_value)) {
-
                         if (is_numeric($meta_value)) {
                             //echo 'numeric';
                             $id_file = $meta_value;
@@ -172,15 +172,17 @@ trait Custommeta {
                         //$meta_value = $meta_value; //è una stringa id
                     } else if (is_array($meta_value)) {
                         //echo 'array';
-                        if ($meta_value['ID'])
+                        if (!empty($meta_value['ID'])) {
                             $id_file = $meta_value['ID'];
-
-                        if ($meta_value['url'])
+                        }
+                        if (!empty($meta_value['url'])) {
                             $url_file = $meta_value['url'];
+                        }
                     }
 
-                    if ($id_file)
+                    if ($id_file) {
                         $url_file = wp_get_attachment_url($id_file);
+                    }
 
                     if ($url_file) {
 
@@ -190,8 +192,8 @@ trait Custommeta {
 
                         //l'icona
                         $show_icon = '';
-                        if ( !empty($metaitem['show_icon']) ) {
-                            $show_icon = $this->render_item_icon($metaitem,'show_icon','icon','e-add-query-icon');
+                        if (!empty($metaitem['show_icon'])) {
+                            $show_icon = $this->render_item_icon($metaitem, 'show_icon', 'icon', 'e-add-query-icon');
                             $this->parent->add_render_attribute($attribute_a_link, 'class', 'e-add-is_icon');
                         }
 
@@ -345,7 +347,7 @@ trait Custommeta {
 
                     //l'icona
                     //@p qui renderizzo l'icona.. 
-                    $show_icon = $this->render_item_icon($metaitem,'show_icon','icon','e-add-query-icon');
+                    $show_icon = $this->render_item_icon($metaitem, 'show_icon', 'icon', 'e-add-query-icon');
                     $class_icon = ' class="e-add-is_icon"';
                     $label_before = $this->render_label_before_item($metaitem);
                     if ($html_tag_item) {
@@ -359,7 +361,7 @@ trait Custommeta {
                     $meta_html = Utils::to_string($meta_value);
             }
 
-            switch($link_to){
+            switch ($link_to) {
                 case 'post':
                     $href_link = $this->current_permalink;
                     break;
@@ -368,12 +370,11 @@ trait Custommeta {
 
                     break;
                 default:
-                    
             }
             if ($link_to) {
                 $this->parent->add_render_attribute($attribute_a_link, 'href', $href_link);
             }
-            
+
 
             //@p il link del metafield
             $linkOpen = '';
@@ -384,11 +385,11 @@ trait Custommeta {
                 $linkOpen = '<a ' . $this->parent->get_render_attribute_string($attribute_a_link) . '>';
                 $linkClose = '</a>';
             }
-            if ( !empty($meta_html) ) {
+            if (!empty($meta_html)) {
                 //
                 echo $linkOpen . $meta_html . $linkClose;
             }
         }
     }
-    
+
 }
