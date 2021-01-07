@@ -205,8 +205,10 @@ class Base_Skin extends \Elementor\Skin_Base {
                 }, $post->tags);
             }
 
+            $widget_name = $this->parent->get_name();
+            
             $classes = [
-                'elementor-portfolio-item',
+                'elementor-'.$widget_name.'-item',
                 'elementor-post',
                 implode(' ', $tags_classes),
             ];
