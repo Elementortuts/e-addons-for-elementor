@@ -27,14 +27,10 @@ if (!Utils::is_plugin_active('elementor-pro') || !class_exists('ElementorPro\Mod
             //parent::__construct();
 
             add_filter('e_addons/dynamic', [$this, 'filter_form'], 10, 3);
-            add_filter('e_addons/form/setting_shortcodes', [$this, 'filter_setting_shortcodes'], 10, 2);
-        }
-
-        public function filter_setting_shortcodes($text = '', $fields = array()) {
-            return \EAddonsForElementor\Core\Utils\Form::do_setting_shortcodes($text, $fields);
         }
 
         public function filter_form($value = '', $fields = array(), $var = 'form') {
+            //var_dump($value); die();
             $value = \EAddonsForElementor\Core\Utils\Form::do_setting_shortcodes($value, $fields);
             $value = \EAddonsForElementor\Core\Utils\Form::replace_content_shortcodes($value, $fields);
             return $value;
@@ -105,7 +101,7 @@ if (!Utils::is_plugin_active('elementor-pro') || !class_exists('ElementorPro\Mod
                 }
             }
             if ($dynamic) {
-                $settings = Utils::get_dynamic_data($settings, $fields);
+                $settings = Utils::get_dynamic_data($settings, $fields, 'form');
             }
             return $settings;
         }
