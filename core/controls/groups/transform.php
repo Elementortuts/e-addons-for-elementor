@@ -67,7 +67,7 @@ class Transform extends Group_Control_Base {
                 'transform_type' => 'custom',
             ],
             'selectors' => [
-                '{{SELECTOR}} > *:first-child' => 'transform: rotateZ({{ANGLE}}deg) rotateX({{ROTATE_X}}deg) rotateY({{ROTATE_Y}}deg) scale({{SCALE}}) translateX({{TRANSLATE_X}}%) translateY({{TRANSLATE_Y}}%) translateZ({{TRANSLATE_Z}}%);',
+                '{{SELECTOR}} > *:first-child' => 'transform: rotateZ({{ANGLE}}deg) rotateX({{ROTATE_X}}deg) rotateY({{ROTATE_Y}}deg) scale({{SCALE}}) translate3D({{TRANSLATE_X}}%,{{TRANSLATE_Y}}%,{{TRANSLATE_Z}}px);',
             ],
         ];
         
