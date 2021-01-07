@@ -4,7 +4,7 @@ namespace EAddonsForElementor\Base;
 
 use Elementor\Element_Base;
 use EAddonsForElementor\Core\Utils;
-use EAddonsProForm\Core\Utils\Form;
+use EAddonsForElementor\Core\Utils\Form;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -22,6 +22,23 @@ if (!Utils::is_plugin_active('elementor-pro') || !class_exists('ElementorPro\Mod
     class Base_Action extends \ElementorPro\Modules\Forms\Classes\Action_Base {
 
         use \EAddonsForElementor\Base\Traits\Base;
+
+        public function __construct() {
+            //parent::__construct();
+
+            add_filter('e_addons/dynamic', [$this, 'filter_form'], 10, 3);
+            add_filter('e_addons/form/setting_shortcodes', [$this, 'filter_setting_shortcodes'], 10, 2);
+        }
+
+        public function filter_setting_shortcodes($text = '', $fields = array()) {
+            return \EAddonsForElementor\Core\Utils\Form::do_setting_shortcodes($text, $fields);
+        }
+
+        public function filter_form($value = '', $fields = array(), $var = 'form') {
+            $value = \EAddonsForElementor\Core\Utils\Form::do_setting_shortcodes($value, $fields);
+            $value = \EAddonsForElementor\Core\Utils\Form::replace_content_shortcodes($value, $fields);
+            return $value;
+        }
 
         /**
          * Get Label
@@ -68,13 +85,13 @@ if (!Utils::is_plugin_active('elementor-pro') || !class_exists('ElementorPro\Mod
             $settings = array();
             if ($form_id) {
                 if ($post_id) {
-                    $document = \Elementor\Plugin::$instance->documents->get($post_id);            
+                    $document = \Elementor\Plugin::$instance->documents->get($post_id);
                     if ($document) {
                         $form = \ElementorPro\Modules\Forms\Module::find_element_recursive($document->get_elements_data(), $form_id);
                         if ($form) {
                             $widget = \Elementor\Plugin::$instance->elements_manager->create_element_instance($form);
                         }
-                    } 
+                    }
                 }
                 if (!$widget) {
                     $widget = \EAddonsForElementor\Core\Utils::get_element_instance_by_id($form_id);
