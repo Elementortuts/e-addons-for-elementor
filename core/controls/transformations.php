@@ -111,38 +111,38 @@ class Transformations extends Control_Base_Units {
 	public function get_sliders() {
 		return [
 			'angle' => [
-				'label' => __( 'Angle', 'e-addons-for-elementor' ),
+				'label' => __( 'Angle (deg)', 'e-addons-for-elementor' ),
 				'min' => -360,
 				'max' => 360,
 				'step' => 1
 			],
 			'rotate_x' => [
-				'label' => __( 'Rotate X', 'e-addons-for-elementor' ),
+				'label' => __( 'Rotate X (deg)', 'e-addons-for-elementor' ),
 				'min' => -360,
 				'max' => 360,
 				'step' => 1
 			],
 			'rotate_y' => [
-				'label' => __( 'Rotate Y', 'e-addons-for-elementor' ),
+				'label' => __( 'Rotate Y (deg)', 'e-addons-for-elementor' ),
 				'min' => -360,
 				'max' => 360,
 				'step' => 1
 			],
 			'translate_x' => [
-				'label' => __( 'X', 'e-addons-for-elementor' ),
+				'label' => __( 'X (%)', 'e-addons-for-elementor' ),
 				'size_units' => [ 'px','%' ],
 				'min' => -200,
 				'max' => 200,
 				'step' => 1
 			],
 			'translate_y' => [
-				'label' => __( 'Y', 'e-addons-for-elementor' ),
+				'label' => __( 'Y (%)', 'e-addons-for-elementor' ),
 				'min' => -200,
 				'max' => 200,
 				'step' => 1
 			],
 			'translate_z' => [
-				'label' => __( 'Z', 'e-addons-for-elementor' ),
+				'label' => __( 'Z (px)', 'e-addons-for-elementor' ),
 				'min' => -200,
 				'max' => 200,
 				'step' => 1
