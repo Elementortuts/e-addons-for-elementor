@@ -45,6 +45,10 @@ class Base extends Base_Skin {
     protected $counter = 0;
     protected $depended_scripts = [];
     protected $depended_styles = [];
+    
+    public function show_in_settings() {
+        return false;
+    }
 
     public function _register_controls_actions() {
 

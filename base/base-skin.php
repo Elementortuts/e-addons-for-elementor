@@ -229,7 +229,7 @@ class Base_Skin extends \Elementor\Skin_Base {
             <?php
         }
 
-        protected function render_overlay_footer($link = false) { ?>
+        protected function render_overlay_footer() { ?>
             </div></a>
             <?php
         }

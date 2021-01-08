@@ -4,6 +4,7 @@ Donate link: https://e-addons.com/donate/
 Tags: elementor, addons, extension, dynamic, template, token, widget, module, design
 Requires at least: 5.0
 Tested up to: 5.6.1
+Elementor tested up to: 3.2.0
 Stable tag: 2.2
 Requires PHP: 7.1
 License: GPLv3
