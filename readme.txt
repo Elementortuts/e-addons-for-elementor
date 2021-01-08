@@ -97,6 +97,13 @@ Absolutely not! But for an advanced use it's better to understand Wordpress logi
 
 == Changelog ==
 
+= 2.2.1 - 08-01-2021 =
+* Add: Query module
+* Add: Form utils
+* Fix: Translate Control
+* Fix: Dynamic Tags Controls
+* Fix: minor fixes
+
 = 2.2 - 04-01-2021 =
 * Add: Control Element ID
 * Add: Ajax action Metas Attachment
