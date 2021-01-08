@@ -25,8 +25,10 @@ trait Pagination {
                 'label' => __('Pagination', 'e-addons'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'pagination_enable' => 'yes',
-                    'infiniteScroll_enable' => ''
+                    //'pagination_enable' => 'yes',
+                    //'infiniteScroll_enable' => ''
+                    $this->get_control_id('pagination_enable') => 'yes', 
+                    $this->get_control_id('infiniteScroll_enable') => '',
                 ],
             ]
         );

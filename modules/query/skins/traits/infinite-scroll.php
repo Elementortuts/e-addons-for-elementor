@@ -23,7 +23,7 @@ trait Infinite_Scroll {
             'label' => __('Infinite Scroll', 'e-addons'),
             'tab' => Controls_Manager::TAB_STYLE,
             'condition' => [
-                $this->get_control_id('infiniteScroll_enable') => 'yes',
+                $this->get_control_id('infiniteScroll_enable') => 'yes', 
             ],
                 ]
         );
