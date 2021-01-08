@@ -54,9 +54,11 @@ abstract class Base_Tag extends Tag {
 
     public function _register_controls() {
         //parent::register_controls();
-        if (version_compare(ELEMENTOR_VERSION, '3.1.0') < 0) {
+        //$tmp = explode('-', ELEMENTOR_VERSION); $version = reset($tmp);
+        //if (version_compare($version, '3.1.0') < 0 || version_compare($version, '3.2.0') >= 0) {
+            //var_dump($version); die();
             $this->register_controls();
-        }
+        //}
     }
 
     /**
