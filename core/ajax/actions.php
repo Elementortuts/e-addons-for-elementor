@@ -192,6 +192,42 @@ class Actions {
         }
         return $control_options;
     }
+    
+    public function get_comments($params) {
+        $control_options = [];
+        $args = array(); 
+        if (is_numeric($params['q'])) {
+            $args['ID'] = intval($params['q']);// args here 
+        } else {
+            $args['search'] = $params['q'];
+        }
+        $comments_query = new \WP_Comment_Query( $args ); 
+        $comments = $comments_query->comments;
+        if ( $comments ) { 
+            foreach ( $comments as $comment ) { 
+                $control_options[] = [
+                    'id' => $comment->comment_ID,
+                    'text' => '['.$comment->comment_ID.'] on '.$comment->comment_post_ID.' by '.$comment->comment_author,
+                ];
+            }
+        }
+        return $control_options;
+    }
+
+    public function _get_comments($params) {
+        $control_options = [];
+        $uid = (array) $params['id'];        
+        foreach ( $uid as $comment_id ) {
+            $comment = get_comment(intval($comment_id));
+            if ($comment) {
+                $control_options[] = [
+                    'id' => $comment->comment_ID,
+                    'text' => '['.$comment->comment_ID.'] on '.$comment->comment_post_ID.' by '.$comment->comment_author,
+                ];
+            }
+        }
+        return $control_options;
+    }
 
     public function get_fields($params) {
         $control_options = [];
@@ -572,14 +608,11 @@ class Actions {
         $uid = (array) $params['id'];
         $control_options = [];
         $term_id = reset($uid);
+        $query_params = array('hide_empty' => false);
         if (is_numeric($term_id)) {
-            $query_params = [
-                'include' => $uid,
-            ];
+            $query_params['include'] = $uid;
         } else {
-            $query_params = [
-                'slug' => $uid,
-            ];
+            $query_params['slug'] = $uid;
         }
         $terms = get_terms($query_params);
         foreach ($terms as $term) {
