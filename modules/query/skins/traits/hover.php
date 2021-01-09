@@ -99,9 +99,14 @@ trait Hover {
                 'label' => __('Background', 'e-addons'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .e-add-post-image.e-add-post-overlayhover:before',
+                /*'
+                @p il default per background non l'ho capito..
+                default' => [
+                    'background' => 'classic',
+                    'color' => '#00000080'
+                ],*/
                 'condition' => [
                     $this->get_control_id('use_overlay_hover') => '1',
-                //'image_link!' => '',
                 ]
             ]
         );
@@ -125,6 +130,7 @@ trait Hover {
                 ],
                 'condition' => [
                     $this->get_control_id('overlay_color_hover_background') => ['classic', 'gradient'],
+                    $this->get_control_id('use_overlay_hover') => '1',
                 ],
             ]
         );
@@ -152,6 +158,7 @@ trait Hover {
                 ],
                 'condition' => [
                     $this->get_control_id('overlay_color_hover_background') => ['classic', 'gradient'],
+                    $this->get_control_id('use_overlay_hover') => '1',
                 ],
             ]
         );
