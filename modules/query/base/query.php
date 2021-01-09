@@ -321,6 +321,21 @@ class Query extends Base_Widget {
         //@p qui infilo i controllo relativamente agli items..
         $this->items_query_controls();
         
+        $this->add_control(
+            'heading_pagination',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'show_label' => false,
+                'raw' => '<i class="fas fa-pager"></i> &nbsp;'.__('PAGINATION:', 'e-addons'),
+                'content_classes' => 'e-add-icon-heading',
+                'condition' => [
+                    //@p il massimo è che la paginazione funzioni con tutti gli skins...
+                    '_skin' => ['', 'grid', 'carousel', 'filters', 'justifiedgrid', 'gridtofullscreen3d'],
+                    'infiniteScroll_enable' => '',
+                    'query_type' => ['automatic_mode', 'get_cpt', 'get_tax', 'get_users_and_roles', 'get_attachments']
+                ],
+            ]
+        );
         //@p questo metodo produce i 2 switcher per abilitare la paginazione 8in caso di items_list è vuoto)
         $this->paginations_enable_controls();
         
@@ -333,7 +348,7 @@ class Query extends Base_Widget {
             'section_layout_blocks', [
                 'label' => '<i class="eaddicon eicon-info-box" aria-hidden="true"></i> '.__('Layout of blocks', 'e-addons'),
                 'condition' => [
-                    '_skin!' => ['justifiedgrid','timeline', 'nextpost'],
+                    '_skin!' => ['justifiedgrid', 'timeline', 'nextpost'],
                 ],
             ]
         );

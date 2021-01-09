@@ -22,10 +22,9 @@ trait Pagination {
             'pagination_enable', [
                 'label' => '<i class="eaddicon eicon-post-navigation" aria-hidden="true"></i> '.__('Pagination', 'e-addons'),
                 'type' => Controls_Manager::SWITCHER,
-                'separator' => 'before',
                 'condition' => [
                     //@p il massimo è che la paginazione funzioni con tutti gli skins...
-                    '_skin' => ['', 'grid', 'carousel', 'filters','gridtofullscreen3d'],
+                    '_skin' => ['', 'grid', 'carousel', 'filters', 'justifiedgrid' , 'gridtofullscreen3d'],
                     'infiniteScroll_enable' => '',
                     'query_type' => ['automatic_mode', 'get_cpt', 'get_tax', 'get_users_and_roles', 'get_attachments']
                 ],
