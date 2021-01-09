@@ -22,7 +22,8 @@
   margin: 0;
   padding: 0;
 }
-.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img{
+.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img,
+.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-image-area > .e-add-item > .e-add-post-image > .e-add-img{
   position: inherit;
 }
 .justified-gallery > a > img,
@@ -44,7 +45,12 @@
 .justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img > img,
 .justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img > a > img,
 .justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img > svg,
-.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img > a > svg{
+.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img > a > svg,
+
+.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-image-area > .e-add-item > .e-add-post-image > .e-add-img > img,
+.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-image-area > .e-add-item > .e-add-post-image > .e-add-img > a > img,
+.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-image-area > .e-add-item > .e-add-post-image > .e-add-img > svg,
+.justified-gallery > .e-add-item-justifiedgrid > .e-add-post-block > .e-add-image-area > .e-add-item > .e-add-post-image > .e-add-img > a > svg{
   position: absolute;
   top: 50%;
   left: 50%;

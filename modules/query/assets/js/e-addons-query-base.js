@@ -127,9 +127,7 @@ jQuery(window).on('elementor/frontend/init', () => {
 				const fitImage = ($post) => {
 					let $imageParent = $post.find('.e-add-img'),
 						$image = $imageParent.find('img'),
-						image = $image[0];
-					$imageParent.addClass('ppppp');
-					
+						image = $image[0];					
 					
 					if (!image) {
 					return;

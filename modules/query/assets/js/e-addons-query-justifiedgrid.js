@@ -54,7 +54,7 @@ jQuery(window).on('elementor/frontend/init', () => {
 				captions: false,
 				cssAnimation: false,
 				selector: '.e-add-item-justifiedgrid',
-				imgSelector: '> .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img > img, > .e-add-post-block > .e-add-item > .e-add-post-image > .e-add-img  > a > img'
+				imgSelector: '> .e-add-post-block > .e-add-image-area > .e-add-item > .e-add-post-image > .e-add-img > img, > .e-add-post-block > .e-add-image-area > .e-add-item > .e-add-post-image > .e-add-img  > a > img'
 			}).on('jg.complete', function (e) {
 				//console.log(e);
 			});;
