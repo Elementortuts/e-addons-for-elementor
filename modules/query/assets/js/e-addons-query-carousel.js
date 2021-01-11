@@ -28,7 +28,8 @@ class WidgetQueryCarouselHandlerClass extends elementorModules.frontend.handlers
             
             $items: this.$element.find(selectors.items),
             
-            $animationReveal: null
+            $animationReveal: null,
+            $eaddPostsSwiper: null
         };
     }
 
@@ -41,7 +42,7 @@ class WidgetQueryCarouselHandlerClass extends elementorModules.frontend.handlers
 
         if(eaddPostsSwiper) eaddPostsSwiper.destroy();
         eaddPostsSwiper = new Swiper( this.elements.$containerCarousel[0], this.carouselOptions( id_scope, elementSettings ) );
-
+        this.elements.$eaddPostsSwiper = eaddPostsSwiper;
         
         // ---------------------------------------------
         // Funzione di callback eseguita quando avvengono le mutazioni
@@ -51,14 +52,14 @@ class WidgetQueryCarouselHandlerClass extends elementorModules.frontend.handlers
                 if (mutation.attributeName === 'class') {
                         if (this.isCarouselEnabled) {
                         eaddPostsSwiper.update();
-                        alert('update');
+                        
                         }
                     }
                 }
             }
         };
-        observe_eAddns_element(scope[0], eAddns_MutationObserverCallback);
-        */
+        observe_eAddns_element(scope[0], eAddns_MutationObserverCallback);*/
+        
 
     }
     /*
@@ -67,9 +68,17 @@ class WidgetQueryCarouselHandlerClass extends elementorModules.frontend.handlers
     }
     */
     
-    onElementChange(propertyName){
+   onElementChange(propertyName){
         
+    if (    EADD_skinPrefix+'ratio_image' === propertyName || 
+            EADD_skinPrefix+'dualslider_distribution_vertical' === propertyName || 
+            EADD_skinPrefix+'dualslider_height_container' === propertyName
+        ) {
+        this.elements.$eaddPostsSwiper.update();
+
+        console.log(propertyName);
     }
+}
 
     carouselOptions( id_scope, elementSettings ){ 
         //@p qui vado a restituire l'oggettoo per configurare loo swiper ;-)
@@ -189,7 +198,6 @@ class WidgetQueryCarouselHandlerClass extends elementorModules.frontend.handlers
     
             // ----------------------------
     
-    
             navigation: {
                 nextEl: '.next-' + id_scope, //'.swiper-button-next',
                 prevEl: '.prev-' + id_scope, //'.swiper-button-prev',
@@ -254,11 +262,11 @@ class WidgetQueryCarouselHandlerClass extends elementorModules.frontend.handlers
             // watchSlidesProgress:  Boolean( elementSettings[EADD_skinPrefix+'watchSlidesProgress ), //false, // Enable this feature to calculate each slides progress
             // watchSlidesVisibility:  Boolean( elementSettings[EADD_skinPrefix+'watchSlidesVisibility ), // false, // watchSlidesProgress should be enabled. Enable this option and slides that are in viewport will have additional visible class
             scrollbar: {
-            el: '.swiper-scrollbar', //    null    String with CSS selector or HTML element of the container with scrollbar.
-            hide: Boolean( elementSettings[EADD_skinPrefix+'scrollbar_hide'] ),    // boolean  true    Hide scrollbar automatically after user interaction
-            draggable: Boolean( elementSettings[EADD_skinPrefix+'scrollbar_draggable'] ), //true, // Set to true to enable make scrollbar draggable that allows you to control slider position
-            snapOnRelease: true, // Set to true to snap slider position to slides when you release scrollbar
-            //dragSize: 'auto', //     string/number   Size of scrollbar draggable element in px
+                el: '.swiper-scrollbar', //    null    String with CSS selector or HTML element of the container with scrollbar.
+                hide: Boolean( elementSettings[EADD_skinPrefix+'scrollbar_hide'] ),    // boolean  true    Hide scrollbar automatically after user interaction
+                draggable: Boolean( elementSettings[EADD_skinPrefix+'scrollbar_draggable'] ), //true, // Set to true to enable make scrollbar draggable that allows you to control slider position
+                snapOnRelease: true, // Set to true to snap slider position to slides when you release scrollbar
+                //dragSize: 'auto', //     string/number   Size of scrollbar draggable element in px
             },
             mousewheel: Boolean( elementSettings[EADD_skinPrefix+'mousewheelControl'] ), // true,
             /*mousewheel: {

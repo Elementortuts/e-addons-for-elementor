@@ -190,7 +190,7 @@ class Carousel extends Base {
             'height_container', [
                 'label' => __('Height of viewport', 'e-addons'),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', 'vh'],
+                'size_units' => ['px', 'vh', '%'],
                 'range' => [
                     'px' => [
                         'min' => 1,
@@ -202,7 +202,7 @@ class Carousel extends Base {
                     '{{WRAPPER}} .e-add-skin-carousel.swiper-container-vertical' => 'height: {{SIZE}}{{UNIT}};'
                 ],
                 'condition' => [
-	                $this->get_control_id('useNavigation') => 'yes',
+	                //$this->get_control_id('useNavigation') => 'yes',
 	                $this->get_control_id('direction_slider') => 'vertical'
 	            ]
             ]
@@ -270,8 +270,8 @@ class Carousel extends Base {
         // ******************************************************************
         // ******************************************************************
         // ******************************************************************
-        // ******************************************************************
-        $this->add_control(
+
+		$this->add_control(
             'hr_interface',
             [
                 'type' => Controls_Manager::DIVIDER,
@@ -1229,7 +1229,6 @@ class Carousel extends Base {
             ]
         );
         
-        
         $this->parent->end_popover();
 
 
@@ -1415,8 +1414,8 @@ class Carousel extends Base {
         // ******************************************************************
         // ******************************************************************
         // ******************************************************************
-        // ******************************************************************
-        $this->add_control(
+
+		$this->add_control(
             'hr_options',
             [
                 'type' => Controls_Manager::DIVIDER,

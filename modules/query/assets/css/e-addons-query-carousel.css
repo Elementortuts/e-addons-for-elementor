@@ -1,6 +1,7 @@
 .e-add-carouser-container{
   position: relative;
 }
+/* NAVIGATION: PREV-NEXT */
 .e-add-carousel-controls .swiper-button-prev,
 .e-add-carousel-controls .swiper-button-next {
   position: absolute;
@@ -60,19 +61,6 @@
   transform: scale(0.1);
 }
 
-.e-add-carousel-controls .swiper-button-prev.swiper-button-disabled svg{
-  /*-webkit-transform: translateX(-50vw);
-  -ms-transform: translateX(-50vw);
-  -o-transform: translateX(-50vw);
-  transform: translateX(-50vw);*/
-
-}
-.e-add-carousel-controls .swiper-button-next.swiper-button-disabled svg{
-  /*-webkit-transform: translateX(50vw);
-  -ms-transform: translateX(50vw);
-  -o-transform: translateX(50vw);
-  transform: translateX(50vw);*/
-}
 .e-add-carousel-controls .swiper-button-next:focus, 
 .e-add-carousel-controls .swiper-button-prev:focus{
   outline: none;
@@ -85,7 +73,6 @@
 }
 .e-add-carousel-controls .swiper-button-prev,
 .e-add-carousel-controls .swiper-container-rtl .swiper-button-prev {
-  /*background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");*/
   left: 10px;
   right: auto;
   background-image: none;
@@ -105,14 +92,13 @@
  content: none;
 }
 
-/**/
+/* PAGINATION [ Base ] */
 .e-add-carousel-controls .e-add-container-pagination > .swiper-pagination-bullets .swiper-pagination-bullet {
   transition: background .5s, border .5s, opacity .5s;
 }
 .e-add-carousel-controls .e-add-container-pagination > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
   transition: .5s transform,.5s top,.5s left,.5s background-color;
 }
-
 .e-add-container-navigation{
   position: absolute;
   top: 50%;
@@ -135,7 +121,6 @@
 .e-add-container-pagination.swiper-container-horizontal > .swiper-pagination-bullets.e-add-nav-style .swiper-pagination-bullet {
    display: inline-block;
 }
-
 .e-add-container-pagination > .swiper-pagination-bullets.e-add-nav-style .swiper-pagination-bullet:focus {
   outline: none;
 }
@@ -174,7 +159,7 @@
   transition-delay: 0.1s;
 }
 
-/*numbers horizontal*/
+/* numbers horizontal */
 .e-add-container-pagination.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet-title {
   padding: 0 0 10px 0;
 
@@ -190,7 +175,7 @@
   -webkit-transform: scale3d(1,1,1) translateY(-100%);
   transform: scale3d(1,1,1) translateY(-100%);
 }
-/*numbers vertical*/
+/* numbers vertical */
 .e-add-container-pagination.swiper-container-vertical > .swiper-pagination-bullets .swiper-pagination-bullet-title {
   padding: 0 10px 0 0;
 

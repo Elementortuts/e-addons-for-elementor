@@ -9,7 +9,7 @@ class WidgetQueryDualSliderHandlerClass extends elementorModules.frontend.handle
                 container: '.e-add-posts-container',
                 containerCarousel: '.e-add-posts-container.e-add-skin-dualslider',
                 thumbsCarousel: '.e-add-dualslider-gallery-thumbs',
-
+                dualsliderCarousel: '.e-add-skin-dualslider',
                 containerWrapper: '.e-add-posts-wrapper',
                 items: '.e-add-post-item',
             },
@@ -25,13 +25,16 @@ class WidgetQueryDualSliderHandlerClass extends elementorModules.frontend.handle
 
             $container: this.$element.find(selectors.container),
             $containerCarousel: this.$element.find(selectors.containerCarousel),
+
             $thumbsCarousel: this.$element.find(selectors.thumbsCarousel),
+            $dualsliderCarousel: this.$element.find(selectors.dualsliderCarousel),
 
             $containerWrapper: this.$element.find(selectors.containerWrapper),
             
             $items: this.$element.find(selectors.items),
             
-            $animationReveal: null
+            $animationReveal: null,
+            $galleryThumbs: null
         };
     }
 
@@ -42,9 +45,11 @@ class WidgetQueryDualSliderHandlerClass extends elementorModules.frontend.handle
             widgetType = this.getWidgetType(),
             galleryThumbs = null;
 
+        this.adapteHeight();
+
         if(galleryThumbs) galleryThumbs.destroy();
         galleryThumbs = new Swiper( this.elements.$thumbsCarousel[0], this.thumbCarouselOptions( id_scope, elementSettings ) );
-
+        this.elements.$galleryThumbs = galleryThumbs;
         this.elements.$scope.data('thumbscarousel', galleryThumbs);
 
         //alert(widgetType+'.carousel');
@@ -52,23 +57,69 @@ class WidgetQueryDualSliderHandlerClass extends elementorModules.frontend.handle
         //elementorFrontend.elementsHandler.runReadyTrigger(jQUery(widgetType+'.carousel'));
 
         elementorFrontend.hooks.doAction('frontend/element_ready/'+widgetType+'.carousel', scope);
-            
+        
+
+        //da fare.... l'evento di resizng per getire l'altezza delle tumbnail in caso di left-right
+        this.initEvents();
+
+
+         // ---------------------------------------------
+        // Funzione di callback eseguita quando avvengono le mutazioni
+        /*var eAddns_MutationObserverCallback = function(mutationsList, observer) {
+            for(var mutation of mutationsList) {
+                if (mutation.type == 'attributes') {
+                if (mutation.attributeName === 'class') {
+                        if (this.isThumbsCarouselEnabled) {
+                            galleryThumbs.update();
+                            this.adapteHeight();
+                        }
+                    }
+                }
+            }
+        };
+        observe_eAddns_element(scope[0], eAddns_MutationObserverCallback);*/
     }
     /*
     onInit(){
         //alert('init');
     }
     */
-    
+    initEvents(){
+		// on risize adapting blocks and elements
+		window.addEventListener("resize", (event) => {
+			this.adapteHeight();
+		});
+		
+	}
     onElementChange(propertyName){
-       
+        
+        if (    EADD_skinPrefix+'ratio_image' === propertyName || 
+                EADD_skinPrefix+'dualslider_distribution_vertical' === propertyName || 
+                EADD_skinPrefix+'dualslider_height_container' === propertyName
+            ) {
+            this.elements.$galleryThumbs.update();
+            this.adapteHeight();
+            console.log(propertyName);
+        }
     }
-
+    adapteHeight(){
+        let elementSettings = this.getElementSettings();
+        if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'left' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'right'){
+            this.elements.$thumbsCarousel.height( this.elements.$dualsliderCarousel.height() );
+        }
+    }
     thumbCarouselOptions( id_scope, elementSettings ){ 
         
-        var slidesPerView = Number(elementSettings[EADD_skinPrefix+'thumbnails_slidesPerView']);
-        var elementorBreakpoints = elementorFrontend.config.breakpoints;
-        
+        let slidesPerView = Number(elementSettings[EADD_skinPrefix+'thumbnails_slidesPerView']),
+            elementorBreakpoints = elementorFrontend.config.breakpoints,
+            directionThumbSlider = 'horizontal';
+
+        if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'left' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'right'){
+            directionThumbSlider = 'vertical';
+        }else if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'top' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'bottom'){
+            directionThumbSlider = 'horizontal';
+        }
+
         var eaddSwiperOptions = {
             spaceBetween: Number(elementSettings[EADD_skinPrefix+'dualslider_gap']) || 0,
             slidesPerView: slidesPerView || 'auto',
@@ -77,9 +128,19 @@ class WidgetQueryDualSliderHandlerClass extends elementorModules.frontend.handle
             autoHeight: true,
             //watchOverflow: true,
             
+            direction:  directionThumbSlider,
+
             watchSlidesVisibility: true,
             watchSlidesProgress: true,
             
+            navigation: {
+                nextEl: '.next-' + id_scope, //'.swiper-button-next',
+                prevEl: '.prev-' + id_scope, //'.swiper-button-prev',
+                //hideOnClick: false,
+                //disabledClass: 'swiper-button-disabled', //   CSS class name added to navigation button when it becomes disabled
+                //hiddenClass: 'swiper-button-hidden', //   CSS class name added to navigation button when it becomes hidden
+            },
+
             // centeredSlides: true,
             loop: true,
             
