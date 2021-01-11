@@ -62,7 +62,7 @@ class Form_Fields extends \Elementor\Control_Select {
         ob_start();
         parent::content_template();
         $template = ob_get_clean();
-        $template = str_replace('<select ', '<# var multiple = ( data.multiple ) ? \'class="elementor-select2" type="select2" multiple\' : \'\'; #><select {{ multiple }} ', $template);
+        $template = str_replace('<select ', '<# var multiple = ( data.multiple ) ? \'multiple\' : \'\'; #><# var select_type = ( data.multiple ) ? \'select2\' : \'select\'; #><select class="elementor-{{ select_type }}" type="{{ select_type }}" {{ multiple }} ', $template);
         echo $template;
     }
 

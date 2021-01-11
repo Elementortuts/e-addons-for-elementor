@@ -1,7 +1,7 @@
 var formFieldsItemView = elementor.modules.controls.BaseData.extend({
     onReady: function () {
 
-        console.log('form_fields');
+        //console.log('form_fields');
         
         var selectedElement = elementor.getCurrentElement();
         if (selectedElement) {
@@ -9,7 +9,7 @@ var formFieldsItemView = elementor.modules.controls.BaseData.extend({
         } else {
             var cid = jQuery('.elementor-navigator__item.elementor-editing').parent().data('model-cid');
         }
-        console.log(cid);
+        //console.log(cid);
         
         if (elementorFrontend.config.elements.data[cid]) {
             var settings = elementorFrontend.config.elements.data[cid].attributes;
@@ -46,7 +46,8 @@ var formFieldsItemView = elementor.modules.controls.BaseData.extend({
                 select.find("option[value='" + custom_id_input.val() + "']").remove();
             }*/
             select.val(ids);
-            if (is_select2) {
+            if (is_select2 || select.hasClass('elementor-select2')) { //select.prop('multiple')) {
+                //console.log('select2');
                 select.select2();
             }
         }
