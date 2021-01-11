@@ -49,6 +49,90 @@ class Dualslider extends Carousel {
 	            'label' => '<i class="eaddicon eadd-queryviews-dualslider"></i> '.__('Dual Slider', 'e-addons'),
 	            'tab' => Controls_Manager::TAB_CONTENT,
             ]
+		);
+		$this->add_control(
+            'dualslider_style', [
+              'label' => __('Position Style', 'e-addons'),
+              'type' => 'ui_selector',
+              'label_block' => true,
+              'toggle' => false,
+              'type_selector' => 'image',
+              'columns_grid' => 4,
+              'options' => [
+                  'bottom' => [
+                      'title' => __('Bottom','e-addons'),
+                      'return_val' => 'val',
+                      'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_b.png',
+                  ],
+                  'top' => [
+                      'title' => __('Top','e-addons'),
+                      'return_val' => 'val',
+                      'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_t.png',
+                  ],
+                  'left' => [
+                      'title' => __('Left','e-addons'),
+                      'return_val' => 'val',
+                      'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_l.png',
+                  ],
+                  'right' => [
+                      'title' => __('Right','e-addons'),
+                      'return_val' => 'val',
+                      'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_r.png',
+                  ],
+                  
+              ],
+              'toggle' => false,
+              'render_type' => 'template',
+              'default' => 'bottom',
+              //'tablet_default' => '',
+			  //'mobile_default' => '',
+			  'separator' => 'before',
+			  'frontend_available' => true,
+            ]
+		  );
+		  $this->add_responsive_control(
+            'dualslider_distribution_vertical', [
+                'label' => __('Distribution', 'e-addons'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+					'size' => '',
+					'unit' => '%',
+				],
+				'size_units' => ['%'],
+				'range' => [
+					'%' => [
+						'min' => 10,
+						'max' => 60,
+					]
+				],
+                'selectors' => [
+						'{{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-thumbnails, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-thumbnails' => 'width: {{SIZE}}%;',
+						'{{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-posts, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-posts' => 'width: calc(100% - {{SIZE}}%);'
+                ],
+                'condition' => [
+	                $this->get_control_id('dualslider_style') => ['left','right']
+	            ]
+            ]
+        );
+		  $this->add_responsive_control(
+            'dualslider_height_container', [
+                'label' => __('Height of viewport', 'e-addons'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'vh'],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 800,
+                        'step' => 1
+                    ],
+                ],
+                'selectors' => [
+						'{{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-posts .swiper-container, {{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-thumbnails .swiper-container, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-posts .swiper-container, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-thumbnails .swiper-container' => 'height: {{SIZE}}{{UNIT}};'
+                ],
+                'condition' => [
+	                $this->get_control_id('dualslider_style') => ['left','right']
+	            ]
+            ]
         );
 		// slides per row
 		$this->add_responsive_control(
@@ -88,7 +172,10 @@ class Dualslider extends Carousel {
 	                ]
 	            ],
 	            'selectors' => [
-	                '{{WRAPPER}} .e-add-dualslider-thumbnails' => 'margin-top: {{SIZE}}{{UNIT}};'
+					'{{WRAPPER}} .e-add-style-position-top-dualslider .e-add-dualslider-thumbnails' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .e-add-style-position-bottom-dualslider .e-add-dualslider-thumbnails' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-thumbnails' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-thumbnails' => 'margin-left: {{SIZE}}{{UNIT}};'
 	                
 	            ]
             ]
@@ -453,46 +540,78 @@ class Dualslider extends Carousel {
 	
 	
 	public function render() {
-		echo '<div class="e-add-dualslider-posts">';
-		parent::render();
-		echo '</div>';
-		/** @p elaboro la query... */
-		$this->parent->query_the_elements();
+		// @p [apro] il wrapper che defifinisce la direction style del dualslider
+		echo '<div class="e-add-style-position-' . $this->get_id() . ' e-add-style-position-' . $this->get_instance_value('dualslider_style') . '-' .$this->get_id() .'">'; 
+		
+			echo '<div class="e-add-dualslider-posts">';
+			parent::render();
+			echo '</div>';
+			
+			/** @p elaboro la query... */
+			$this->parent->query_the_elements();
 
-		/** @p qui prendo il valore di $query elaborato in base > query.php */
-		$query = $this->parent->get_query();
-		//$querytype = $this->parent->get_querytype();
-		
-		//var_dump($query);
-		
-		
+			/** @p qui prendo il valore di $query elaborato in base > query.php */
+			$query = $this->parent->get_query();
+			//$querytype = $this->parent->get_querytype();
+			
+			//var_dump($query);
+			
+			//@p MMMMM se esistono sia immagine che titolo uso una classe: xxxxx per getire gli allineamenti flex
+			$multip = '';
+			if( $this->get_instance_value('use_title') && $this->get_instance_value('use_image') ){
+				$multip = ' e-add-dualslider-multi';
+			}
+			//@p controllo se ci sono 
+			echo '<div class="e-add-dualslider-thumbnails">';
 
-		echo '<div class="e-add-dualslider-thumbnails">';
-		echo '	<div class="swiper-container e-add-dualslider-gallery-thumbs">'; //@p this is the target 
-    	echo '		<div class="swiper-wrapper e-add-dualslider-wrapper">';
-		
-		if ( !$query->found_posts ) {
-			return;
-		}
-		/**@p qui identifico se mi trovo in un loop, altrimenti uso la wp_query */
-		if ( $query->in_the_loop ) {
-			$this->current_permalink = get_permalink();
-			$this->current_id = get_the_ID();
-			//
-			$this->render_thumbnail();
-		} else {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-
+			echo '	<div class="swiper-container e-add-dualslider-gallery-thumbs">'; //@p this is the target 
+			echo '		<div class="swiper-wrapper e-add-dualslider-wrapper'.$multip.'">';
+			
+			if ( !$query->found_posts ) {
+				return;
+			}
+			/**@p qui identifico se mi trovo in un loop, altrimenti uso la wp_query */
+			if ( $query->in_the_loop ) {
 				$this->current_permalink = get_permalink();
 				$this->current_id = get_the_ID();
 				//
 				$this->render_thumbnail();
-			}
-		}
-		wp_reset_postdata();
+			} else {
+				while ( $query->have_posts() ) {
+					$query->the_post();
 
-		echo '</div></div></div>';
+					$this->current_permalink = get_permalink();
+					$this->current_id = get_the_ID();
+					//
+					$this->render_thumbnail();
+				}
+			}
+			wp_reset_postdata();
+
+			echo '</div>'; // @p END: swiper-container
+			echo '</div>'; // @p END: swiper-wrapper
+
+			// @p le freccine di navigazione
+			echo '<div class="e-add-dualslider-controls e-add-dualslider-controls-'.$this->get_instance_value('dualslider_style').'">';
+			$this->render_thumb_navigation();
+			echo '</div>';
+			
+			echo '</div>'; // @p END: e-add-dualslider-thumbnails
+		
+		echo '</div>'; // @p [chiudo] il wrapper che defifinisce la direction style del dualslider
+	}
+	protected function render_thumb_navigation() {
+
+		$arrow_1 = 'left';
+		$arrow_2 = 'right';
+		if( $this->get_instance_value('dualslider_style') == 'left' || $this->get_instance_value('dualslider_style') == 'right' ){
+			$arrow_1 = 'up';
+			$arrow_2 = 'down';
+		}
+		//if ( $this->get_instance_value('useNavigation') ) {
+            echo '<div class="swiper-button-prev prev-' . $this->parent->get_id() . '"><i class="fas fa-chevron-'.$arrow_1.'"></i></div>';
+            echo '<div class="swiper-button-next next-' . $this->parent->get_id() . '"><i class="fas fa-chevron-'.$arrow_2.'"></i></div>';
+        //}
 	}
 	public function render_thumbnail(){
 		
@@ -534,6 +653,8 @@ class Dualslider extends Carousel {
 			echo '<figure class="e-add-img e-add-bgimage" style="background: url('.$image_url[0].') no-repeat center; background-size: cover; display: block;"></figure>';
 			
 			echo '</div>';
+
+
 		}
 	}
 	// Classes ----------
