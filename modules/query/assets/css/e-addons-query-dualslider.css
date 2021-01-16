@@ -186,69 +186,61 @@
 	display: flex;
 	
 }
-.e-add-style-position-bottom-dualslider{
+.e-add-style-dualslider-position-bottom .e-add-style-position-dualslider{
 	flex-direction: column;
 }
-.e-add-style-position-top-dualslider{
+.e-add-style-dualslider-position-top .e-add-style-position-dualslider{
 	flex-direction: column-reverse;
-}
-.e-add-style-position-left-dualslider .e-add-dualslider-posts,
-.e-add-style-position-right-dualslider .e-add-dualslider-posts{
-	width: 70%;
-}
-.e-add-style-position-left-dualslider .e-add-dualslider-thumbnails,
-.e-add-style-position-right-dualslider .e-add-dualslider-thumbnails{
-	width: 30%;
 }
 
 /* LEFT-RIGHT: Layout Style */
-.e-add-style-position-right-dualslider{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider{
 	flex-direction: row;
 }
-.e-add-style-position-left-dualslider{
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider{
 	flex-direction: row-reverse;
 }
 
-.e-add-style-position-right-dualslider .e-add-dualslider-posts,
-.e-add-style-position-left-dualslider .e-add-dualslider-posts{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-posts,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-posts{
 	width: 70%;
 }
-.e-add-style-position-right-dualslider .e-add-dualslider-thumbnails,
-.e-add-style-position-left-dualslider .e-add-dualslider-thumbnails{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails{
 	width: 30%;
 }
 
-.e-add-style-position-right-dualslider .e-add-dualslider-posts .swiper-container,
-.e-add-style-position-left-dualslider .e-add-dualslider-posts .swiper-container{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-posts .swiper-container,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-posts .swiper-container{
 	height: 100%;
 }
-.e-add-style-position-right-dualslider .e-add-dualslider-thumbnails .swiper-container,
-.e-add-style-position-left-dualslider .e-add-dualslider-thumbnails .swiper-container{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .swiper-container,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .swiper-container{
 	height: 100%;
 }
-.e-add-style-position-right-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-wrap,
-.e-add-style-position-left-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-wrap{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-wrap,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-wrap{
 	height: 100%;
 }
 /* multi */
-.e-add-style-position-right-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-multi .e-add-dualslider-wrap,
-.e-add-style-position-left-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-multi .e-add-dualslider-wrap{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-multi .e-add-dualslider-wrap,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-multi .e-add-dualslider-wrap{
 	display: flex;
 	align-items: center;
 }
-.e-add-style-position-right-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-image,
-.e-add-style-position-left-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-image{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-image,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-image{
 	flex: 0 0 50%;
 	align-self: stretch;
 }
-.e-add-style-position-right-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-title,
-.e-add-style-position-left-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-title{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-title,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-title{
 	flex: 0 0 50%;
 	align-self: stretch;
 	padding: 10px;
 }
 /*  */
-.e-add-style-position-right-dualslider .e-add-thumbnail-image .e-add-bgimage,
-.e-add-style-position-left-dualslider .e-add-thumbnail-image .e-add-bgimage{
+.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-thumbnail-image .e-add-bgimage,
+.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-thumbnail-image .e-add-bgimage{
 	height: 100%;
 }

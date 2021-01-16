@@ -138,14 +138,40 @@ trait Custommeta {
                     'user' => __('Users(id)', 'e-addons'), //
                     'term' => __('Terms(id)', 'e-addons'), //
                     'gallery' => __('Gallery', 'e-addons'), //
+
                 ],
                 'condition' => [
                     'item_type' => 'item_custommeta'
                 ]
             ]
         );
-        //Image .. 'metafield_type!' => ['','textarea','date','button','file','oembed','map','term','post','user','gallery'],
+        //...'metafield_type!' => ['','textarea','date','button','file','oembed','map','term','post','user','gallery','array'],
+        //
+        //Array
+        $target->add_control(
+            'array_dump', [
+                'label' => __('Show dump array', 'e-addons'),
+                'type' => Controls_Manager::SWITCHER,
+                'condition' => [
+                    'metafield_type' => 'array',
+                ]
+            ]
+        );
+        $target->add_control(
+            'array_index', [
+                'label' => __('Indexes of array', 'e-addons'),
+                'description' => __('write the string of logic array with a dot for separatior (example: 0.0 or 1.val ecc). Empty it\'s all', 'e-addons'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => 'example: 1.val',
 
+                'default' => '',
+                'condition' => [
+                    'metafield_type' => 'array',
+                ]
+            ]
+        );
+        //Image
         $target->add_group_control(
             Group_Control_Image_Size::get_type(), [
                 'name' => 'metafield_image_size',

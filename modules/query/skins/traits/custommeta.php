@@ -357,6 +357,21 @@ trait Custommeta {
                     }
 
                     break;
+                    case 'array':
+                    $array_dump = $metaitem['array_dump'];
+                    $array_indexes = $metaitem['array_index'];
+                    if(!empty($array_dump)){
+                        echo '<pre>';
+                        var_dump($meta_value);
+                        echo '</pre>';
+                    }
+                    $label_before = $this->render_label_before_item($metaitem);
+
+                    $tmp = explode('.', $array_indexes);
+                    $sub_data = Utils::get_array_value($meta_value, $tmp);
+                    
+                    $meta_html = $label_before.$sub_data;
+                        break;
                 default:
                     $meta_html = Utils::to_string($meta_value);
             }

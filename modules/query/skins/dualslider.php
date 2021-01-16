@@ -50,7 +50,7 @@ class Dualslider extends Carousel {
 	            'tab' => Controls_Manager::TAB_CONTENT,
             ]
 		);
-		$this->add_control(
+		$this->add_responsive_control(
             'dualslider_style', [
               'label' => __('Position Style', 'e-addons'),
               'type' => 'ui_selector',
@@ -85,7 +85,8 @@ class Dualslider extends Carousel {
               'render_type' => 'template',
               'default' => 'bottom',
               //'tablet_default' => '',
-			  //'mobile_default' => '',
+			  //'mobile_default' => 'bottom',
+			  'prefix_class' => 'e-add-style-dualslider-position%s-', //'e-add-align%s-',
 			  'separator' => 'before',
 			  'frontend_available' => true,
             ]
@@ -106,8 +107,8 @@ class Dualslider extends Carousel {
 					]
 				],
                 'selectors' => [
-						'{{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-thumbnails, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-thumbnails' => 'width: {{SIZE}}%;',
-						'{{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-posts, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-posts' => 'width: calc(100% - {{SIZE}}%);'
+						'{{WRAPPER}}.e-add-style-dualslider-position-right .e-add-dualslider-thumbnails, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-thumbnails' => 'width: {{SIZE}}%;',
+						'{{WRAPPER}}.e-add-style-dualslider-position-right .e-add-dualslider-posts, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-posts' => 'width: calc(100% - {{SIZE}}%);'
                 ],
                 'condition' => [
 	                $this->get_control_id('dualslider_style') => ['left','right']
@@ -127,7 +128,7 @@ class Dualslider extends Carousel {
                     ],
                 ],
                 'selectors' => [
-						'{{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-posts .swiper-container, {{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-thumbnails .swiper-container, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-posts .swiper-container, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-thumbnails .swiper-container' => 'height: {{SIZE}}{{UNIT}};'
+						'{{WRAPPER}}.e-add-style-dualslider-position-right .e-add-dualslider-posts .swiper-container, {{WRAPPER}}.e-add-style-dualslider -position-right.e-add-dualslider-thumbnails .swiper-container, {{WRAPPER}}.e-add-style-dualslider-position-left .e-add-dualslider-posts .swiper-container, {{WRAPPER}}.e-add-style-dualslider-position-left .e-add-dualslider-thumbnails .swiper-container' => 'height: {{SIZE}}{{UNIT}};'
                 ],
                 'condition' => [
 	                $this->get_control_id('dualslider_style') => ['left','right']
@@ -172,10 +173,10 @@ class Dualslider extends Carousel {
 	                ]
 	            ],
 	            'selectors' => [
-					'{{WRAPPER}} .e-add-style-position-top-dualslider .e-add-dualslider-thumbnails' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .e-add-style-position-bottom-dualslider .e-add-dualslider-thumbnails' => 'margin-top: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-thumbnails' => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .e-add-style-position-right-dualslider .e-add-dualslider-thumbnails' => 'margin-left: {{SIZE}}{{UNIT}};'
+					'{{WRAPPER}}.e-add-style-dualslider-position-top .e-add-dualslider-thumbnails' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.e-add-style-dualslider-position-bottom .e-add-dualslider-thumbnails' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.e-add-style-dualslider-position-left .e-add-dualslider-thumbnails' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.e-add-style-dualslider-position-right .e-add-dualslider-thumbnails' => 'margin-left: {{SIZE}}{{UNIT}};'
 	                
 	            ]
             ]
@@ -541,7 +542,7 @@ class Dualslider extends Carousel {
 	
 	public function render() {
 		// @p [apro] il wrapper che defifinisce la direction style del dualslider
-		echo '<div class="e-add-style-position-' . $this->get_id() . ' e-add-style-position-' . $this->get_instance_value('dualslider_style') . '-' .$this->get_id() .'">'; 
+		echo '<div class="e-add-style-position-' . $this->get_id() . '">'; 
 		
 			echo '<div class="e-add-dualslider-posts">';
 			parent::render();

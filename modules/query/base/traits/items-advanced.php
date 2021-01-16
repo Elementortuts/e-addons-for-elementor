@@ -97,7 +97,7 @@ trait Items_Advanced {
                                 [
                                     'name' => 'metafield_type',
                                     'operator' => 'in',
-                                    'value' => ['file','text','image']
+                                    'value' => ['file','text','image','array']
                                 ]
                             ]
                         ]
@@ -205,7 +205,7 @@ trait Items_Advanced {
                                 [
                                     'name' => 'metafield_type',
                                     'operator' => 'in',
-                                    'value' => ['text']
+                                    'value' => ['text','array']
                                 ]
                             ]
                         ]
