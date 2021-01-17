@@ -357,7 +357,7 @@ trait Custommeta {
                     }
 
                     break;
-                    case 'array':
+                case 'array':
                     $array_dump = $metaitem['array_dump'];
                     $array_indexes = $metaitem['array_index'];
                     if(!empty($array_dump)){
@@ -371,7 +371,7 @@ trait Custommeta {
                     $sub_data = Utils::get_array_value($meta_value, $tmp);
                     
                     $meta_html = $label_before.$sub_data;
-                        break;
+                    break;
                 default:
                     $meta_html = Utils::to_string($meta_value);
             }

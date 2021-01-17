@@ -138,7 +138,7 @@ trait Custommeta {
                     'user' => __('Users(id)', 'e-addons'), //
                     'term' => __('Terms(id)', 'e-addons'), //
                     'gallery' => __('Gallery', 'e-addons'), //
-
+                    'array' => __('Array', 'e-addons'), //
                 ],
                 'condition' => [
                     'item_type' => 'item_custommeta'
