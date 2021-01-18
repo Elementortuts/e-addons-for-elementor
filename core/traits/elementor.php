@@ -133,7 +133,7 @@ trait Elementor {
     }
 
     public static function get_template_from_html($content = '') {
-        $tmp = explode('elementor elementor-', $content, 2);
+        $tmp = explode('class="elementor elementor-', $content, 2);
         if (count($tmp) > 1) {
             $tmp = str_replace('"', ' ', end($tmp));
             list($id, $more) = explode(' ', $tmp, 2);

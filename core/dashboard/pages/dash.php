@@ -43,6 +43,9 @@ if (!empty($_REQUEST['action'])) {
 <div class="wrap">
 
     <?php
+    
+    Utils::e_admin_banner_notice('Test', 'test');
+    
     $this->top_menu();
 
     $has_license = false;    

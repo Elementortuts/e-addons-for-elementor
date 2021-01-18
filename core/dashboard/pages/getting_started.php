@@ -28,7 +28,7 @@ if (!current_user_can('manage_options')) {
                     <p class="e-addons-evidence">The plugin has been completely revamped.<br>Once installed, remember to activate the desired features.</p>
                     <a href="https://e-addons.com/the-evolution/" target="_blank" class="button button-primary button-hero button-e-addons">Read More</a>
                     <p class="e-addons-steps"><b>3</b> steps &raquo; <b>for</b> many colors</p>
-                    <img class="e-addons-start-page__scheme_processf" src="<?php echo E_ADDONS_URL; ?>/assets/img/process_scheme.jpg">
+                    <img class="e-addons-start-page__scheme_processf" src="https://e-addons.com/wp-content/uploads/getting-started/process_scheme.jpg">
                 </div>
 
                 <div class="e-addons-start-page__content_intro">
@@ -36,9 +36,9 @@ if (!current_user_can('manage_options')) {
                 </div>
 
                 <div class="e-addons-start-page__scheme">
-                    <img class="e-addons-start-page__scheme_install" src="<?php echo E_ADDONS_URL; ?>/assets/img/install_scheme.jpg">
+                    <img class="e-addons-start-page__scheme_install" src="https://e-addons.com/wp-content/uploads/getting-started/install_scheme.jpg">
                     <p>From the e-Addons Dashboard you can activate every available addons in just one click.</p>
-                    <img class="e-addons-start-page__scheme_panel" src="<?php echo E_ADDONS_URL; ?>/assets/img/panel_scheme.jpg">
+                    <img class="e-addons-start-page__scheme_panel" src="https://e-addons.com/wp-content/uploads/getting-started/panel_scheme.jpg">
                 </div>
 
                 <div class="e-addons-start-page__actions e-addons-start-page__content--narrow">
@@ -48,9 +48,9 @@ if (!current_user_can('manage_options')) {
             </div>
         </div>
         <div class="e-addons-row">
-            <div class="e-addons-col e-addons-col-3 e-addons-banner"><a href="https://e-addons.com" target="_blank"><img src="<?php echo E_ADDONS_URL; ?>/assets/img/banner1.jpg"></a></div>
-            <div class="e-addons-col e-addons-col-3 e-addons-banner"><a href="https://e-addons.com/the-evolution" target="_blank"><img src="<?php echo E_ADDONS_URL; ?>/assets/img/banner2.jpg"></a></div>
-            <div class="e-addons-col e-addons-col-3 e-addons-banner"><a href="https://www.facebook.com/eaddons" target="_blank"><img src="<?php echo E_ADDONS_URL; ?>/assets/img/banner3.jpg"></a></div>
+            <div class="e-addons-col e-addons-col-3 e-addons-banner"><a href="https://e-addons.com" target="_blank"><img src="https://e-addons.com/wp-content/uploads/getting-started/banner1.jpg"></a></div>
+            <div class="e-addons-col e-addons-col-3 e-addons-banner"><a href="https://e-addons.com/the-evolution" target="_blank"><img src="https://e-addons.com/wp-content/uploads/getting-started/banner2.jpg"></a></div>
+            <div class="e-addons-col e-addons-col-3 e-addons-banner"><a href="https://www.facebook.com/eaddons" target="_blank"><img src="https://e-addons.com/wp-content/uploads/getting-started/banner3.jpg"></a></div>
         </div>
     </div>
 </div>
