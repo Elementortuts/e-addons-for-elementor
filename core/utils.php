@@ -23,7 +23,7 @@ class Utils {
     use \EAddonsForElementor\Core\Traits\Data;    
     use \EAddonsForElementor\Core\Traits\Path;
 
-    public static function get_dynamic_data($value, $fields = array(), $var = 'form') {
+    public static function get_dynamic_data($value, $fields = array(), $var = '') {
         if (!empty($value)) {
             if (is_array($value)) {
                 foreach ($value as $key => $setting) {

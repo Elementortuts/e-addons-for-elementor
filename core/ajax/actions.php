@@ -33,13 +33,24 @@ class Actions {
     public function __construct() {
         add_action('elementor/ajax/register_actions', [$this, 'elementor_ajax_register_actions']);
 
-        // Ajax page open Actions
-        //add_action('wp_ajax_modal_action', array($this, 'modal_action'));
-        //add_action('wp_ajax_nopriv_modal_action', array($this, 'modal_action'));
+        // Ajax close banner notice
+        add_action('wp_ajax_close_banner_notice_action', array($this, 'close_banner_notice_action'));
+        //add_action('wp_ajax_nopriv_close_banner_notice_action', array($this, 'close_banner_notice_action'));
 
         $this->register_addons_actions();
     }
 
+    public function close_banner_notice_action() {
+        $data = $_POST;
+        $time = time();
+        if (!empty($data['unique_id'])) {
+            $unique_id = sanitize_key($data['unique_id']);
+            update_option('e_addons_notice_close_'.$unique_id, $time);
+        }
+        echo $time;
+        die();
+    }
+    
     public function elementor_ajax_register_actions($ajax_manager) {
         $ajax_manager->register_ajax_action('e_query_control_options', [$this, 'get_control_options']);
         $ajax_manager->register_ajax_action('e_query_control_search', [$this, 'get_control_search']);

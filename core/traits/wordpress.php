@@ -22,6 +22,39 @@ trait Wordpress {
         <?php
     }
 
+    public static function e_admin_banner_notice($msg = '', $unique_id = '') {
+        $notice_id = 'e_addons_notice_close_' . $unique_id;
+        $maybe_show = !get_option($notice_id);
+        $msg = Utils::to_string($msg);
+        if ($maybe_show && $msg) {
+            ?>
+            <div class="e-add-notiice notice-success notice is-dismissible" id="<?php echo $notice_id; ?>">
+                <?php echo ($msg); ?>
+                <button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+            </div>
+            <script>
+                jQuery(function () {
+                    jQuery("#<?php echo $notice_id; ?> .notice-dismiss").on('click', function (e) {
+                        e.preventDefault();
+                        jQuery.ajax({
+                            type: "post",
+                            dataType: "json",
+                            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                            data: {action: 'close_banner_notice_action', unique_id: '<?php echo $unique_id; ?>'},
+                            success: function (response) {
+                                if (response.type == "success") {
+                                    //
+                                }
+                            }
+                        });
+                        jQuery('#<?php echo $notice_id; ?>').fadeOut();
+                    });
+                });
+            </script>
+            <?php
+        }
+    }
+
     /*     * *********************************************************************** */
 
     public static function get_options($filter = '') {
@@ -65,14 +98,14 @@ trait Wordpress {
         } else {
             $obj_vars = $object_vars;
         }
-        $fields = array_keys($obj_vars);        
+        $fields = array_keys($obj_vars);
         return $fields;
     }
 
     public static function get_fields($obj, $meta = false, $info = true) {
         $fields = array();
         if (is_string($obj)) {
-            switch($obj) {
+            switch ($obj) {
                 case 'post':
                     $obj = get_post();
                     break;
@@ -87,12 +120,12 @@ trait Wordpress {
                     break;
             }
         }
-        if ($obj && is_object($obj)) {            
+        if ($obj && is_object($obj)) {
             $obj_class = get_class($obj);
             list($wp, $type) = explode('_', $obj_class, 2);
             $type = strtolower($type);
 
-            $obj_fields = self::get_object_fields($obj, $meta);            
+            $obj_fields = self::get_object_fields($obj, $meta);
             if (!empty($obj_fields)) {
                 foreach ($obj_fields as $field) {
                     $name = str_replace($type . '_', '', $field);
@@ -114,10 +147,10 @@ trait Wordpress {
         }
         return $fields;
     }
-    
+
     public static function get_wp_object_field($obj, $field, $single = true) {
         $value = $type = null;
-        
+
         if ($value === null) {
             if (property_exists($obj, $field)) {
                 $value = $obj->{$field};
@@ -130,9 +163,9 @@ trait Wordpress {
                 list($wp, $type) = $tmp;
             } else {
                 $type = 'user';
-            }                
-            if (property_exists($obj, $type.'_' . $field)) {
-                $value = $obj->{$type.'_' . $field};
+            }
+            if (property_exists($obj, $type . '_' . $field)) {
+                $value = $obj->{$type . '_' . $field};
             }
         }
         if ($value === null && $type) {
@@ -141,14 +174,14 @@ trait Wordpress {
                 $value = get_metadata($type, $obj_id, $field, $single);
             }
         }
-        
+
         if ($value === null) {
             if (get_class($obj) == 'WP_User' && property_exists($obj, 'data')) {
                 $obj = $obj->data;
                 return self::get_wp_object_field($obj, $field, $single);
             }
         }
-        
+
         return $value;
     }
 
@@ -157,10 +190,10 @@ trait Wordpress {
 
         $table_join = '';
         if ($obj == 'attachment') {
-            $table_join .= " AND post_id IN ( SELECT id FROM " . $wpdb->prefix . "posts WHERE post_type LIKE '".$obj."' )";
+            $table_join .= " AND post_id IN ( SELECT id FROM " . $wpdb->prefix . "posts WHERE post_type LIKE '" . $obj . "' )";
             $obj = 'post';
         }
-        
+
         if ($obj == 'post') {
             // REGISTERED in FUNCTION
             $post_types = self::get_post_types();
@@ -182,7 +215,7 @@ trait Wordpress {
                 }
             }
         }
-        
+
         // FROM DB
         global $wpdb;
         $table = $wpdb->prefix . $obj . 'meta';
@@ -196,7 +229,7 @@ trait Wordpress {
             $query .= " WHERE meta_key LIKE '%" . $like . "%'";
         }
         $query .= $table_join;
-        
+
         $results = $wpdb->get_results($query);
         if (!empty($results)) {
             $db_metas = array();
@@ -267,9 +300,10 @@ trait Wordpress {
     public static function get_link($obj = null) {
         return self::get_permalink($obj);
     }
+
     public static function get_permalink($obj = null, $type = 'post') {
         if (is_numeric($obj) || empty($obj)) {
-            switch($type) {
+            switch ($type) {
                 case 'term':
                     return self::get_term_url($obj);
                 case 'user':
@@ -317,7 +351,7 @@ trait Wordpress {
         if (empty($obj)) {
             return get_the_ID();
         }
-        if (filter_var($obj, FILTER_VALIDATE_URL)) {            
+        if (filter_var($obj, FILTER_VALIDATE_URL)) {
             return url_to_postid($obj);
         }
         if (is_numeric($obj)) {
@@ -351,38 +385,38 @@ trait Wordpress {
         }
         return false;
     }
-    
+
     public static function get_image($meta = null) {
         $id = '';
         $url = '';
         if (!empty($meta)) {
             if (is_numeric($meta)) {
-                    $id = intval($meta);
+                $id = intval($meta);
+                $url = wp_get_attachment_url($id);
+            }
+            if (is_string($meta)) {
+                if (filter_var($meta, FILTER_VALIDATE_URL)) {
+                    $id = attachment_url_to_postid($meta);
+                    if ($id) {
+                        $url = $meta;
+                    }
+                }
+            }
+            if (is_array($meta)) {
+                if (isset($meta['url'])) {
+                    $url = $meta['url'];
+                }
+                if (isset($meta['src'])) {
+                    $url = $meta['src'];
+                }
+                if (isset($meta['guid'])) {
+                    $url = $meta['guid'];
+                }
+                if (isset($meta['ID'])) {
+                    $id = intval($meta['ID']);
                     $url = wp_get_attachment_url($id);
                 }
-                if (is_string($meta)) {
-                    if (filter_var($meta, FILTER_VALIDATE_URL)) {
-                        $id = attachment_url_to_postid($meta);
-                        if ($id) {
-                            $url = $meta;
-                        }
-                    }
-                }
-                if (is_array($meta)) {
-                    if (isset($meta['url'])) {
-                        $url = $meta['url'];
-                    }
-                    if (isset($meta['src'])) {
-                        $url = $meta['src'];
-                    }
-                    if (isset($meta['guid'])) {
-                        $url = $meta['guid'];
-                    }
-                    if (isset($meta['ID'])) {
-                        $id = intval($meta['ID']);
-                        $url = wp_get_attachment_url($id);
-                    }
-                }
+            }
         }
         if ($url) {
             return array('id' => $id, 'url' => $url);
