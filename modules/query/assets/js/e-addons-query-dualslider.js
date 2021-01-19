@@ -104,7 +104,7 @@ class WidgetQueryDualSliderHandlerClass extends elementorModules.frontend.handle
     }
     adapteHeight(){
         let elementSettings = this.getElementSettings();
-        if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'left' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'right'){
+        if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'row-reverse' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'row'){
             this.elements.$thumbsCarousel.height( this.elements.$dualsliderCarousel.height() );
         }
     }
@@ -114,9 +114,9 @@ class WidgetQueryDualSliderHandlerClass extends elementorModules.frontend.handle
             elementorBreakpoints = elementorFrontend.config.breakpoints,
             directionThumbSlider = 'horizontal';
 
-        if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'left' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'right'){
+        if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'row-reverse' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'row'){
             directionThumbSlider = 'vertical';
-        }else if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'top' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'bottom'){
+        }else if(elementSettings[EADD_skinPrefix+'dualslider_style'] == 'column-reverse' || elementSettings[EADD_skinPrefix+'dualslider_style'] == 'column'){
             directionThumbSlider = 'horizontal';
         }
 

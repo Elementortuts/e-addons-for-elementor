@@ -125,10 +125,10 @@
 }
 
 /* left-right */
-.e-add-dualslider-controls-left .swiper-button-prev,
-.e-add-dualslider-controls-left .swiper-container-rtl .swiper-button-prev,
-.e-add-dualslider-controls-right .swiper-button-prev,
-.e-add-dualslider-controls-right .swiper-container-rtl .swiper-button-prev{
+.e-add-dualslider-controls-row-reverse .swiper-button-prev,
+.e-add-dualslider-controls-row-reverse .swiper-container-rtl .swiper-button-prev,
+.e-add-dualslider-controls-row .swiper-button-prev,
+.e-add-dualslider-controls-row .swiper-container-rtl .swiper-button-prev{
 	top: -10px;
 	bottom: auto; 
 	left: 50%;
@@ -136,10 +136,10 @@
 	background-image: none;
 	transform: translateY(-100%);
 }
-.e-add-dualslider-controls-left .swiper-button-next,
-.e-add-dualslider-controls-left .swiper-container-rtl .swiper-button-next,
-.e-add-dualslider-controls-right .swiper-button-next,
-.e-add-dualslider-controls-right .swiper-container-rtl .swiper-button-next {
+.e-add-dualslider-controls-row-reverse .swiper-button-next,
+.e-add-dualslider-controls-row-reverse .swiper-container-rtl .swiper-button-next,
+.e-add-dualslider-controls-row .swiper-button-next,
+.e-add-dualslider-controls-row .swiper-container-rtl .swiper-button-next {
 	top: auto;
 	bottom: -10px;  
 	right: auto;
@@ -148,10 +148,10 @@
 	transform: translateY(100%);
 }
 /* top-bottom */
-.e-add-dualslider-controls-top .swiper-button-prev,
-.e-add-dualslider-controls-top .swiper-container-rtl .swiper-button-prev,
-.e-add-dualslider-controls-bottom .swiper-button-prev,
-.e-add-dualslider-controls-bottom .swiper-container-rtl .swiper-button-prev{
+.e-add-dualslider-controls-column-reverse .swiper-button-prev,
+.e-add-dualslider-controls-column-reverse .swiper-container-rtl .swiper-button-prev,
+.e-add-dualslider-controls-column .swiper-button-prev,
+.e-add-dualslider-controls-column .swiper-container-rtl .swiper-button-prev{
 	top: 50%;
 	bottom: auto;
   	left: -10px;
@@ -159,10 +159,10 @@
 	background-image: none;
 	transform: translateX(-100%);
 }
-.e-add-dualslider-controls-top .swiper-button-next,
-.e-add-dualslider-controls-top .swiper-container-rtl .swiper-button-next,
-.e-add-dualslider-controls-bottom .swiper-button-next,
-.e-add-dualslider-controls-bottom .swiper-container-rtl .swiper-button-next {
+.e-add-dualslider-controls-column-reverse .swiper-button-next,
+.e-add-dualslider-controls-column-reverse .swiper-container-rtl .swiper-button-next,
+.e-add-dualslider-controls-column .swiper-button-next,
+.e-add-dualslider-controls-column .swiper-container-rtl .swiper-button-next {
 	top: 50%;
 	bottom: auto;
 	right: -10px;
@@ -180,67 +180,76 @@
  content: none;
 }
 
+
+
+
+
+
+
+
+
+
 /* --------------------[ Direction style ]---------------------- */
 /* (bottom,top,left,right) */
 .e-add-style-position-dualslider{
 	display: flex;
 	
 }
-.e-add-style-dualslider-position-bottom .e-add-style-position-dualslider{
+/*.e-add-style-dualslider-position-bottom .e-add-style-position-dualslider{
 	flex-direction: column;
 }
 .e-add-style-dualslider-position-top .e-add-style-position-dualslider{
 	flex-direction: column-reverse;
-}
+}*/
 
 /* LEFT-RIGHT: Layout Style */
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider{
+/*.e-add-style-dualslider-position-right .e-add-style-position-dualslider{
 	flex-direction: row;
 }
 .e-add-style-dualslider-position-left .e-add-style-position-dualslider{
 	flex-direction: row-reverse;
-}
+}*/
 
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-posts,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-posts{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-dualslider-posts,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-dualslider-posts{
 	width: 70%;
 }
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-dualslider-thumbnails,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-dualslider-thumbnails{
 	width: 30%;
 }
 
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-posts .swiper-container,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-posts .swiper-container{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-dualslider-posts .swiper-container,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-dualslider-posts .swiper-container{
 	height: 100%;
 }
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .swiper-container,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .swiper-container{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-dualslider-thumbnails .swiper-container,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-dualslider-thumbnails .swiper-container{
 	height: 100%;
 }
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-wrap,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-wrap{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-wrap,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-wrap{
 	height: 100%;
 }
 /* multi */
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-multi .e-add-dualslider-wrap,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-multi .e-add-dualslider-wrap{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-multi .e-add-dualslider-wrap,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-multi .e-add-dualslider-wrap{
 	display: flex;
 	align-items: center;
 }
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-image,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-image{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-image,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-image{
 	flex: 0 0 50%;
 	align-self: stretch;
 }
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-title,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-title{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-title,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-dualslider-thumbnails .e-add-dualslider-gallery-thumbs .e-add-dualslider-multi .swiper-slide .e-add-thumbnail-title{
 	flex: 0 0 50%;
 	align-self: stretch;
 	padding: 10px;
 }
 /*  */
-.e-add-style-dualslider-position-right .e-add-style-position-dualslider .e-add-thumbnail-image .e-add-bgimage,
-.e-add-style-dualslider-position-left .e-add-style-position-dualslider .e-add-thumbnail-image .e-add-bgimage{
+.e-add-style-dualslider-position-row .e-add-style-position-dualslider .e-add-thumbnail-image .e-add-bgimage,
+.e-add-style-dualslider-position-row-reverse .e-add-style-position-dualslider .e-add-thumbnail-image .e-add-bgimage{
 	height: 100%;
 }

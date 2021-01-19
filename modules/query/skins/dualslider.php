@@ -59,22 +59,22 @@ class Dualslider extends Carousel {
               'type_selector' => 'image',
               'columns_grid' => 4,
               'options' => [
-                  'bottom' => [
-                      'title' => __('Bottom','e-addons'),
+                  'column' => [
+                      'title' => __('Bottomm','e-addons'),
                       'return_val' => 'val',
                       'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_b.png',
                   ],
-                  'top' => [
+                  'column-reverse' => [
                       'title' => __('Top','e-addons'),
                       'return_val' => 'val',
                       'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_t.png',
                   ],
-                  'left' => [
+                  'row-reverse' => [
                       'title' => __('Left','e-addons'),
                       'return_val' => 'val',
                       'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_l.png',
                   ],
-                  'right' => [
+                  'row' => [
                       'title' => __('Right','e-addons'),
                       'return_val' => 'val',
                       'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_r.png',
@@ -86,9 +86,13 @@ class Dualslider extends Carousel {
               'default' => 'bottom',
               //'tablet_default' => '',
 			  //'mobile_default' => 'bottom',
-			  'prefix_class' => 'e-add-style-dualslider-position%s-', //'e-add-align%s-',
+			  'prefix_class' => 'e-add-style-dualslider-position-', //'e-add-align%s-',
 			  'separator' => 'before',
 			  'frontend_available' => true,
+			  'selectors' => [
+					'{{WRAPPER}} .e-add-style-position-dualslider' => 'flex-direction: {{VALUE}};',
+
+				],
             ]
 		  );
 		  $this->add_responsive_control(
@@ -107,11 +111,11 @@ class Dualslider extends Carousel {
 					]
 				],
                 'selectors' => [
-						'{{WRAPPER}}.e-add-style-dualslider-position-right .e-add-dualslider-thumbnails, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-thumbnails' => 'width: {{SIZE}}%;',
-						'{{WRAPPER}}.e-add-style-dualslider-position-right .e-add-dualslider-posts, {{WRAPPER}} .e-add-style-position-left-dualslider .e-add-dualslider-posts' => 'width: calc(100% - {{SIZE}}%);'
+						'{{WRAPPER}}.e-add-style-dualslider-position-row .e-add-dualslider-thumbnails, {{WRAPPER}}.e-add-style-dualslider-position-row-reverse .e-add-dualslider-thumbnails' => 'width: {{SIZE}}%;',
+						'{{WRAPPER}}.e-add-style-dualslider-position-row .e-add-dualslider-posts, {{WRAPPER}}.e-add-style-dualslider-position-row-reverse .e-add-dualslider-posts' => 'width: calc(100% - {{SIZE}}%);'
                 ],
                 'condition' => [
-	                $this->get_control_id('dualslider_style') => ['left','right']
+	                $this->get_control_id('dualslider_style') => ['row-reverse','row']
 	            ]
             ]
         );
@@ -128,10 +132,10 @@ class Dualslider extends Carousel {
                     ],
                 ],
                 'selectors' => [
-						'{{WRAPPER}}.e-add-style-dualslider-position-right .e-add-dualslider-posts .swiper-container, {{WRAPPER}}.e-add-style-dualslider -position-right.e-add-dualslider-thumbnails .swiper-container, {{WRAPPER}}.e-add-style-dualslider-position-left .e-add-dualslider-posts .swiper-container, {{WRAPPER}}.e-add-style-dualslider-position-left .e-add-dualslider-thumbnails .swiper-container' => 'height: {{SIZE}}{{UNIT}};'
+						'{{WRAPPER}}.e-add-style-dualslider-position-row .e-add-dualslider-posts .swiper-container, {{WRAPPER}}.e-add-style-dualslider -position-row.e-add-dualslider-thumbnails .swiper-container, {{WRAPPER}}.e-add-style-dualslider-position-row-reverse .e-add-dualslider-posts .swiper-container, {{WRAPPER}}.e-add-style-dualslider-position-row-reverse .e-add-dualslider-thumbnails .swiper-container' => 'height: {{SIZE}}{{UNIT}};'
                 ],
                 'condition' => [
-	                $this->get_control_id('dualslider_style') => ['left','right']
+	                $this->get_control_id('dualslider_style') => ['row-reverse','row']
 	            ]
             ]
         );
@@ -173,11 +177,10 @@ class Dualslider extends Carousel {
 	                ]
 	            ],
 	            'selectors' => [
-					'{{WRAPPER}}.e-add-style-dualslider-position-top .e-add-dualslider-thumbnails' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.e-add-style-dualslider-position-bottom .e-add-dualslider-thumbnails' => 'margin-top: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.e-add-style-dualslider-position-left .e-add-dualslider-thumbnails' => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.e-add-style-dualslider-position-right .e-add-dualslider-thumbnails' => 'margin-left: {{SIZE}}{{UNIT}};'
-	                
+					'{{WRAPPER}}.e-add-style-dualslider-position-column-reverse .e-add-dualslider-thumbnails' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.e-add-style-dualslider-position-columns .e-add-dualslider-thumbnails' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.e-add-style-dualslider-position-row-reverse .e-add-dualslider-thumbnails' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.e-add-style-dualslider-position-row .e-add-dualslider-thumbnails' => 'margin-left: {{SIZE}}{{UNIT}};'	                
 	            ]
             ]
         );
@@ -605,13 +608,13 @@ class Dualslider extends Carousel {
 
 		$arrow_1 = 'left';
 		$arrow_2 = 'right';
-		if( $this->get_instance_value('dualslider_style') == 'left' || $this->get_instance_value('dualslider_style') == 'right' ){
+		if( $this->get_instance_value('dualslider_style') == 'row-reverse' || $this->get_instance_value('dualslider_style') == 'row' ){
 			$arrow_1 = 'up';
 			$arrow_2 = 'down';
 		}
 		//if ( $this->get_instance_value('useNavigation') ) {
-            echo '<div class="swiper-button-prev prev-' . $this->parent->get_id() . '"><i class="fas fa-chevron-'.$arrow_1.'"></i></div>';
-            echo '<div class="swiper-button-next next-' . $this->parent->get_id() . '"><i class="fas fa-chevron-'.$arrow_2.'"></i></div>';
+            echo '<div class="swiper-button-prev prev-' . $this->parent->get_id() . '"><i class="fa fas fa-chevron-'.$arrow_1.'"></i></div>';
+            echo '<div class="swiper-button-next next-' . $this->parent->get_id() . '"><i class="fa fas fa-chevron-'.$arrow_2.'"></i></div>';
         //}
 	}
 	public function render_thumbnail(){
