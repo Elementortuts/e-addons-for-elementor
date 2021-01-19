@@ -237,3 +237,11 @@
 .eadd-query-items:before { content: '\e8b6'; } /* '' */
 .eadd-query-posts:before { content: '\e8b7'; } /* '' */
 .eadd-query-terms:before { content: '\e8b8'; } /* '' */
+
+.eadd-el-form-pro-filters-action:before { content: '\e8b9'; } /* '' */
+.eadd-dynamic-tag-datetime:before { content: '\e8ba'; } /* '' */
+.eadd-el-form-pro-ext-query-field:before { content: '\e8bb'; } /* '' */
+.eadd-lazy-widgets:before { content: '\e8bc'; } /* '' */
+.eadd-dynamic-tag-bggalleryslider:before { content: '\e8bd'; } /* '' */
+.eadd-el-form-pro-act-reorder:before { content: '\e8be'; } /* '' */
+.eadd-el-form-pro-act-lostpassword:before { content: '\e8bf'; } /* '' */
