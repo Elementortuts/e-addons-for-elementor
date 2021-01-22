@@ -12,8 +12,8 @@ class Form {
 
     public static function get_form_data($record, $raw = false, $extra = false, $settings = array()) {
         // Get sumitetd Form data
-        $raw_fields = $record->get('fields');        
-        
+        $raw_fields = $record->get('fields');
+
         // Normalize the Form Data
         $fields = [];
         foreach ($raw_fields as $id => $field) {
@@ -23,7 +23,7 @@ class Form {
                 $fields[$id] = $field['value'];
             }
         }
-        
+
         //var_dump($_POST);
         if (!empty($_POST['form_fields'])) {
             foreach ($_POST['form_fields'] as $id => $field) {
@@ -127,7 +127,7 @@ class Form {
                 }
             }
         }
-        
+
         $setting = preg_replace_callback('/(\[field[^]]*id="(\w+)"[^]]*\])/', function($matches) use ($urlencode, $fields) {
             $value = '';
             if (isset($fields[$matches[2]])) {
@@ -138,7 +138,7 @@ class Form {
             }
             return $value;
         }, $setting);
-        
+
         return $setting;
     }
 
@@ -309,7 +309,7 @@ class Form {
         }
         return false;
     }
-    
+
     public static function tablefy($html = '') {
         $table_replaces = array(
             'table' => '.elementor-container',
@@ -348,20 +348,20 @@ class Form {
             'elementor-frontend' => ELEMENTOR_ASSETS_PATH . 'css/frontend.min.css',
             'elementor-common' => ELEMENTOR_ASSETS_PATH . 'css/common.min.css',
             'elementor-global' => $upload['basedir'] . '/elementor/css/global.css',
-        );        
+        );
         if ($theme) {
             $elementor_styles['theme-style'] = STYLESHEETPATH . '/style.css';
             if (is_child_theme()) {
                 $elementor_styles['theme-style-child'] = TEMPLATEPATH . '/style.css';
                 $elementor_styles['theme-assets-style'] = TEMPLATEPATH . '/assets/css/style.css';
             }
-        }        
+        }
         if ($p_id) {
             $elementor_styles['elementor-post-' . $p_id . '-css'] = $upload['basedir'] . '/elementor/css/post-' . $p_id . '.css';
         }
         if (Utils::is_plugin_active('elementor-pro')) {
             $elementor_styles['elementor-pro-frontend'] = ELEMENTOR_PRO_ASSETS_PATH . 'css/frontend.min.css';
-        }        
+        }
         foreach ($elementor_styles as $style) {
             if (file_exists($style)) {
                 $css .= file_get_contents($style);
@@ -369,7 +369,7 @@ class Form {
         }
         return $css;
     }
-    
+
     public static function get_elementor_elements($type = '') {
         global $wpdb;
         $sql_query = "SELECT * FROM " . $wpdb->prefix . "postmeta
@@ -398,7 +398,7 @@ class Form {
 
         return $elements;
     }
-    
+
     public static function get_elements_from_data($e_data, $type = '') {
         $elements = array();
         if (is_string($e_data)) {
@@ -421,261 +421,262 @@ class Form {
         }
         return $elements;
     }
-    
+
     /**
-         * @param string      $email_content
-         * @param Form_Record $record
-         *
-         * @return string
-         */
-        public static function replace_content_shortcodes($email_content = '', $record = array(), $line_break = '<br>') {
+     * @param string      $email_content
+     * @param Form_Record $record
+     *
+     * @return string
+     */
+    public static function replace_content_shortcodes($email_content = '', $record = array(), $line_break = '<br>') {
 
-            $all_fields_shortcode = '[all-fields]';
-            $text = self::get_shortcode_value($all_fields_shortcode, $email_content, $record, $line_break);
-            $email_content = str_replace($all_fields_shortcode, $text, $email_content);
+        $all_fields_shortcode = '[all-fields]';
+        $text = self::get_shortcode_value($all_fields_shortcode, $email_content, $record, $line_break);
+        $email_content = str_replace($all_fields_shortcode, $text, $email_content);
 
-            $all_valued_fields_shortcode = '[all-fields|!empty]';
-            $text = self::get_shortcode_value($all_valued_fields_shortcode, $email_content, $record, $line_break, false);
-            $email_content = str_replace($all_fields_shortcode, $text, $email_content);
-            
-            if ($email_content) {
+        $all_valued_fields_shortcode = '[all-fields|!empty]';
+        $text = self::get_shortcode_value($all_valued_fields_shortcode, $email_content, $record, $line_break, false);
+        $email_content = str_replace($all_fields_shortcode, $text, $email_content);
+
+        if ($email_content) {
+            global $e_form;
+            $pdf_form = '[form:pdf]';
+            if (strpos($email_content, $pdf_form) !== false) {
+                $value = '';
+                if (!empty($e_form['pdf']['url'])) {
+                    $value = $e_form['pdf']['url'];
+                }
+                $email_content = str_replace($pdf_form, $value, $email_content);
+            }
+            $pdf_form = '[form:pdf:';
+            if (strpos($email_content, $pdf_form) !== false) {
+                $tmp = explode($pdf_form, $email_content);
+                foreach ($tmp as $key => $pdf) {
+                    if ($key) {
+                        list($field, $tmp) = explode(']', $pdf, 2);
+                        $value = '';
+                        if (!empty($e_form['pdf'][$field])) {
+                            $value = $e_form['pdf'][$field];
+                        }
+                        $email_content = str_replace($pdf_form . $field . ']', $value, $email_content);
+                    }
+                }
+            }
+        }
+
+        return $email_content;
+    }
+
+    public static function get_shortcode_value($shortcode = '[all-fields]', $email_content = '', $record = array(), $line_break = '<br>', $show_empty = true) {
+        $text = '';
+        if (false !== strpos($email_content, $shortcode)) {
+            $fields = $record;
+            if (is_object($record)) {
+                $fields = $record->get('fields');
+            }
+            foreach ($fields as $fkey => $field) {
+                $formatted = '';
+                if (is_string($field)) {
+                    $formatted = $fkey . ': ' . $field;
+                } else {
+                    if (!empty($field['title'])) {
+                        $formatted = sprintf('%s: %s', $field['title'], $field['value']);
+                    } elseif (!empty($field['value'])) {
+                        $formatted = sprintf('%s', $field['value']);
+                    }
+                    if (( 'textarea' === $field['type'] ) && ( '<br>' === $line_break )) {
+                        $formatted = str_replace(["\r\n", "\n", "\r"], '<br />', $formatted);
+                    }
+                    if (!$show_empty && empty($field['value']))
+                        continue;
+                }
+                $text .= $formatted . $line_break;
+            }
+        }
+        return $text;
+    }
+
+    public static function get_plain_txt($e_message_content_txt, $line_break = PHP_EOL) {
+        $e_message_content_txt = str_replace('</p>', '</p><br /><br />', $e_message_content_txt);
+        $e_message_content_txt = str_replace('<br />', $line_break, $e_message_content_txt);
+        $e_message_content_txt = str_replace('<br/>', $line_break, $e_message_content_txt);
+        $e_message_content_txt = str_replace('<br>', $line_break, $e_message_content_txt);
+        $e_message_content_txt = str_replace('\n', $line_break, $e_message_content_txt);
+        $e_message_content_txt = strip_tags($e_message_content_txt);
+        return $e_message_content_txt;
+    }
+
+    public static function get_attachments($fields, $settings, $amail = array(), $e_form_email_content = '', $url = false) {
+        $attachments = array();
+
+        if ($e_form_email_content) {
+            $pdf_attachment = '<!--[e_form_pdf:attachment]-->';
+            $pdf_form = '[form:pdf]';
+            if (strpos($e_form_email_content, $pdf_attachment) !== false || strpos($e_form_email_content, $pdf_form) !== false) {
                 global $e_form;
-                $pdf_form = '[form:pdf]';
-                if (strpos($email_content, $pdf_form) !== false) {
-                    $value = '';
-                    if (!empty($e_form['pdf']['url'])) {
-                        $value = $e_form['pdf']['url'];
-                    }
-                    $email_content = str_replace($pdf_form, $value, $email_content);                    
-                }                
-                $pdf_form = '[form:pdf:';
-                if (strpos($email_content, $pdf_form) !== false) {
-                    $tmp = explode($pdf_form, $email_content);
-                    foreach($tmp as $key => $pdf) {
-                        if ($key) {
-                            list($field, $tmp) = explode(']', $pdf, 2);
-                            $value = '';
-                            if (!empty($e_form['pdf'][$field])) {
-                                $value = $e_form['pdf'][$field];
-                            }
-                            $email_content = str_replace($pdf_form.$field.']', $value, $email_content);
+                if (!empty($e_form['pdf'])) {
+                    if ($url) {
+                        if (!empty($e_form['pdf']['url'])) {
+                            $attachments[] = $e_form['pdf']['url'];
                         }
-                    }
-                    
-                }
-            }
-
-            return $email_content;
-        }
-
-        public static function get_shortcode_value($shortcode = '[all-fields]', $email_content = '', $record = array(), $line_break = '<br>', $show_empty = true) {
-            $text = '';
-            if (false !== strpos($email_content, $shortcode)) {
-                $fields = $record;
-                if (is_object($record)) {
-                    $fields = $record->get('fields');
-                }
-                foreach ($fields as $fkey => $field) {
-                    $formatted = '';
-                    if (is_string($field)) {
-                        $formatted = $fkey.': '.$field;
                     } else {
-                        if (!empty($field['title'])) {
-                            $formatted = sprintf('%s: %s', $field['title'], $field['value']);
-                        } elseif (!empty($field['value'])) {
-                            $formatted = sprintf('%s', $field['value']);
+                        if (!empty($e_form['pdf']['path'])) {
+                            $attachments[] = $e_form['pdf']['path'];
                         }
-                        if (( 'textarea' === $field['type'] ) && ( '<br>' === $line_break )) {
-                            $formatted = str_replace(["\r\n", "\n", "\r"], '<br />', $formatted);
-                        }
-                        if (!$show_empty && empty($field['value']))
-                            continue;
                     }
-                    $text .= $formatted . $line_break;
                 }
+                $e_form_email_content = str_replace($pdf_attachment, '', $e_form_email_content);
+                $e_form_email_content = str_replace($pdf_form, '', $e_form_email_content);
             }
-            return $text;
         }
 
-        public static function get_plain_txt($e_message_content_txt, $line_break = PHP_EOL) {
-            $e_message_content_txt = str_replace('</p>', '</p><br /><br />', $e_message_content_txt);
-            $e_message_content_txt = str_replace('<br />', $line_break, $e_message_content_txt);
-            $e_message_content_txt = str_replace('<br/>', $line_break, $e_message_content_txt);
-            $e_message_content_txt = str_replace('<br>', $line_break, $e_message_content_txt);
-            $e_message_content_txt = str_replace('\n', $line_break, $e_message_content_txt);
-            $e_message_content_txt = strip_tags($e_message_content_txt);
-            return $e_message_content_txt;
-        }
-
-        public static function get_attachments($fields, $settings, $amail = array(), $e_form_email_content = '', $url = false) {
-            $attachments = array();
-
-            if ($e_form_email_content) {
-                $pdf_attachment = '<!--[e_form_pdf:attachment]-->';
-                $pdf_form = '[form:pdf]';
-                if (strpos($e_form_email_content, $pdf_attachment) !== false 
-                    || strpos($e_form_email_content, $pdf_form) !== false) {
-                    global $e_form;
-                    if (!empty($e_form['pdf'])) {                    
-                        if ($url) {
-                            if (!empty($e_form['pdf']['url'])) {
-                                $attachments[] = $e_form['pdf']['url'];
-                            }
-                        } else {
-                            if (!empty($e_form['pdf']['path'])) {
-                                $attachments[] = $e_form['pdf']['path'];
+        if (!empty($fields) && is_array($fields)) {
+            foreach ($fields as $akey => $adatas) {
+                $afield = self::get_field($akey, $settings);
+                if ($afield) {
+                    if (in_array($afield['field_type'], array('upload', 'signature'))) {
+                        $files = Utils::explode($adatas);
+                        if (!empty($files)) {
+                            foreach ($files as $adata) {
+                                if (filter_var($adata, FILTER_VALIDATE_URL)) {
+                                    $file_path = Utils::url_to_path($adata);
+                                    if (is_file($file_path)) {
+                                        if ($url) {
+                                            if (!in_array($adata, $attachments)) {
+                                                $attachments[] = $adata;
+                                            }
+                                        } else {
+                                            if (!in_array($file_path, $attachments)) {
+                                                $attachments[] = $file_path;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                    $e_form_email_content = str_replace($pdf_attachment, '', $e_form_email_content);
-                    $e_form_email_content = str_replace($pdf_form, '', $e_form_email_content);
                 }
             }
+        }
 
-            if (!empty($fields) && is_array($fields)) {
-                foreach ($fields as $akey => $adatas) {
+        if (!empty($amail) && !empty($amail['e_form_attachments_file'])) {
+            $media_ids = Utils::explode($amail['e_form_attachments_file']);
+            if (!empty($media_ids)) {
+                foreach ($media_ids as $attachment_id) {
+                    $file_path = get_attached_file($attachment_id);
+                    if (!in_array($file_path, $attachments)) {
+                        $attachments[] = $file_path;
+                    }
+                }
+            }
+        }
+
+        return $attachments;
+    }
+
+    public static function delete_attachments($fields, $settings) {
+        $attachments = self::get_attachments($fields, $settings);
+        if (!empty($attachments) && is_array($attachments)) {
+            foreach ($attachments as $filename) {
+                unlink($filename);
+            }
+        }
+    }
+
+    public static function is_multiple($afield) {
+        return $afield['field_type'] == 'checkbox' || ($afield['field_type'] == 'select' && $afield['allow_multiple']) || ($afield['field_type'] == 'upload' && $afield['allow_multiple_upload']);
+    }
+
+    public static function save_upload_media($fields, $settings, $obj_id = 0) {
+        if (!empty($fields) && is_array($fields)) {
+            foreach ($fields as $akey => $adatas) {
+                $afield = self::get_field($akey, $settings);
+                if ($afield) {
+                    if ($afield['field_type'] == 'upload') {
+                        $files = Utils::explode($adatas);
+                        if (!empty($files)) {
+                            foreach ($files as $adata) {
+                                if (filter_var($adata, FILTER_VALIDATE_URL)) {
+                                    //$adata = str_replace(get_bloginfo('url'), WP, $value);
+                                    $filename = Utils::url_to_path($adata);
+                                    if (is_file($filename)) {
+                                        // Check the type of file. We'll use this as the 'post_mime_type'.
+                                        $filetype = wp_check_filetype(basename($filename), null);
+                                        $fileinfo = pathinfo($filename);
+                                        // Prepare an array of post data for the attachment.
+                                        $attachment = array(
+                                            'guid' => $adata,
+                                            'post_mime_type' => $filetype['type'],
+                                            'post_status' => 'inherit',
+                                            'post_title' => $fileinfo['filename'],
+                                                //'post_content' => '',
+                                        );
+                                        if ($obj_id) {
+                                            $attachment['post_parent'] = $obj_id;
+                                        }
+                                        // Insert the attachment.
+                                        $attach_id = wp_insert_attachment($attachment, $filename, $obj_id);
+                                        // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+                                        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                                        // Generate the metadata for the attachment, and update the database record.
+                                        $attach_data = wp_generate_attachment_metadata($attach_id, $filename);
+                                        wp_update_attachment_metadata($attach_id, $attach_data);
+                                        if ($afield['allow_multiple_upload']) {
+                                            if (is_array($fields[$akey])) {
+                                                $fields[$akey][] = $attach_id;
+                                            } else {
+                                                $fields[$akey] = array($attach_id);
+                                            }
+                                        } else {
+                                            $fields[$akey] = $attach_id;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $fields;
+    }
+
+    public static function save_extra($obj_id, $type, $settings, $fields) {
+
+        if ($settings['e_form_save_' . ($type ? $type . '_' : '') . 'file']) {
+            $fields = Form::save_upload_media($fields, $settings, $obj_id);
+        }
+
+        if (!empty($fields) && is_array($fields)) {
+            if (!empty($settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas']) && is_array($settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas'])) {
+                $settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas'] = array_filter($settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas']); // remove the "No field" empty value
+            }
+            foreach ($fields as $akey => $adata) {
+                if (!empty($settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas']) && !in_array($akey, $settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas']))
+                    continue;
+                /* if ($settings['e_form_save_anonymous'] && ($akey == 'ip_address' || $akey == 'referrer' || $akey == 'user_id'))
+                  continue; */
+                if ($settings['e_form_save_' . ($type ? $type . '_' : '') . 'array']) {
                     $afield = self::get_field($akey, $settings);
                     if ($afield) {
-                        if (in_array($afield['field_type'], array('upload', 'signature'))) {
-                            $files = Utils::explode($adatas);
-                            if (!empty($files)) {
-                                foreach ($files as $adata) {
-                                    if (filter_var($adata, FILTER_VALIDATE_URL)) {
-                                        $file_path = Utils::url_to_path($adata);
-                                        if (is_file($file_path)) {
-                                            if ($url) {
-                                                if (!in_array($adata, $attachments)) {
-                                                    $attachments[] = $adata;
-                                                }
-                                            } else {
-                                                if (!in_array($file_path, $attachments)) {
-                                                    $attachments[] = $file_path;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                        if (Form::is_multiple($afield)) {
+                            $adata = Utils::explode($adata);
                         }
                     }
                 }
+                if ($type == 'option') {
+                    $exist_opt = false;
+                    if ($settings['e_form_save_' . ($type ? $type . '_' : '') . 'override'] == 'add') {
+                        $exist_opt = get_option($akey);
+                    }
+                    if ($settings['e_form_save_' . ($type ? $type . '_' : '') . 'override'] == 'update' || !$exist_opt) {
+                        update_option($akey, $adata);
+                    }
+                } else {
+                    update_metadata($type, $obj_id, $akey, $adata);
+                }
             }
+        }
+    }
 
-            if (!empty($amail) && !empty($amail['e_form_attachments_file'])) {
-                $media_ids = Utils::explode($amail['e_form_attachments_file']);
-                if (!empty($media_ids)) {
-                    foreach ($media_ids as $attachment_id) {
-                        $file_path = get_attached_file($attachment_id);
-                        if (!in_array($file_path, $attachments)) {
-                            $attachments[] = $file_path;
-                        }
-                    }
-                }
-            }
-            
-            return $attachments;
-        }
-
-        public static function delete_attachments($fields, $settings) {
-            $attachments = self::get_attachments($fields, $settings);
-            if (!empty($attachments) && is_array($attachments)) {
-                foreach ($attachments as $filename) {
-                    unlink($filename);
-                }
-            }
-        }
-        
-        public static function is_multiple($afield) {
-            return $afield['field_type'] == 'checkbox' || ($afield['field_type'] == 'select' && $afield['allow_multiple']) || ($afield['field_type'] == 'upload' && $afield['allow_multiple_upload']);
-        }
-        
-        public static function save_upload_media($fields, $settings, $obj_id = 0) {
-            if (!empty($fields) && is_array($fields)) {
-                    foreach ($fields as $akey => $adatas) {
-                        $afield = self::get_field($akey, $settings);
-                        if ($afield) {
-                            if ($afield['field_type'] == 'upload') {
-                                $files = Utils::explode($adatas);
-                                if (!empty($files)) {
-                                    foreach ($files as $adata) {
-                                        if (filter_var($adata, FILTER_VALIDATE_URL)) {
-                                            //$adata = str_replace(get_bloginfo('url'), WP, $value);
-                                            $filename = Utils::url_to_path($adata);
-                                            if (is_file($filename)) {
-                                                // Check the type of file. We'll use this as the 'post_mime_type'.
-                                                $filetype = wp_check_filetype(basename($filename), null);
-                                                $fileinfo = pathinfo($filename);
-                                                // Prepare an array of post data for the attachment.
-                                                $attachment = array(
-                                                    'guid' => $adata,
-                                                    'post_mime_type' => $filetype['type'],
-                                                    'post_status' => 'inherit',
-                                                    'post_title' => $fileinfo['filename'],
-                                                    //'post_content' => '',
-                                                );
-                                                if ($obj_id) {
-                                                    $attachment['post_parent'] = $obj_id;
-                                                }
-                                                // Insert the attachment.
-                                                $attach_id = wp_insert_attachment($attachment, $filename, $obj_id);
-                                                // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
-                                                require_once( ABSPATH . 'wp-admin/includes/image.php' );
-                                                // Generate the metadata for the attachment, and update the database record.
-                                                $attach_data = wp_generate_attachment_metadata($attach_id, $filename);
-                                                wp_update_attachment_metadata($attach_id, $attach_data);
-                                                if ($afield['allow_multiple_upload']) {
-                                                    if (is_array($fields[$akey])) {
-                                                        $fields[$akey][] = $attach_id;
-                                                    } else {
-                                                        $fields[$akey] = array($attach_id);
-                                                    }
-                                                } else {
-                                                    $fields[$akey] = $attach_id;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-        }
-        
-        public static function save_extra($obj_id, $type, $settings, $fields) {
-            if ($settings['e_form_save_' . ($type ? $type . '_' : '') . 'file']) {
-                $fields = Form::save_upload_media($fields, $settings, $obj_id);
-            }
-
-            if (!empty($fields) && is_array($fields)) {
-                if (!empty($settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas']) && is_array($settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas'])) {
-                    $settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas'] = array_filter($settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas']); // remove the "No field" empty value
-                }
-                foreach ($fields as $akey => $adata) {
-                    if (!empty($settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas']) && !in_array($akey, $settings['e_form_save_' . ($type ? $type . '_' : '') . 'metas']))
-                        continue;
-                    /* if ($settings['e_form_save_anonymous'] && ($akey == 'ip_address' || $akey == 'referrer' || $akey == 'user_id'))
-                      continue; */
-                    if ($settings['e_form_save_' . ($type ? $type . '_' : '') . 'array']) {
-                        $afield = self::get_field($akey, $settings);
-                        if ($afield) {
-                            if (Form::is_multiple($afield)) {
-                                $adata = Utils::explode($adata);
-                            }
-                        }
-                    }
-                    if ($type == 'option') {
-                        $exist_opt = false;
-                        if ($settings['e_form_save_' . ($type ? $type . '_' : '') . 'override'] == 'add') {
-                            $exist_opt = get_option($akey);
-                        }
-                        if ($settings['e_form_save_' . ($type ? $type . '_' : '') . 'override'] == 'update' || !$exist_opt) {
-                            update_option($akey, $adata);
-                        }
-                    } else {
-                        update_metadata($type, $obj_id, $akey, $adata);
-                    }
-                }
-            }
-        }
 }

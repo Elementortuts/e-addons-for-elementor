@@ -49,9 +49,9 @@ abstract class Base_Extension extends Element_Base {
                 } else {
                     add_action('elementor/element/' . $action['element'] . '/' . $action['action'] . '/after_section_end', [$this, '_add_common_sections'], 11, 2);
                 }            
-            }        
-            add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue']);
+            }            
         }
+        add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue']);
     }
 
     public function _enqueue_scripts() {

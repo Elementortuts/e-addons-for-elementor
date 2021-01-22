@@ -853,23 +853,6 @@ class Query extends Base_Widget {
                   ],
               ]
           );
-          /*
-          // Da deprecare
-          $this->add_control(
-              'native_templatemode_enable', [
-                  'label' => __('Template System Block', 'e-addons'),
-                  'description' => __('Use the template associated with the type (Menu: Elementor > Dynamic Content > Template System) to manage the appearance of the individual elements of the grid ', 'e-addons'),
-                  'type' => Controls_Manager::SWITCHER,
-                  'default' => '',
-                  'render_type' => 'template',
-                  'condition' => [
-                      '_skin' => ['', 'grid', 'carousel', 'filters', 'dualslider','smoothscroll','triggerscroll','3d'],
-                      'style_items' => 'template',
-                      'templatemode_enable_2' => '',
-                  ],
-              ]
-          );
-          */
           $this->add_control(
               'templatemode_linkable', [
                   'label' => __('Linkable', 'e-addons'),

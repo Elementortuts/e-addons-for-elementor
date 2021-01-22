@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
             dataType: "html",
             context: jQuery(this),
             type: "POST",
-            data: {"url": jQuery(this).attr('href'), "action": 'update'},
+            data: {"url": jQuery(this).attr('href'), "action": 'update', "addon": jQuery(this).data('addon')},
             error: function () {
                 console.log("error");
                 window.location.href = jQuery(this).attr('href');
