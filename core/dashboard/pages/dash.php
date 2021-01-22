@@ -22,11 +22,11 @@ if (!empty($_REQUEST['action'])) {
             $addon_name = sanitize_key($_POST['addon']);
         } else {
             list($dwn, $addon_name) = explode('addon=', $addon_url);
-        }
+        }      
         $wp_plugin_dir = str_replace('/', DIRECTORY_SEPARATOR, WP_PLUGIN_DIR);
         $e_addons_path = $wp_plugin_dir . DIRECTORY_SEPARATOR . $addon_name;
         $version_manager = \EAddonsForElementor\Plugin::instance()->version_manager;
-        $version_manager->addon_backup($addon_name);
+        $version_manager->addon_backup($addon_name);          
         $version_manager->download_plugin($addon_url, $e_addons_path);
         $e_addons->clear_addons();
     }
@@ -110,7 +110,8 @@ if (!empty($_REQUEST['action'])) {
                                 }                                
                                 $install_body_class = ' my_eaddon_body_updatenew';
                                 if ($install_url && ($e_plugin['Free'] || $e_plugin['license_status'] == 'valid')) {
-                                    echo '<a class="my_e_addon_version my_e_addon_version_update" data-addon="' . $e_plugin['TextDomain'] . '" href="' . $install_url . '" target="_blank" alt="' . __('New version available', 'e-addons-for-elementor') . '"><span class="dashicons dashicons-update"></span> <span class="btn-txt">' . $e_plugin['Version'] . ' &gt; ' . $e_plugin['new_version'] . '</span></a>';
+                                    $update_url = wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $e_plugin['plugin'], 'upgrade-plugin_' . $e_plugin['plugin'] );
+                                    echo '<a class="my_e_addon_version my_e_addon_version_update" data-update="'.$update_url.'" data-addon="' . $e_plugin['TextDomain'] . '" href="' . $install_url . '" target="_blank" alt="' . __('New version available', 'e-addons-for-elementor') . '"><span class="dashicons dashicons-update"></span> <span class="btn-txt">' . $e_plugin['Version'] . ' &gt; ' . $e_plugin['new_version'] . '</span></a>';
                                 } else {
                                     echo '<b class="my_e_addon_version"><span class="dashicons dashicons-warning"></span> <span class="btn-txt">' . $e_plugin['Version'] . ' &gt; ' . $e_plugin['new_version'] . '</span></b>';
                                 }
