@@ -602,15 +602,17 @@ class Actions {
         ];
         $terms = get_terms($query_params);
         foreach ($terms as $term) {
-            $term_name = $term->name;
-            if (empty($params['object_type'])) {
-                $taxonomy = get_taxonomy($term->taxonomy);
-                $term_name = $term_name . ' (' . $taxonomy->labels->singular_name . ')';
+            if (is_object($term) && get_class($term) == 'WP_Term') {
+                $term_name = $term->name;
+                if (empty($params['object_type'])) {
+                    $taxonomy = get_taxonomy($term->taxonomy);
+                    $term_name = $term_name . ' (' . $taxonomy->labels->singular_name . ')';
+                }
+                $control_options[] = [
+                    'id' => $term->term_id,
+                    'text' => $term_name,
+                ];
             }
-            $control_options[] = [
-                'id' => $term->term_id,
-                'text' => $term_name,
-            ];
         }
         return $control_options;
     }

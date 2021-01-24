@@ -145,19 +145,25 @@ class Version {
         $wp_upgrader_skin = new E_Upgrader_Skin();
         $wp_upgrader = new \WP_Upgrader($wp_upgrader_skin);
         $wp_upgrader->init();
-        $rollback = $wp_upgrader->run(
-                array(
-                    'package' => $roll_url,
-                    'destination' => $e_addons_path,
-                    'clear_destination' => true
-                )
-        );
-        $roll_status = ob_get_clean();
-        if ($rollback) {
-            return true;
-        } else {
-            return $roll_status;
+        if ($roll_url && !empty($e_addons_path)) {
+            if ($e_addons_path == WP_PLUGIN_DIR || $e_addons_path.DIRECTORY_SEPARATOR == WP_PLUGIN_DIR) {
+                return false;
+            }
+            $rollback = $wp_upgrader->run(
+                    array(
+                        'package' => $roll_url,
+                        'destination' => $e_addons_path,
+                        'clear_destination' => true
+                    )
+            );
+            $roll_status = ob_get_clean();
+            if ($rollback) {
+                return true;
+            } else {
+                return $roll_status;
+            }
         }
+        $roll_status = ob_get_clean();
         return false;
     }
 
