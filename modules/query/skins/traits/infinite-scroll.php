@@ -23,7 +23,8 @@ trait Infinite_Scroll {
             'label' => __('Infinite Scroll', 'e-addons'),
             'tab' => Controls_Manager::TAB_STYLE,
             'condition' => [
-                $this->get_control_id('infiniteScroll_enable') => 'yes', 
+                'infiniteScroll_enable' => 'yes'
+                //$this->get_control_id('infiniteScroll_enable') => 'yes', 
             ],
                 ]
         );
@@ -52,7 +53,8 @@ trait Infinite_Scroll {
             'type' => Controls_Manager::HEADING,
             'separator' => 'before',
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -81,7 +83,8 @@ trait Infinite_Scroll {
                 '{{WRAPPER}} div.infiniteScroll' => 'justify-content: {{VALUE}};',
             ],
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -91,7 +94,8 @@ trait Infinite_Scroll {
                 'infiniteScroll_button_text_colors', [
             'label' => __('Normal', 'e-addons'),
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -105,7 +109,8 @@ trait Infinite_Scroll {
                 '{{WRAPPER}} .infiniteScroll button' => 'color: {{VALUE}};',
             ],
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -119,7 +124,8 @@ trait Infinite_Scroll {
                 '{{WRAPPER}} .infiniteScroll button' => 'background-color: {{VALUE}};',
             ],
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -129,7 +135,8 @@ trait Infinite_Scroll {
                 'infiniteScroll_button_text_colors_hover', [
             'label' => __('Hover', 'e-addons'),
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -141,7 +148,8 @@ trait Infinite_Scroll {
                 '{{WRAPPER}} .infiniteScroll button:hover' => 'color: {{VALUE}};',
             ],
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -153,7 +161,8 @@ trait Infinite_Scroll {
                 '{{WRAPPER}} .infiniteScroll button:hover' => 'background-color: {{VALUE}};',
             ],
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -165,7 +174,8 @@ trait Infinite_Scroll {
                 '{{WRAPPER}} .infiniteScroll button:hover' => 'border-color: {{VALUE}};',
             ],
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );
@@ -184,7 +194,8 @@ trait Infinite_Scroll {
                 '{{WRAPPER}} .infiniteScroll button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
             'separator' => 'before'
                 ]
@@ -198,7 +209,8 @@ trait Infinite_Scroll {
                 '{{WRAPPER}} .infiniteScroll button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'condition' => [
-                $this->get_control_id('infiniteScroll_trigger') => 'button',
+                'infiniteScroll_trigger' => 'button',
+                //$this->get_control_id('infiniteScroll_trigger') => 'button',
             ],
                 ]
         );

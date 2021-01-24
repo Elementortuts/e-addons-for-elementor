@@ -121,6 +121,13 @@ jQuery(window).on('elementor/frontend/init', () => {
 				widgetType == 'e-query-media' ||
 				widgetType == 'e-query-itemslist'
 			){
+				const fitV = function(){
+					// ---------------------------------------------
+					// FitVids per scalare in percentuale video e mappa
+					if(jQuery(".e-add-oembed").length){
+						jQuery(".e-add-oembed").fitVids();
+					}
+				}
 				// ---------------------------------------------
 				// FIT IMAGES RATIO ........
 				// 3 - 
@@ -167,12 +174,8 @@ jQuery(window).on('elementor/frontend/init', () => {
 				};
 				//Run on load..
 				fitImages();
-
-				// ---------------------------------------------
-				// FitVids per scalare in percentuale video e mappa
-				if(jQuery(".e-add-oembed").length){
-					jQuery(".e-add-oembed").fitVids();
-				}
+				fitV();
+				
 
 				// ---------------------------------------------
 				// infiniteScroll load paginations
@@ -214,6 +217,8 @@ jQuery(window).on('elementor/frontend/init', () => {
 								this.elements.$animationReveal = new eadd_animationReveal( this.elements.$container , isLive );
 								
 								fitImages();
+								fitV();
+								
 							}
 							/*if( elementSettings[EADD_skinPrefix+'scrollreveal_effect_type'] ){
 
