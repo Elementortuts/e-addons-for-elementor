@@ -843,4 +843,29 @@ trait Items_Content {
                 ]
             );
         }
+        // +********************* Template item
+        public function controls_items_template_content( $target ) {
+            //
+            $target->add_control(
+                'template_item_id',
+                [
+                    'label' => __('Template', 'e-addons'),
+                    'type' => 'e-query',
+                    'placeholder' => __('Template Name', 'e-addons'),
+                    'label_block' => true,
+                    'query_type' => 'posts',
+                    'render_type' => 'template',
+                    'object_type' => 'elementor_library',
+                    'conditions' => [
+                        'terms' => [
+                            
+                            [
+                                'name' => 'item_type',
+                                'value' => 'item_template',
+                            ]
+                        ]
+                    ]
+                ]
+            );
+        }
 }

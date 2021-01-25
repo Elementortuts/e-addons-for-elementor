@@ -801,7 +801,7 @@ class Query extends Base_Widget {
                   ],
               ]
           );
-          // +********************* Style: Elementor TEMPLATE
+          // +********************* Style: Elementor TEMPLATE 
           $this->add_control(
               'template_id',
               [

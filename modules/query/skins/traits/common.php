@@ -248,8 +248,14 @@ trait Common {
         </div>
         <?php
     }
-     // per gestire l'icona 
-     protected function render_item_icon($metaitem,$icon5_key,$icon4_key,$class_icon = '') {
+    //@p il read_more è praticamente su tutti
+    protected function render_item_template($settings) {
+        $item_template_id = $settings['template_item_id'];
+        if (!empty($item_template_id))
+            $this->render_e_template($item_template_id);
+    }
+    // per gestire l'icona 
+    protected function render_item_icon($metaitem,$icon5_key,$icon4_key,$class_icon = '') {
         $migrated = isset($metaitem['__fa4_migrated'][$icon5_key]);
         $is_new = empty($metaitem[$icon4_key]) && Icons_Manager::is_migration_allowed();
         //

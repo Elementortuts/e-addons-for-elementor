@@ -60,7 +60,7 @@ class Dualslider extends Carousel {
               'columns_grid' => 4,
               'options' => [
                   'column' => [
-                      'title' => __('Bottomm','e-addons'),
+                      'title' => __('Bottom','e-addons'),
                       'return_val' => 'val',
                       'image' => E_ADDONS_URL . 'modules/query/assets/img/dualslider/dualslider_b.png',
                   ],
@@ -83,7 +83,7 @@ class Dualslider extends Carousel {
               ],
               'toggle' => false,
               'render_type' => 'template',
-              'default' => 'bottom',
+              'default' => 'column',
               //'tablet_default' => '',
 			  //'mobile_default' => 'bottom',
 			  'prefix_class' => 'e-add-style-dualslider-position-', //'e-add-align%s-',
