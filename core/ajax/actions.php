@@ -499,12 +499,32 @@ class Actions {
                     's' => $params['q'],
                     'posts_per_page' => -1,
                 ];
+                if (!empty($params['author_id'])) {
+                    $query_params['author__in'] = Utils::explode($params['author_id']);
+                }
+                if (!empty($params['tax_query'])) {
+                    $terms = Utils::explode($params['tax_query']);
+                    $term = Utils::get_term(reset($terms));
+                    //var_dump($term);
+                    if ($term && is_object($term) && get_class($term) == 'WP_Term') {
+                        $query_params['tax_query'] = array(
+                            array(
+                                'taxonomy' => $term->taxonomy,
+                                'terms'    => $terms,
+                            ),
+                        );
+                    }
+                }
                 if (!wp_doing_ajax()) { //$object_type != 'any') {
                     $query_params['post_status'] = 'publish';
                 }
                 if ('attachment' === $query_params['post_type']) {
                     $query_params['post_status'] = 'inherit';
                 }
+                if (!empty($params['post_status'])) {
+                    $query_params['post_status'] = $params['post_status'];
+                }
+                //var_dump($query_params);
                 if (class_exists('EAddonsForElementor\Overrides\E_Query')) {
                     $query = new \EAddonsForElementor\Overrides\E_Query($query_params);
                 } else {
@@ -769,6 +789,35 @@ class Actions {
     }
 
     public function _get_term_posts($params) {        
+        return $this->_get_posts($params);
+    }
+    
+    public function get_author_posts($params) {
+        $control_options = [];
+        $author_id = intval($params['object_type']);
+        $query_params = [
+            'post_type' => self::ANY,
+            'author_id' => $author_id,
+            's' => $params['q'],
+            'posts_per_page' => -1,
+        ];
+        $query = new \WP_Query($query_params);
+        foreach ($query->posts as $post) {
+            $post_title = $post->post_title;
+            $post_title = '[' . $post->ID . '] ' . $post_title . ' (' . $post->post_type . ')';
+            if ($post->taxonomy == 'elementor_library') {
+                $etype = get_post_meta($post->ID, '_elementor_template_type', true);
+                $post_title = '[' . $post->ID . '] ' . $post->post_title . ' (' . $post->post_type . ' > ' . $etype . ')';
+            }
+            $control_options[] = [
+                'id' => $post->ID,
+                'text' => $post_title,
+            ];
+        }
+        return $control_options;
+    }
+
+    public function _get_author_posts($params) {        
         return $this->_get_posts($params);
     }
 

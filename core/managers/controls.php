@@ -51,15 +51,20 @@ final class Controls {
     public function init_controls() {
         $controls_manager = \Elementor\Plugin::$instance->controls_manager;
         $controls = $this->get_controls();
+        
+        $tmp = explode('\\', __NAMESPACE__);
+        array_pop($tmp);
+        $namespace = implode('\\', $tmp);
+        
         foreach ($controls as $control) {
-            $class_name = 'EAddonsForElementor\Core\Controls\\' . $control;
+            $class_name = $namespace.'\\Controls\\' . $control;
             $control_obj = new $class_name();
             $controls_manager->register_control($control_obj->get_type(), $control_obj);
             $this->controls[$control_obj->get_type()] = $control_obj;
         }
         
         foreach ($this->get_groups() as $group) {
-            $class_name = 'EAddonsForElementor\Core\Controls\Groups\\' . $group;
+            $class_name = $namespace.'\\Controls\Groups\\' . $group;
             $control_obj = new $class_name();
             $controls_manager->add_group_control($control_obj->get_type(), $control_obj);
         }
