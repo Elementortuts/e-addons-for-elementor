@@ -16,7 +16,7 @@ trait Wordpress {
             <i class="eadd-logo-e-addons"></i>
             <p>
                 <strong>e-addons:</strong> 
-                <?php echo ($msg) ? $msg : _e(get_option('e_addons_notice'), 'e-addons-for-elementor'); ?>
+                <?php _e($msg, 'e-addons-for-elementor'); ?>
             </p>
         </div>
         <?php
