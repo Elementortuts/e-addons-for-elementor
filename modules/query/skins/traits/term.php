@@ -19,13 +19,14 @@ trait Term {
 
     // TERMS
     protected function render_item_postscount($settings) {
+        //$term_info = $this->current_data;
+        //var_dump($term_info);
         //
-        $term_info_count = $this->current_data['count'];
-        if( !empty($term_info_count) ){
+        if( !empty($term_info['count']) ){
             
-            echo $this->render_label_before_item($settinngs,'Posts: ');
+            echo $this->render_label_before_item($settings,'Posts: ');
             //
-            echo $term_info->count;
+            echo $term_info['count'];
         }
     }
 

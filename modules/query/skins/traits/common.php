@@ -187,6 +187,7 @@ trait Common {
         if ($icon_enable) {
             $icon = '<i class="e-add-query-icon fas fa-calendar" aria-hidden="true"></i> ';
         }
+        $date = '';
         switch($querytype){
             case 'media':
             case 'post':
@@ -207,8 +208,10 @@ trait Common {
             case 'items':
                 //se mi trovo in item_list
                 //$date = $this->current_data['sl_date'];
-                $date = date_create($this->current_data['sl_date']);
-                $date = date_format($date, $date_format);
+                if(!empty($this->current_data['sl_date'])){
+                    $date = date_create($this->current_data['sl_date']);
+                    $date = date_format($date, $date_format);
+                }
             break;
         }
         
@@ -240,6 +243,8 @@ trait Common {
         if (!empty($readmore_size)) {
             $this->parent->add_render_attribute($attribute_button, 'class', 'elementor-size-' . $readmore_size);
         }
+
+        if(!empty($this->current_permalink)){
         ?>
         <div class="e-add-post-button">
             <a <?php echo $this->parent->get_render_attribute_string($attribute_button); ?>>
@@ -247,6 +252,7 @@ trait Common {
             </a>
         </div>
         <?php
+        }
     }
     //@p il read_more è praticamente su tutti
     protected function render_item_template($settings) {

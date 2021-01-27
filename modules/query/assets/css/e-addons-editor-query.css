@@ -165,11 +165,11 @@
 .fa.item_date-ic::before { content: "\f073"; }
 .fa.item_title-ic::before { content: "\f1dc"; }
 .fa.item_subtitle-ic::before { content: "\f032"; }
-.fa.item_termstaxonomy-ic::before { content: "\f07c"; }
+.fa.item_termstaxonomy-ic::before { content: "\f02c"; }  
+.fa.item_template-ic::before { content: "\f07c"; }
 .fa.item_content-ic::before, 
 .fa.item_description-ic::before, 
-.fa.item_descriptiontext-ic::before
-{ content: "\f036"; }
+.fa.item_descriptiontext-ic::before{ content: "\f036"; }
 .fa.item_author-ic::before { content: "\f2bd"; }
 .fa.item_readmore-ic::before { content: "\f25a"; }
 .fa.item_posttype-ic::before { content: "\f08d"; }

@@ -154,6 +154,7 @@ trait Custommeta {
                 'type' => Controls_Manager::SWITCHER,
                 'condition' => [
                     'metafield_type' => 'array',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -168,6 +169,7 @@ trait Custommeta {
                 'default' => '',
                 'condition' => [
                     'metafield_type' => 'array',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -179,6 +181,7 @@ trait Custommeta {
                 'default' => 'large',
                 'condition' => [
                     'metafield_type' => 'image',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -204,6 +207,7 @@ trait Custommeta {
                 ],
                 'condition' => [
                     'metafield_type' => 'image',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -225,7 +229,8 @@ trait Custommeta {
                 ],
                 'default' => 'grid',
                 'condition' => [
-                    'metafield_type' => 'gallery'
+                    'metafield_type' => 'gallery',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );*/
@@ -239,6 +244,7 @@ trait Custommeta {
                 'placeholder' => __('YmdHis, d/m/Y, m-d-y', 'e-addons'),
                 'condition' => [
                     'metafield_type' => 'date',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -250,6 +256,7 @@ trait Custommeta {
                 'default' => 'F j, Y, g:i a',
                 'condition' => [
                     'metafield_type' => 'date',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -261,6 +268,7 @@ trait Custommeta {
                 'default' => 'Click me',
                 'condition' => [
                     'metafield_type' => 'button',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -274,6 +282,7 @@ trait Custommeta {
                 'style_transfer' => true,
                 'condition' => [
                     'metafield_type' => 'button',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -295,6 +304,7 @@ trait Custommeta {
                 ],
                 'condition' => [
                     'metafield_type' => 'text',
+                    'item_type' => 'item_custommeta'
                 ],
                 'default' => 'span',
             ]
@@ -305,7 +315,8 @@ trait Custommeta {
                 'label' => __('Show count', 'e-addons'),
                 'type' => Controls_Manager::SWITCHER,
                 'condition' => [
-                    'metafield_type' => 'term'
+                    'metafield_type' => 'term',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -315,7 +326,8 @@ trait Custommeta {
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'condition' => [
-                    'metafield_type' => 'term'
+                    'metafield_type' => 'term',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -329,7 +341,8 @@ trait Custommeta {
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'condition' => [
-                    'metafield_type' => 'post'
+                    'metafield_type' => 'post',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -352,7 +365,8 @@ trait Custommeta {
                 ],
                 'default' => 'horizontal',
                 'condition' => [
-                    'metafield_type' => ['user','term']
+                    'metafield_type' => ['user','term'],
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -363,7 +377,8 @@ trait Custommeta {
                 'default' => ',',
                 'condition' => [
                     'metafield_type' => ['user','term'],
-                    'metafield_term_style' => 'horizontal'
+                    'metafield_term_style' => 'horizontal',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -376,6 +391,7 @@ trait Custommeta {
                 'default' => 'File',
                 'condition' => [
                     'metafield_type' => 'file',
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -395,6 +411,7 @@ trait Custommeta {
                 'fa4compatibility' => 'icon',
                 'condition' => [
                     'metafield_type' => ['button','file','text'],
+                    'item_type' => 'item_custommeta'
                 ]
 			]
         );
@@ -405,7 +422,8 @@ trait Custommeta {
                 'label' => __('Link', 'e-addons'),
                 'type' => Controls_Manager::SWITCHER,
                 'condition' => [
-                    'metafield_type' => ['user','term','post']
+                    'metafield_type' => ['user','term','post'],
+                    'item_type' => 'item_custommeta'
                 ]
             ]
         );
@@ -427,6 +445,7 @@ trait Custommeta {
                         //'','textarea','date','button','file','oembed','map','term','post','user','gallery'
                         // 
                         'metafield_type' => ['image', 'text'],
+                        'item_type' => 'item_custommeta'
                     ]
             ]
         );
@@ -438,6 +457,7 @@ trait Custommeta {
                 'condition' => [
                     'metafield_type' => ['image', 'text'],
                     'link_to' => 'custom',
+                    'item_type' => 'item_custommeta'
                 ],
                 'dynamic' => [
                     'active' => true
