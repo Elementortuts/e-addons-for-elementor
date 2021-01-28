@@ -175,22 +175,24 @@ trait Common {
     protected function render_item_date($settings) {
         $querytype = $this->parent->get_querytype();
         // Settings ------------------------------
-        $date_type = $settings['date_type'];
         $date_format = $settings['date_format'];
         $icon_enable = $settings['icon_enable'];
         $use_link = $settings['use_link'];
         // ---------------------------------------
-        if (!$date_format) {
+        if (empty($date_format)) {
             $date_format = get_option('date_format');
         }
         $icon = '';
-        if ($icon_enable) {
+        if (!empty($icon_enable)) {
             $icon = '<i class="e-add-query-icon fas fa-calendar" aria-hidden="true"></i> ';
         }
         $date = '';
         switch($querytype){
             case 'media':
+                $date = get_the_date($date_format, '');
+            break;
             case 'post':
+                $date_type = $settings['date_type'];
                 //se mi trovo in post
                 switch ($date_type) {
                     case 'modified' :

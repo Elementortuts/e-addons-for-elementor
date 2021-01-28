@@ -448,7 +448,7 @@ class Grid extends Base {
         $grid_type = $this->get_instance_value('grid_type');
 
         $this->render_item_start();
-
+       
         if ($this->counter == 0 && $blog_template_id && $grid_type == 'blog') {
             $this->render_template($blog_template_id);
         } else {

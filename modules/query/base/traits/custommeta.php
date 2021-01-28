@@ -122,10 +122,10 @@ trait Custommeta {
             'metafield_type', [
                 'label' => __('Render Field type', 'e-addons'),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'default',
+                'default' => '',
                 'separator' => 'after',
                 'options' => [
-                    '' => __('None', 'e-addons'), //
+                    '' => __('Select render type', 'e-addons'), //
                     'image' => __('Image', 'e-addons'),
                     'oembed' => __('oEmbed', 'e-addons'), //
                     'date' => __('Date', 'e-addons'), //

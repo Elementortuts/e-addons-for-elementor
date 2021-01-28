@@ -167,6 +167,7 @@
 .fa.item_subtitle-ic::before { content: "\f032"; }
 .fa.item_termstaxonomy-ic::before { content: "\f02c"; }  
 .fa.item_template-ic::before { content: "\f07c"; }
+.fa.item_counts-ic::before { content: "\f163"; }
 .fa.item_content-ic::before, 
 .fa.item_description-ic::before, 
 .fa.item_descriptiontext-ic::before{ content: "\f036"; }
@@ -186,5 +187,8 @@
 .fa.item_email-ic::before { content: "\f0e0"; }
 .fa.item_website-ic::before { content: "\f0ac"; }
 .fa.item_bio-ic::before { content: "\f036"; }
-
-
+.fa.item_alternativetext-ic::before { content: "\f4ad"; }
+.fa.item_caption-ic::before { content: "\f15c"; }
+.fa.item_uploadedto-ic::before { content: "\f56f"; }
+.fa.item_imagemeta-ic::before { content: "\f87c"; }
+.fa.item_mimetype-ic::before { content: "\f86d"; }

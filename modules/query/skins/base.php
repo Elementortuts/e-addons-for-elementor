@@ -595,7 +595,6 @@ class Base extends Base_Skin {
                         break;
                     case 'item_template': $this->render_item_template($item);
                         break;
-
                     case 'item_image':
                         if ($useimg) {
                             $this->render_item_image($item);

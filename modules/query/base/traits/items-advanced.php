@@ -41,7 +41,9 @@ trait Items_Advanced {
                                         'item_caption',
                                         'item_alternativetext',
                                         'item_imagemeta',
-                                        'item_mimetype'],
+                                        'item_mimetype',
+                                        'item_counts'
+                                    ],
                         ]
                     ]
                 ]
@@ -85,6 +87,12 @@ trait Items_Advanced {
                                         'item_nickname',
                                         'item_email',
                                         'item_label',
+                                        'item_counts',
+                                        'item_caption',
+                                        'item_alternativetext',
+                                        'item_imagemeta',
+                                        'item_mimetype',
+                                        'item_uploadedto'
                                     ],
                         ],
                         [
@@ -193,7 +201,14 @@ trait Items_Advanced {
                             'item_nickname',
                             'item_email',
                             'item_website',
-                            'item_bio]']
+                            'item_bio',
+                            'item_counts',
+                            'item_caption',
+                            'item_alternativetext',
+                            'item_imagemeta',
+                            'item_mimetype',
+                            'item_uploadedto'
+                            ]
                         ],
                         [
                             'relation' => 'and',

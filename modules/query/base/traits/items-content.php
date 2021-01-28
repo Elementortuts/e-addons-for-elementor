@@ -408,9 +408,12 @@ trait Items_Content {
                                             'item_displayname',
                                             'item_nickname',
                                             'item_email',
+                                            'item_website',
                                             'item_alternativetext',
                                             'item_caption',
-                                            'item_mimetype'
+                                            'item_mimetype',
+                                            'item_counts',
+                                            'item_uploadedto'
                                         ],
                             ]
                         ]

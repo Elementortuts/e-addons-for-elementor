@@ -306,8 +306,22 @@ trait Items_Style {
                         [
                             'name' => 'item_type',
                             'operator' => '!in',
-                            'value' => ['item_image','item_avatar','item_date','item_author'],
-                        ],
+                            'value' => ['item_image','item_avatar','item_author',
+                                        'item_posttype',
+                                        'item_date',
+                                        'item_readmore',
+                                        'item_termstaxonomy',
+                                        'item_content',
+                                        'item_description',
+                                        'item_taxonomy',
+                                        'item_custommeta',
+                                        'item_caption',
+                                        'item_alternativetext',
+                                        'item_imagemeta',
+                                        'item_mimetype',
+                                        'item_counts'
+                                        ],
+                            ],
                         [
                             'relation' => 'or',
                             'terms' => [
@@ -318,11 +332,14 @@ trait Items_Style {
                                 ],
                                 [
                                     'name' => 'use_link',
-                                    'operator' => '==',
                                     'value' => 'yes'
                                 ]
                             ]
                         ],
+                        [
+                            'name' => 'use_link',
+                            'value' => 'yes'
+                        ]
                         
                     ]
                 ]
@@ -342,7 +359,21 @@ trait Items_Style {
                         [
                             'name' => 'item_type',
                             'operator' => '!in',
-                            'value' => ['item_image','item_avatar','item_date','item_author'],
+                            'value' => ['item_image','item_avatar','item_author',
+                                        'item_posttype',
+                                        'item_date',
+                                        'item_readmore',
+                                        'item_termstaxonomy',
+                                        'item_content',
+                                        'item_description',
+                                        'item_taxonomy',
+                                        'item_custommeta',
+                                        'item_caption',
+                                        'item_alternativetext',
+                                        'item_imagemeta',
+                                        'item_mimetype',
+                                        'item_counts'
+                                        ],
                         ],
                         [
                             'relation' => 'or',
@@ -354,11 +385,14 @@ trait Items_Style {
                                 ],
                                 [
                                     'name' => 'use_link',
-                                    'operator' => '==',
                                     'value' => 'yes'
                                 ]
                             ]
-                        ], 
+                        ],
+                        [
+                            'name' => 'use_link',
+                            'value' => 'yes'
+                        ] 
                     ]
                 ]
             ]
