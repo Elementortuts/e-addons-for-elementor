@@ -646,6 +646,8 @@ class Base extends Base_Skin {
     protected function render_item_start($key = 'post') {
         $hover_animation = $this->get_instance_value('hover_animation');
         $animation_class = !empty($hover_animation) ? ' elementor-animation-' . $hover_animation : '';
+        
+        $use_overlay_hover = $this->get_instance_value('use_overlay_hover');
 
         $_skin = $this->parent->get_settings_for_display('_skin');
         $style_items = $this->parent->get_settings_for_display('style_items');
@@ -655,7 +657,11 @@ class Base extends Base_Skin {
         if($_skin == 'justifiedgrid'){
             $style_items = 'float';
         }
-
+        //@p ..questo è il background per il block
+        $overlayhover = '';
+        if ($use_overlay_hover) {
+            $overlayhover = ' e-add-post-overlayhover';
+        }
         $hover_effects = $this->get_instance_value('hover_text_effect');
         $hoverEffects_class = !empty($hover_effects) && $style_items == 'float' ? ' e-add-hover-effects' : '';
         
@@ -669,7 +675,7 @@ class Base extends Base_Skin {
         <article <?php post_class(['e-add-post e-add-post-item e-add-post-item-' . $this->parent->get_id() . $item_class]);
         echo $data_post_id . $data_post_index;
         ?>>
-            <div class="e-add-post-block<?php echo $hoverEffects_class . $animation_class; ?>">
+            <div class="e-add-post-block<?php echo $overlayhover . $hoverEffects_class . $animation_class; ?>">
                 
                 <?php
     }

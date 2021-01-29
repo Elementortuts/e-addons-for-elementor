@@ -42,6 +42,68 @@ trait Hover {
                 'type' => Controls_Manager::HOVER_ANIMATION,
             ]
         );
+        $this->add_control(
+            'use_overlay_hover', [
+                'label' => __('Overlay', 'e-addons'),
+                'type' => Controls_Manager::CHOOSE,
+                'toggle' => false,
+                'label_block' => false,
+                'separator' => 'before',
+                'options' => [
+                    '1' => [
+                        'title' => __('Yes', 'e-addons'),
+                        'icon' => 'fa fa-check',
+                    ],
+                    '0' => [
+                        'title' => __('No', 'e-addons'),
+                        'icon' => 'fa fa-ban',
+                    ]
+                ],
+                'default' => '0',
+            ]
+        );
+        // overlay: color/image/gradient
+        $this->add_group_control(
+            Group_Control_Background::get_type(), [
+                'name' => 'overlay_color_hover',
+                'label' => __('Background', 'e-addons'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .e-add-post-block.e-add-post-overlayhover:before',
+                /*'
+                @p il default per background non l'ho capito..
+                default' => [
+                    'background' => 'classic',
+                    'color' => '#00000080'
+                ],*/
+                'condition' => [
+                    $this->get_control_id('use_overlay_hover') => '1',
+                ]
+            ]
+        );
+        // overlay: opacity
+        $this->add_control(
+            'overlay_opacity',
+            [
+                'label' => __('Opacity', 'e-addons'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => .5,
+                ],
+                'range' => [
+                    'px' => [
+                        'max' => 1,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .e-add-post-block.e-add-post-overlayhover:hover:before' => 'opacity: {{SIZE}};',
+                ],
+                'condition' => [
+                    $this->get_control_id('overlay_color_hover_background') => ['classic', 'gradient'],
+                    $this->get_control_id('use_overlay_hover') => '1',
+                ],
+            ]
+        );
         $this->end_controls_tab();
 
         $this->start_controls_tab('tab_hover_image', [
@@ -73,7 +135,7 @@ trait Hover {
         );
 
         $this->add_control(
-            'use_overlay_hover', [
+            'use_overlayimg_hover', [
                 'label' => __('Overlay', 'e-addons'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
@@ -95,7 +157,7 @@ trait Hover {
         // overlay: color/image/gradient
         $this->add_group_control(
             Group_Control_Background::get_type(), [
-                'name' => 'overlay_color_hover',
+                'name' => 'overlayimg_color_hover',
                 'label' => __('Background', 'e-addons'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .e-add-post-image.e-add-post-overlayhover:before',
@@ -106,13 +168,13 @@ trait Hover {
                     'color' => '#00000080'
                 ],*/
                 'condition' => [
-                    $this->get_control_id('use_overlay_hover') => '1',
+                    $this->get_control_id('use_overlayimg_hover') => '1',
                 ]
             ]
         );
         // overlay: opacity
         $this->add_control(
-            'overlay_opacity',
+            'overlayimg_opacity',
             [
                 'label' => __('Opacity', 'e-addons'),
                 'type' => Controls_Manager::SLIDER,
@@ -129,8 +191,8 @@ trait Hover {
                     '{{WRAPPER}} .e-add-post-image.e-add-post-overlayhover:hover:before' => 'opacity: {{SIZE}};',
                 ],
                 'condition' => [
-                    $this->get_control_id('overlay_color_hover_background') => ['classic', 'gradient'],
-                    $this->get_control_id('use_overlay_hover') => '1',
+                    $this->get_control_id('overlayimg_color_hover_background') => ['classic', 'gradient'],
+                    $this->get_control_id('use_overlayimg_hover') => '1',
                 ],
             ]
         );
@@ -158,7 +220,7 @@ trait Hover {
                 ],
                 'condition' => [
                     $this->get_control_id('overlay_color_hover_background') => ['classic', 'gradient'],
-                    $this->get_control_id('use_overlay_hover') => '1',
+                    $this->get_control_id('use_overlayimg_hover') => '1',
                 ],
             ]
         );
