@@ -13,8 +13,12 @@ trait Post {
         return self::get_fields(get_post(), $filter, $info);
     }
 
-    public static function get_post_types($exclude = true, $public = false) {
-        $post_types = get_post_types(array('public' => $public));
+    public static function get_post_types($exclude = true, $public = null) {
+        $args = array();
+        if ($public != null) {
+            $args = array('public' => $public);
+        }
+        $post_types = get_post_types($args);
         if ($exclude) {
             $post_types = array_diff($post_types, ['attachment', 'elementor_library']);
         }

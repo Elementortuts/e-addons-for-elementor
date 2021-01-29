@@ -460,6 +460,26 @@ class Actions {
         }
         return $control_options;
     }
+    
+    
+    public function get_types($params) {
+        $control_options = [];
+        $post_types = Utils::get_post_types();
+        if (!empty($post_types)) {
+            foreach ($post_types as $akey => $apt) {
+                if (strlen($params['q']) > self::MIN_LENGHT) {
+                    if (strpos($akey, $params['q']) === false && strpos($apt, $params['q']) === false) {
+                        continue;
+                    }
+                }
+                $control_options[] = [
+                    'id' => $akey,
+                    'text' => $apt,
+                ];
+            }
+        }
+        return $control_options;
+    }
 
     public function get_posts($params) {
         $control_options = [];
@@ -467,20 +487,7 @@ class Actions {
 
         switch ($object_type) {
             case 'type':
-                $post_types = Utils::get_post_types();
-                if (!empty($post_types)) {
-                    foreach ($post_types as $akey => $apt) {
-                        if (strlen($params['q']) > self::MIN_LENGHT) {
-                            if (strpos($akey, $params['q']) === false && strpos($apt, $params['q']) === false) {
-                                continue;
-                            }
-                        }
-                        $control_options[] = [
-                            'id' => $akey,
-                            'text' => $apt,
-                        ];
-                    }
-                }
+                $control_options = $this->get_types($params);
                 break;
             case 'meta':
                 $fields = Utils::get_metas('post', $params['q']);
@@ -560,10 +567,10 @@ class Actions {
             }
             $is_txt = !is_numeric($first);
         }
-        if ($is_txt) {
-            $post_types = Utils::get_post_types();
+        if ($is_txt) {            
             if (!empty($uid)) {
                 // post type
+                $post_types = Utils::get_post_types();
                 foreach ($uid as $aid) {
                     if (isset($post_types[$aid])) {
                         $control_options[$aid] = $post_types[$aid];
@@ -626,7 +633,10 @@ class Actions {
                 $term_name = $term->name;
                 if (empty($params['object_type'])) {
                     $taxonomy = get_taxonomy($term->taxonomy);
-                    $term_name = $term_name . ' (' . $taxonomy->labels->singular_name . ')';
+                    if ($taxonomy) {
+                        $label = (property_exists($taxonomy, 'labels')) ? $taxonomy->labels->singular_name : $taxonomy->label;
+                        $term_name = $term_name . ' (' . $label . ')';
+                    }
                 }
                 $control_options[] = [
                     'id' => $term->term_id,

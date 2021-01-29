@@ -14,7 +14,7 @@ var formFieldsItemView = elementor.modules.controls.BaseData.extend({
         if (elementorFrontend.config.elements.data[cid]) {
             var settings = elementorFrontend.config.elements.data[cid].attributes;
             var fields = settings['form_fields'];
-            //console.log(fields);
+            //console.log(settings);
             
             var options = '<option value="">No field</option>';                        
             jQuery(fields.models).each(function(index,element){
