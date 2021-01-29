@@ -53,7 +53,7 @@ trait Common {
         // Settings ------------------------------
         $use_bgimage = $settings['use_bgimage'];
         $use_overlay = $settings['use_overlay'];
-        $use_overlay_hover = $this->get_instance_value('use_overlay_hover');
+        $use_overlayimg_hover = $this->get_instance_value('use_overlayimg_hover');
         //
         $bgimage = '';
         if ($use_bgimage) {
@@ -64,7 +64,7 @@ trait Common {
             $overlayimage = ' e-add-post-overlayimage';
         }
         $overlayhover = '';
-        if ($use_overlay_hover) {
+        if ($use_overlayimg_hover) {
             $overlayhover = ' e-add-post-overlayhover';
         }
         //

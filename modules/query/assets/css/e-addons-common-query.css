@@ -35,11 +35,13 @@
 /*-------------------------------------------*/
 
 .e-add-posts-container .e-add-post-image.e-add-post-overlayimage,
+.e-add-posts-container .e-add-post-block.e-add-post-overlayhover,
 .e-add-posts-container .e-add-post-image.e-add-post-overlayhover{
 	position: relative;
 	display: block; /* <---- @p è da impazzirci*/
 }
 .e-add-posts-container .e-add-post-image.e-add-post-overlayimage:after,
+.e-add-posts-container .e-add-post-block.e-add-post-overlayhover:before,
 .e-add-posts-container .e-add-post-image.e-add-post-overlayhover:before{
 	content: '';
 	position: absolute;
@@ -55,6 +57,7 @@
   
   	pointer-events: none;
 }
+.e-add-posts-container .e-add-post-block.e-add-post-overlayhover:before,
 .e-add-posts-container .e-add-post-image.e-add-post-overlayhover:before{
 	z-index: 2;
 
@@ -63,6 +66,7 @@
 
 	opacity: 0;
 }
+.e-add-posts-container .e-add-post-block.e-add-post-overlayhover:hover:before,
 .e-add-posts-container .e-add-post-image.e-add-post-overlayhover:hover:before{
 	opacity: 1;
 }
