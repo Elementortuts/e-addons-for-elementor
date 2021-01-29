@@ -36,7 +36,7 @@
 
 .e-add-posts-container .e-add-post-image.e-add-post-overlayimage,
 .e-add-posts-container .e-add-post-block.e-add-post-overlayhover,
-.e-add-posts-container .e-add-post-image.e-add-post-overlayhover{
+.e-add-posts-container .e-add-post-image.e-add-post-overlayhover:not(.e-add-post-bgimage){
 	position: relative;
 	display: block; /* <---- @p è da impazzirci*/
 }
@@ -59,7 +59,7 @@
 }
 .e-add-posts-container .e-add-post-block.e-add-post-overlayhover:before,
 .e-add-posts-container .e-add-post-image.e-add-post-overlayhover:before{
-	z-index: 2;
+	z-index: 100;
 
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
