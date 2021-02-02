@@ -245,3 +245,10 @@
 .eadd-dynamic-tag-bggalleryslider:before { content: '\e8bd'; } /* '' */
 .eadd-el-form-pro-act-reorder:before { content: '\e8be'; } /* '' */
 .eadd-el-form-pro-act-lostpassword:before { content: '\e8bf'; } /* '' */
+
+.eadd-el-form-pro-act-payments_stripe:before { content: '\e8c0'; } /* '' */
+.eadd-el-form-pro-act-payments_paypal:before { content: '\e8c1'; } /* '' */
+.eadd-inner_sections:before { content: '\e8c2'; } /* '' */
+.eadd-el-form-pro-ext-height:before { content: '\e8c3'; } /* '' */
+.eadd-editor-control-search:before { content: '\e8c4'; } /* '' */
+.eadd-el-form-pro-act-custom-js-script:before { content: '\e8c5'; } /* '' */
