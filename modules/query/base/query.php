@@ -873,6 +873,34 @@ class Query extends Base_Widget {
         
         $this->add_infinite_scroll_section();
     }
+    
+    public function add_no_result_section() {
+        //@p il TAB Query
+        // ------------------------------------------------------------------ [SECTION - QUERY no_result]
+        $this->start_controls_section(
+                'section_query_no_result', [
+            'label' => '<i class="eaddicon eicon-warning" aria-hidden="true"></i> ' . __('No results', 'e-addons'),
+            'tab' => 'e_query',
+                ]
+        );
+        $this->add_control(
+              'query_no_result', [
+                  'label' => __('Print a Fallback Content', 'e-addons'),
+                  'type' => Controls_Manager::SWITCHER,
+              ]
+          );
+        $this->add_control(
+              'query_no_result_txt', [
+                  'label' => __('No results Text', 'e-addons'),
+                  'default' => __('Sorry, no results found', 'e-addons'),
+                  'type' => Controls_Manager::WYSIWYG,
+                  'condition' => [
+                      'query_no_result!' => '',
+                  ]
+              ]
+          );
+        $this->end_controls_section();
+    }
 
 
     // -------------- Render method ---------

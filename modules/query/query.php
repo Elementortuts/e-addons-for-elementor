@@ -29,13 +29,13 @@ class Query extends Module_Base {
         if ($handled || empty($wp_query->query_vars['page']) || !is_singular() || empty($wp_query->post)) {
             return $handled;
         }
-        
+
         $query_widgets = $this->get_query_widgets();
         if (empty($query_widgets)) {
             return $handled;
         }
 
-        if (\Elementor\Plugin::instance()->db->is_built_with_elementor(get_queried_object_id()) || Utils::is_plugin_active('elementor-pro')) {
+        if (\Elementor\Plugin::instance()->db->is_built_with_elementor($wp_query->post->ID) || Utils::is_plugin_active('elementor-pro')) {
             $document = \Elementor\Plugin::instance()->documents->get($wp_query->post->ID);
             if ($this->is_valid_pagination($document->get_elements_data(), $wp_query->query_vars['page'])) {
                 return true;
@@ -72,7 +72,7 @@ class Query extends Module_Base {
             if (isset($element['widgetType']) && in_array($element['widgetType'], $query_widgets, true)) {
                 // Has pagination.
                 if (!empty($element['settings']['pagination_enable'])) {
-                    $is_valid = true;                    
+                    $is_valid = true;
                 }
             }
         });
@@ -103,8 +103,11 @@ class Query extends Module_Base {
      * @access public
      */
     public function enqueue_editor_assets() {
-        wp_enqueue_style('e-addons-editor-query');
-        wp_enqueue_script('e-addons-editor-query');
+        $widgets = \Elementor\Plugin::instance()->widgets_manager->get_widget_types();
+        if (!empty($widgets)) {
+            wp_enqueue_style('e-addons-editor-query');
+            wp_enqueue_script('e-addons-editor-query');
+        }
     }
 
 }

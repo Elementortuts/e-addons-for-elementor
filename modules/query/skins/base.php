@@ -45,7 +45,7 @@ class Base extends Base_Skin {
     protected $counter = 0;
     protected $depended_scripts = [];
     protected $depended_styles = [];
-    
+
     public function show_in_settings() {
         return false;
     }
@@ -73,140 +73,140 @@ class Base extends Base_Skin {
         //
         // Blocks - Style
         $this->start_controls_section(
-            'section_blocks_style',
-            [
-                'label' => __('Blocks Style', 'e-addons'),
-                'tab' => Controls_Manager::TAB_STYLE,
-                'condition' => [
-                    'style_items!' => 'template',
-                ]
-            ]
-        );
-        $this->add_responsive_control(
-            'blocks_align', [
-                'label' => __('Text Alignment', 'e-addons'),
-                'type' => Controls_Manager::CHOOSE,
-                'toggle' => true,
-                'options' => [
-                    'left' => [
-                        'title' => __('Left', 'e-addons'),
-                        'icon' => 'fa fa-align-left',
-                    ],
-                    'center' => [
-                        'title' => __('Center', 'e-addons'),
-                        'icon' => 'fa fa-align-center',
-                    ],
-                    'right' => [
-                        'title' => __('Right', 'e-addons'),
-                        'icon' => 'fa fa-align-right',
+                'section_blocks_style',
+                [
+                    'label' => __('Blocks Style', 'e-addons'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                    'condition' => [
+                        'style_items!' => 'template',
                     ]
-                ],
-                'default' => 'left',
-                'prefix_class' => 'e-add-align%s-',
-                'selectors' => [
-                    '{{WRAPPER}} .e-add-post-item' => 'text-align: {{VALUE}};',
-                ],
-                'separator' => 'before',
-            ]
-        );
-        $this->add_control(
-            'heading_blocks_align_flex',
-            [
-                'type' => Controls_Manager::RAW_HTML,
-                'show_label' => false,
-                'raw' => '<i class="fas fa-arrows-alt" aria-hidden="true"></i> '.__('Flex Alignnment', 'e-addons'),
-                'separator' => 'before',
-                'content_classes' => 'e-add-inner-heading',
-                /*'condition' => [
-                    $this->get_control_id('v_pos_postitems') => ['', 'stretch'],
-                ],*/
-            ]
+                ]
         );
         $this->add_responsive_control(
-            'blocks_align_flex', [
-                'label' => __('Flex Align-items', 'e-addons'),
-                'type' => Controls_Manager::SELECT,
-                'default' => '',
-                'options' => [
-                    '' => 'Default',
-                    'flex-start' => 'Start',
-                    'center' => 'Center',
-                    'flex-end' => 'End',
-                    'space-between' => 'Space Between',
-                    'space-around' => 'Space Around',
-                    'stretch' => 'Stretch',
+                'blocks_align', [
+            'label' => __('Text Alignment', 'e-addons'),
+            'type' => Controls_Manager::CHOOSE,
+            'toggle' => true,
+            'options' => [
+                'left' => [
+                    'title' => __('Left', 'e-addons'),
+                    'icon' => 'fa fa-align-left',
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .e-add-post-block, {{WRAPPER}} .e-add-item-area' => 'align-items: {{VALUE}} !important;',
+                'center' => [
+                    'title' => __('Center', 'e-addons'),
+                    'icon' => 'fa fa-align-center',
                 ],
-                /*'condition' => [
-                    $this->get_control_id('v_pos_postitems') => ['', 'stretch'],
-                ],*/
-            ]
-        );
-        $this->add_responsive_control(
-            'blocks_align_justify', [
-                'label' => __('Flex justify-content', 'e-addons'),
-                'type' => Controls_Manager::SELECT,
-                'default' => '',
-                'options' => [
-                    '' => 'Default',
-                    'flex-start' => 'Start',
-                    'center' => 'Center',
-                    'flex-end' => 'End',
-                    'space-between' => 'Space Between',
-                    'space-around' => 'Space Around',
-                    'stretch' => 'Stretch',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .e-add-post-block, {{WRAPPER}} .e-add-item-area' => 'justify-content: {{VALUE}} !important;',
-                ],
-                'separator' => 'after',
-                /*'condition' => [
-                    $this->get_control_id('v_pos_postitems') => ['', 'stretch'],
-                ],*/
-            ]
+                'right' => [
+                    'title' => __('Right', 'e-addons'),
+                    'icon' => 'fa fa-align-right',
+                ]
+            ],
+            'default' => 'left',
+            'prefix_class' => 'e-add-align%s-',
+            'selectors' => [
+                '{{WRAPPER}} .e-add-post-item' => 'text-align: {{VALUE}};',
+            ],
+            'separator' => 'before',
+                ]
         );
         $this->add_control(
-            'blocks_bgcolor', [
-                'label' => __('Background Color', 'e-addons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .e-add-post-item .e-add-post-block' => 'background-color: {{VALUE}};'
-                ],
-            ]
+                'heading_blocks_align_flex',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'show_label' => false,
+                    'raw' => '<i class="fas fa-arrows-alt" aria-hidden="true"></i> ' . __('Flex Alignnment', 'e-addons'),
+                    'separator' => 'before',
+                    'content_classes' => 'e-add-inner-heading',
+                /* 'condition' => [
+                  $this->get_control_id('v_pos_postitems') => ['', 'stretch'],
+                  ], */
+                ]
+        );
+        $this->add_responsive_control(
+                'blocks_align_flex', [
+            'label' => __('Flex Align-items', 'e-addons'),
+            'type' => Controls_Manager::SELECT,
+            'default' => '',
+            'options' => [
+                '' => 'Default',
+                'flex-start' => 'Start',
+                'center' => 'Center',
+                'flex-end' => 'End',
+                'space-between' => 'Space Between',
+                'space-around' => 'Space Around',
+                'stretch' => 'Stretch',
+            ],
+            'selectors' => [
+                '{{WRAPPER}} .e-add-post-block, {{WRAPPER}} .e-add-item-area' => 'align-items: {{VALUE}} !important;',
+            ],
+                /* 'condition' => [
+                  $this->get_control_id('v_pos_postitems') => ['', 'stretch'],
+                  ], */
+                ]
+        );
+        $this->add_responsive_control(
+                'blocks_align_justify', [
+            'label' => __('Flex justify-content', 'e-addons'),
+            'type' => Controls_Manager::SELECT,
+            'default' => '',
+            'options' => [
+                '' => 'Default',
+                'flex-start' => 'Start',
+                'center' => 'Center',
+                'flex-end' => 'End',
+                'space-between' => 'Space Between',
+                'space-around' => 'Space Around',
+                'stretch' => 'Stretch',
+            ],
+            'selectors' => [
+                '{{WRAPPER}} .e-add-post-block, {{WRAPPER}} .e-add-item-area' => 'justify-content: {{VALUE}} !important;',
+            ],
+            'separator' => 'after',
+                /* 'condition' => [
+                  $this->get_control_id('v_pos_postitems') => ['', 'stretch'],
+                  ], */
+                ]
+        );
+        $this->add_control(
+                'blocks_bgcolor', [
+            'label' => __('Background Color', 'e-addons'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .e-add-post-item .e-add-post-block' => 'background-color: {{VALUE}};'
+            ],
+                ]
         );
         $this->add_group_control(
-            Group_Control_Border::get_type(), [
-                'name' => 'blocks_border',
-                'selector' => '{{WRAPPER}} .e-add-post-item .e-add-post-block',
-            ]
+                Group_Control_Border::get_type(), [
+            'name' => 'blocks_border',
+            'selector' => '{{WRAPPER}} .e-add-post-item .e-add-post-block',
+                ]
         );
         $this->add_responsive_control(
-            'blocks_padding', [
-                'label' => __('Padding', 'e-addons'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em'],
-                'selectors' => [
-                    '{{WRAPPER}} .e-add-post-item .e-add-post-block' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
+                'blocks_padding', [
+            'label' => __('Padding', 'e-addons'),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'em'],
+            'selectors' => [
+                '{{WRAPPER}} .e-add-post-item .e-add-post-block' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+                ]
         );
         $this->add_control(
-            'blocks_border_radius', [
-                'label' => __('Border Radius', 'e-addons'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em'],
-                'selectors' => [
-                    '{{WRAPPER}} .e-add-post-item .e-add-post-block' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
+                'blocks_border_radius', [
+            'label' => __('Border Radius', 'e-addons'),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'em'],
+            'selectors' => [
+                '{{WRAPPER}} .e-add-post-item .e-add-post-block' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+                ]
         );
         $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(), [
-                'name' => 'blocks_boxshadow',
-                'selector' => '{{WRAPPER}} .e-add-post-item .e-add-post-block',
-            ]
+                Group_Control_Box_Shadow::get_type(), [
+            'name' => 'blocks_boxshadow',
+            'selector' => '{{WRAPPER}} .e-add-post-item .e-add-post-block',
+                ]
         );
         // Vertical Alternate
         /*
@@ -249,11 +249,47 @@ class Base extends Base_Skin {
         //
     }
 
+    public function has_results($query, $querytype) {
+        switch ($querytype) {
+            case 'media':
+            case 'post':
+                if (!$query->found_posts) {
+                    return false;
+                }
+                break;
+            case 'user':
+                if (empty($query->get_results())) {
+                    return false;
+                }
+                break;
+            case 'term':
+                if (empty($query) || is_wp_error($query)) {
+                    return false;
+                }
+                break;
+            case 'listof':
+                return false;
+                break;
+            case 'items':
+                // il ripetitore di contenuti statici
+                $sl_items = $this->parent->get_settings_for_display('repeater_staticlist');
+                if (empty($sl_items)) {
+                    return false;
+                }
+                break;
+        }
+        return true;
+    }
+
     public function render() {
         $this->parent->render();
 
         /** @p enquequo gli script e gli style... */
         $this->enqueue();
+        
+        if (!$this->parent) {
+            return;
+        }
 
         /** @p elaboro la query... */
         $this->parent->query_the_elements();
@@ -262,40 +298,34 @@ class Base extends Base_Skin {
         $query = $this->parent->get_query();
         $querytype = $this->parent->get_querytype();
 
-        $this->render_loop_start();
+        if ($this->has_results($query, $querytype)) {
 
-        switch ($querytype) {
-            case 'media':
-            case 'post':
-                if (!$query->found_posts) {
-                    return;
-                }
+            $this->render_loop_start();
 
-                /** @p qui identifico se mi trovo in un loop, altrimenti uso la wp_query */
-                if ($query->in_the_loop) {
-                    $this->current_permalink = get_permalink();
-                    $this->current_id = get_the_ID();
-                    $this->current_data = get_post( get_the_ID() );
-                    //
-                    $this->render_element_item();
-                } else {
-                    while ($query->have_posts()) {
-                        $query->the_post();
-
+            switch ($querytype) {
+                case 'media':
+                case 'post':
+                    /** @p qui identifico se mi trovo in un loop, altrimenti uso la wp_query */
+                    if ($query->in_the_loop) {
                         $this->current_permalink = get_permalink();
                         $this->current_id = get_the_ID();
-                        $this->current_data = get_post( get_the_ID() );
+                        $this->current_data = get_post(get_the_ID());
                         //
                         $this->render_element_item();
+                    } else {
+                        while ($query->have_posts()) {
+                            $query->the_post();
+
+                            $this->current_permalink = get_permalink();
+                            $this->current_id = get_the_ID();
+                            $this->current_data = get_post(get_the_ID());
+                            //
+                            $this->render_element_item();
+                        }
                     }
-                }
-                wp_reset_postdata();
-
-                break;
-            case 'user':
-
-                if (!empty($query->get_results())) {
-                    //var_dump($query->get_results());
+                    wp_reset_postdata();
+                    break;
+                case 'user':
                     //global $user;
                     //$user_temp = $user;
                     foreach ($query->get_results() as $user) {
@@ -305,20 +335,9 @@ class Base extends Base_Skin {
                         //
                         $this->render_element_item();
                     }
-                    //$user = $user_temp;
-                } else {
-                    echo 'No users found.';
-                }
-
-                break;
-            case 'term':
-
-                /* foreach($query->get_terms() as $term){ 
-
-                  echo $term->name." (".$term->count.")<br>";
-
-                  } */
-                if (!empty($query) && !is_wp_error($query)) {
+                    //$user = $user_temp;                   
+                    break;
+                case 'term':
                     foreach ($query->get_terms() as $term) {
                         $this->current_permalink = get_term_link($term->term_id);
                         $this->current_id = $term->term_id;
@@ -326,20 +345,14 @@ class Base extends Base_Skin {
                         //
                         $this->render_element_item();
                     }
-                } else {
-                    echo 'No terms found.';
-                }
 
-                break;
-            case 'listof':
-
-                echo 'questo è LISTOF (che nella mia testa è il widget-ACFrepeater)';
-
-                break;
-            case 'items':
-                // il ripetitore di contenuti statici
-                $sl_items = $this->parent->get_settings_for_display('repeater_staticlist');
-                if ( !empty($sl_items) ) {
+                    break;
+                case 'listof':
+                    //echo 'questo è LISTOF (che nella mia testa è il widget-ACFrepeater)';
+                    break;
+                case 'items':
+                    // il ripetitore di contenuti statici
+                    $sl_items = $this->parent->get_settings_for_display('repeater_staticlist');
                     foreach ($sl_items as $item) {
                         //echo $item['sl_title'];
                         $this->current_permalink = $item['sl_link']['url'];
@@ -350,15 +363,25 @@ class Base extends Base_Skin {
                         //
                         $this->render_element_item();
                     }
-                } else {
-                    echo 'The element is empty.';
-                }
-                break;
+                    break;
+            }
+
+            $this->render_loop_end();
+
+            $this->parent->render_pagination();
+        } else {
+            $this->render_no_results();
         }
+    }
 
-        $this->render_loop_end();
-
-        $this->parent->render_pagination();
+    protected function render_no_results() {
+        $query_no_result = $this->parent->get_settings_for_display('query_no_result');
+        if ($query_no_result) {
+            $query_no_result_txt = $this->parent->get_settings_for_display('query_no_result_txt');
+            if (!empty($query_no_result_txt)) {
+                echo $query_no_result_txt;
+            }
+        }
     }
 
     protected function render_element_item() {
@@ -412,13 +435,14 @@ class Base extends Base_Skin {
     }
 
     /* !!!!!!!!!!!!!!!!!!! ITEMS !!!!!!!!!!!!!!!!! */
+
     protected function render_items() {
         $_skin = $this->parent->get_settings_for_display('_skin');
         $style_items = $this->parent->get_settings_for_display('style_items');
 
         //@p in caso di justifiedgrid forzo lo style_items in "float"
         //@p probabilmente farò lo stesso anche per lo skin rhombus ex diamond
-        if($_skin == 'justifiedgrid'){
+        if ($_skin == 'justifiedgrid') {
             $style_items = 'float';
         }
 
@@ -432,10 +456,10 @@ class Base extends Base_Skin {
 
         $hoverEffects_start = !empty($hover_effects) && $style_items == 'float' && $_skin != 'gridtofullscreen3d' ? '<div class="e-add-hover-effect-' . $hover_effects . ' e-add-hover-effect-content e-add-close">' : '';
         $hoverEffects_end = !empty($hover_effects) && $style_items == 'float' ? '</div>' : '';
-        
+
         //@p NOTA:  [x timeline] una piccola considerazione a timeline....
         //          forzo la timeliine al layout default e non uso l'immagine nel content
-        if ( ($style_items && $style_items != 'default' && $_skin != 'timeline') || $_skin == 'justifiedgrid' ) {
+        if (($style_items && $style_items != 'default' && $_skin != 'timeline') || $_skin == 'justifiedgrid') {
             // Layouts
             //echo 'sono un layout: left/right/alternate/textZone/overlay/float';
             echo '<div class="e-add-image-area e-add-item-area">';
@@ -444,41 +468,39 @@ class Base extends Base_Skin {
             echo $hoverEffects_start . '<div class="e-add-content-area e-add-item-area' . $animation_class . '">';
             $this->render_items_content(false); //@p il false non produce l'immagine
             echo '</div>' . $hoverEffects_end;
-            
         } else {
             // Layout-default
             //echo 'sono layout-default';
-            
-            if($_skin == 'timeline'){
+
+            if ($_skin == 'timeline') {
                 $this->render_items_content(false); //@p il false non produce l'immagine
-            }else{
+            } else {
                 $this->render_items_content(true);
             }
         }
-        
     }
 
     // IMAGE
     protected function render_items_image() {
         $_items = $this->parent->get_settings_for_display('list_items');
         $querytype = $this->parent->get_querytype();
-        
+
         //QUERY_MEDIA //////////////////
         //@p l'immagine viene renderizzata sempre per il query_media widget
-        if($querytype == 'media'){
+        if ($querytype == 'media') {
             $this->render_repeateritem_start('e-add-media-image', 'item_image');
             //----------------------------------
             $this->render_item_image($this->parent->get_settings_for_display());
             //----------------------------------
             $this->render_repeateritem_end();
-        }else{
+        } else {
             //
             // ITEMS ///////////////////////
             foreach ($_items as $item) {
                 $_id = $item['_id'];
                 $item_type = $item['item_type'];
                 //
-                if ( !empty($item) ) {
+                if (!empty($item)) {
 
                     if ($item_type == 'item_image') {
                         $this->render_repeateritem_start($_id, $item_type);
@@ -506,7 +528,7 @@ class Base extends Base_Skin {
         //
         // QUERY_MEDIA //////////////////
         //@p l'immagine viene renderizzata sempre per il query_media widget
-        if($querytype == 'media' && $useimg){
+        if ($querytype == 'media' && $useimg) {
             $this->render_repeateritem_start('e-add-media-image', 'item_image');
             //----------------------------------
             $this->render_item_image($this->parent->get_settings_for_display());
@@ -520,7 +542,7 @@ class Base extends Base_Skin {
             $item_type = $item['item_type'];
             //$custommetakey = $item['metafield_key'];
 
-            if ( !empty($item) ) {
+            if (!empty($item)) {
 
                 //if( $item_type == 'item_custommeta' && $this->get_value_custommeta($custommetakey) )
                 $this->render_repeateritem_start($_id, $item_type);
@@ -576,7 +598,7 @@ class Base extends Base_Skin {
                     case 'item_caption': $this->render_item_caption($item);
                         break;
                     case 'item_alternativetext': $this->render_item_alternativetext($item);
-                        break; 
+                        break;
                     case 'item_uploadedto': $this->render_item_uploadedto($item);
                         break;
                     //----------------------------------
@@ -606,12 +628,11 @@ class Base extends Base_Skin {
                         }
                         break;
                 }
-                
+
                 //----------------------------------
                 $this->render_repeateritem_end();
             }
         }
-        
     }
 
     // REPEATER-ITEM start
@@ -639,14 +660,12 @@ class Base extends Base_Skin {
         echo '</div>';
     }
 
-    
-
     /////////////////////////////////////////////////////////////
     // render post item -----------------------------------------
     protected function render_item_start($key = 'post') {
         $hover_animation = $this->get_instance_value('hover_animation');
         $animation_class = !empty($hover_animation) ? ' elementor-animation-' . $hover_animation : '';
-        
+
         $use_overlay_hover = $this->get_instance_value('use_overlay_hover');
 
         $_skin = $this->parent->get_settings_for_display('_skin');
@@ -654,7 +673,7 @@ class Base extends Base_Skin {
 
         //@p in caso di justifiedgrid forzo lo style_items in "float"
         //@p probabilmente farò lo stesso anche per lo skin rhombus ex diamond
-        if($_skin == 'justifiedgrid'){
+        if ($_skin == 'justifiedgrid') {
             $style_items = 'float';
         }
         //@p ..questo è il background per il block
@@ -664,7 +683,7 @@ class Base extends Base_Skin {
         }
         $hover_effects = $this->get_instance_value('hover_text_effect');
         $hoverEffects_class = !empty($hover_effects) && $style_items == 'float' ? ' e-add-hover-effects' : '';
-        
+
         //@p data post ID
         $data_post_id = ' data-e-add-post-id="' . $this->current_id . '"';
         //@p data post INDEX
@@ -672,15 +691,16 @@ class Base extends Base_Skin {
         //@p una classe personalizzata per lo skin
         $item_class = ' ' . $this->get_item_class();
         ?>
-        <article <?php post_class(['e-add-post e-add-post-item e-add-post-item-' . $this->parent->get_id() . $item_class]);
+        <article <?php
+        post_class(['e-add-post e-add-post-item e-add-post-item-' . $this->parent->get_id() . $item_class]);
         echo $data_post_id . $data_post_index;
         ?>>
             <div class="e-add-post-block<?php echo $overlayhover . $hoverEffects_class . $animation_class; ?>">
-                
-                <?php
-    }
 
-    protected function render_item_end() {
+                <?php
+            }
+
+            protected function render_item_end() {
                 ?>
 
             </div>
@@ -724,9 +744,9 @@ class Base extends Base_Skin {
             <div <?php echo $this->parent->get_render_attribute_string('eaddposts_container_wrap'); ?>>
                 <?php
                 $this->render_postsWrapper_before();
-    }
+            }
 
-    protected function render_loop_end() {
+            protected function render_loop_end() {
                 $this->render_postsWrapper_after();
                 ?>      
             </div>
@@ -800,4 +820,5 @@ class Base extends Base_Skin {
 
         return $content;
     }
+
 }
