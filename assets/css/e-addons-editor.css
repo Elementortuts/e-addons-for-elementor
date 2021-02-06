@@ -57,7 +57,8 @@
     cursor: pointer;
 }
 .control-title-first-transformations,
-.control-title-first-position{
+.control-title-first-position,
+.elementor-control-animation_options_transition_transform{
     font-weight: 700;
 }
 .elementor-control-type-slider-transformations,
@@ -65,6 +66,9 @@
 .elementor-control-type-slider-position,
 .elementor-control-field-position{
     margin-bottom: 3px;
+}
+.elementor-control-field-transformations{
+    margin-bottom: 12px;
 }
 .e-add-icon-heading {
     background-color:rgba(200,200,200,0.2);
