@@ -232,6 +232,7 @@ class Query {
     
     public static function get_anim_timingFunctions() {
         $tf_p = [
+            '' => __('Initial', 'e-addons'),
             'linear' => __('Linear', 'e-addons'),
             'ease' => __('Ease', 'e-addons'),
             'ease-in' => __('Ease In', 'e-addons'),
