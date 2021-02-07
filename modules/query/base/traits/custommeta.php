@@ -286,6 +286,29 @@ trait Custommeta {
                 ]
             ]
         );
+        $target->add_control(
+            'metafield_button_target', [
+                'label' => __('Target', 'e-addons'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_off' => __('Self', 'e-addons'),
+                'label_on' => __('Blank', 'e-addons'),
+                'condition' => [
+                    'metafield_type' => 'button',
+                    'item_type' => 'item_custommeta'
+                ]
+            ]
+        );
+        $target->add_control(
+            'metafield_button_nofollow', [
+                'label' => __('Nofollow', 'e-addons'),
+                'type' => Controls_Manager::SWITCHER,
+                'condition' => [
+                    'metafield_type' => 'button',
+                    'item_type' => 'item_custommeta'
+                ]
+            ]
+        );
+        
         //Text
         $target->add_control(
             'html_tag_item', [

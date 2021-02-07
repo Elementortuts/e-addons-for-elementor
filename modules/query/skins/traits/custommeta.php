@@ -107,9 +107,18 @@ trait Custommeta {
                 case 'button':
                     $metafield_button_label = $metaitem['metafield_button_label'];
                     $metafield_button_size = $metaitem['metafield_button_size'];
-
+                    $metafield_button_target = $metaitem['metafield_button_target'];
+                    $metafield_button_nofollow = $metaitem['metafield_button_nofollow'];
+                    
                     $this->parent->add_render_attribute($attribute_a_link, 'href', $meta_value);
                     $this->parent->add_render_attribute($attribute_a_link, 'role', 'button');
+
+                    if(!empty($metafield_button_target))
+                    $this->parent->add_render_attribute($attribute_a_link, 'target', '_blank');
+
+                    if(!empty($metafield_button_nofollow))
+                    $this->parent->add_render_attribute($attribute_a_link, 'rel', 'nofollow');
+
                     if (!empty($metafield_button_size)) {
                         $this->parent->add_render_attribute($attribute_a_link, 'class', 'elementor-size-' . $metafield_button_size);
                     }
