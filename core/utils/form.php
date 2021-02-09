@@ -48,6 +48,10 @@ class Form {
         } else {
             $e_form = $fields; // for form tokens
         }
+        // set them globally in _POST var
+        foreach ($fields as $key => $value) {
+            $_POST[$key] = $value;
+        }
 
         $post_id = !empty($_POST['queried_id']) ? absint($_POST['queried_id']) : absint($_POST['post_id']);
         if ($post_id) {
@@ -436,7 +440,7 @@ class Form {
 
         $all_valued_fields_shortcode = '[all-fields|!empty]';
         $text = self::get_shortcode_value($all_valued_fields_shortcode, $email_content, $record, $line_break, false);
-        $email_content = str_replace($all_fields_shortcode, $text, $email_content);
+        $email_content = str_replace($all_valued_fields_shortcode, $text, $email_content);
 
         if ($email_content) {
             global $e_form;
@@ -476,8 +480,8 @@ class Form {
             }
             foreach ($fields as $fkey => $field) {
                 $formatted = '';
-                if (is_string($field)) {
-                    $formatted = $fkey . ': ' . $field;
+                if (is_string($field) || empty($field['type'])) {
+                    $formatted = $fkey . ': ' . Utils::to_string($field);
                 } else {
                     if (!empty($field['title'])) {
                         $formatted = sprintf('%s: %s', $field['title'], $field['value']);

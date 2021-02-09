@@ -247,9 +247,11 @@ trait Base {
         $tmp = explode('\\', $widget_class);
         array_pop($tmp);
         array_pop($tmp);
-        $module_path = implode(DIRECTORY_SEPARATOR, $tmp);
+        $module_path = implode('/', $tmp);
         $module_path = Utils::camel_to_slug($module_path);
-        return WP_PLUGIN_URL . DIRECTORY_SEPARATOR . $module_path . DIRECTORY_SEPARATOR;
+		$url = WP_PLUGIN_URL . '/' . $module_path . '/';
+		$url = str_replace('/-', '/', $url);
+        return $url;
     }
 
     public function get_module_path() {

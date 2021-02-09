@@ -346,7 +346,7 @@ class Query extends Base_Widget {
         // ------------------------------------------------------------------ [SECTION LAYOUTS BLOCKS ]
         $this->start_controls_section(
             'section_layout_blocks', [
-                'label' => '<i class="eaddicon eicon-info-box" aria-hidden="true"></i> '.__('Layout of blocks', 'e-addons'),
+                'label' => '<i class="eaddicon eicon-info-box" aria-hidden="true"></i> '.__('Block Layout', 'e-addons'),
                 'condition' => [
                     '_skin!' => ['justifiedgrid', 'timeline', 'nextpost'],
                 ],
@@ -355,7 +355,7 @@ class Query extends Base_Widget {
          // ------------------------------------
          $this->add_control(
             'style_items', [
-              'label' => __('Style of items', 'e-addons'),
+              'label' => __('Items Style', 'e-addons'),
               'type' => 'ui_selector',
               'label_block' => true,
               'toggle' => false,
@@ -453,7 +453,7 @@ class Query extends Base_Widget {
               [
                   'type' => Controls_Manager::RAW_HTML,
                   'show_label' => false,
-                  'raw' => '<i class="eaddicon eicon-image-rollover" aria-hidden="true"></i> '.__('The Float style allows you to create animations between the content and the underlying image, from the Hover effect panel you can set the features.','e-addons'),
+                  'raw' => '<i class="eaddicon eicon-image-rollover" aria-hidden="true"></i> '.__('Float style allows you to create animations between the content and the underlying image, from "Hover effect" Panel you can set the features.','e-addons'),
                   'content_classes' => 'e-add-info-panel',
                   'condition' => [
                       '_skin' => ['', 'grid', 'carousel', 'filters', 'dualslider','smoothscroll','triggerscroll','3d'],
@@ -494,7 +494,7 @@ class Query extends Base_Widget {
               'mask_heading',
               [
                   'label' => __( 'Mask', 'e-addons' ),
-                  'description' => __( 'Parameters of shpape.', 'e-addons' ),
+                  'description' => __( 'Shape Parameters', 'e-addons' ),
                   'type' => Controls_Manager::HEADING,
                   'separator' => 'before',
                   'condition' => [
@@ -791,7 +791,7 @@ class Query extends Base_Widget {
           /* Responsive --------------- */
           $this->add_control(
               'force_layout_default', [
-                  'label' => '<i class="eaddicon eicon-device-mobile" aria-hidden="true"></i> '.__('Force layout default on mobile', 'e-addons'),
+                  'label' => '<i class="eaddicon eicon-device-mobile" aria-hidden="true"></i> '.__('Force default layout on mobile', 'e-addons'),
                   'type' => Controls_Manager::SWITCHER,
                   'separator' => 'before',
                   'prefix_class' => 'force-default-mobile-',
@@ -807,7 +807,7 @@ class Query extends Base_Widget {
               [
                   'label' => __('Template', 'e-addons'),
                   'type' => 'e-query',
-                  'placeholder' => __('Template Name', 'e-addons'),
+                  'placeholder' => __('Select Template', 'e-addons'),
                   'label_block' => true,
                   'query_type' => 'posts',
                   'render_type' => 'template',
@@ -856,7 +856,7 @@ class Query extends Base_Widget {
           $this->add_control(
               'templatemode_linkable', [
                   'label' => __('Linkable', 'e-addons'),
-                  'description' => __('Use the extended link on the template block.', 'e-addons'),
+                  'description' => __('Extended link on the full block.', 'e-addons'),
                   'type' => Controls_Manager::SWITCHER,
                   'separator' => 'before',
                   'render_type' => 'template',

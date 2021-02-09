@@ -123,7 +123,7 @@ class Dualslider extends Carousel {
         );
         $this->add_responsive_control(
                 'dualslider_height_container', [
-            'label' => __('Height of viewport', 'e-addons'),
+            'label' => __('Viewport Height', 'e-addons'),
             'type' => Controls_Manager::SLIDER,
             'size_units' => ['px', 'vh'],
             'range' => [
@@ -144,7 +144,7 @@ class Dualslider extends Carousel {
         // slides per row
         $this->add_responsive_control(
                 'thumbnails_slidesPerView', [
-            'label' => __('Slides Per View', 'e-addons'),
+            'label' => __('Slides per View', 'e-addons'),
             'description' => __('Number of slides per view (slides visible at the same time on sliders container). If you use it with "auto" value and along with loop: true then you need to specify loopedSlides parameter with amount of slides to loop (duplicate). SlidesPerView: "auto"\'" is currently not compatible with multirow mode, when slidesPerColumn greater than 1', 'e-addons'),
             'type' => Controls_Manager::NUMBER,
             'default' => '4',
@@ -478,7 +478,7 @@ class Dualslider extends Carousel {
         // height
         $this->add_responsive_control(
                 'dualslider_image_height', [
-            'label' => __('height', 'e-addons'),
+            'label' => __('Height', 'e-addons'),
             'type' => Controls_Manager::SLIDER,
             'default' => [
                 'size' => '',

@@ -222,5 +222,31 @@ trait Elementor {
     public static function get_placeholder_image_src() {
         return \Elementor\Utils::get_placeholder_image_src();
     }
+    
+    public static function get_current_template($post_id = false) {
+        if (!$post_id) {
+            $post_id = get_the_ID();
+        }
+        if (\Elementor\Plugin::instance()->db->is_built_with_elementor($post_id)) {
+            return $post_id;
+        } else {
+            if (\EAddonsForElementor\Core\Utils::is_plugin_active('elementor-pro')) {                
+                $locations = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_locations_manager()->get_locations();
+                if (!empty($locations['single'])) {
+                    $documents_for_location = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location('single');
+                    if (!empty($documents_for_location)) {
+                        foreach ($documents_for_location as $document_id => $document) {
+                            return $document_id;
+                        }
+                    }
+                }                
+                $document = \Elementor\Plugin::instance()->documents->get($post_id);
+                if ($document) {
+                    return $document->get_main_id();
+                }
+            }
+        }
+        return false;
+    }
 
 }

@@ -292,6 +292,25 @@ class Template {
         $element_id = $element->get_id();
         $element_controls = $element->get_controls();
         $q_o = self::get_queried_object();
+        
+        if (!empty($settings['__globals__'])) {
+            // TODO
+            // "reveal_bgcolor" => "globals/colors?id=33547690"
+            /*
+            $kit = \Elementor\Plugin::instance()->kits_manager->get_active_kit_for_frontend();
+            $kit_settings = $kit->get_settings_for_display();
+            foreach ($settings['__globals__'] as $skey => $sglob) {
+                $id = end(explode('id=', $sglob));                
+                foreach ( $kit_settings as $setting) {
+                    foreach ( $setting as $index => $item ) {
+                        if ($id == $item['_id']) {
+                            $settings[$skey] = $item['color'];
+                        }
+                    }
+                }
+            }
+            */
+        }
         if (!empty($settings['__dynamic__'])) {
             $style = '';
             foreach (array_keys($settings['__dynamic__']) as $dynamic) {

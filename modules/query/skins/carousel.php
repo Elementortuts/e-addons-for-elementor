@@ -66,8 +66,8 @@ class Carousel extends Base {
         );
         $this->add_control(
                 'effects', [
-            'label' => __('Effect of transition', 'e-addons'),
-            'description' => __('Tranisition effect from the slides.', 'e-addons'),
+            'label' => __('Transition Effect', 'e-addons'),
+            'description' => __('Transition effect from the slides.', 'e-addons'),
             'type' => Controls_Manager::SELECT,
             'options' => [
                 'slide' => __('Slide', 'e-addons'),
@@ -219,8 +219,8 @@ class Carousel extends Base {
 
         $this->add_responsive_control(
                 'slidesPerView', [
-            'label' => __('Slides Per View', 'e-addons'),
-            'description' => __('Number of slides per view (slides visible at the same time on sliders container). If you use it with "auto" value and along with loop: true then you need to specify loopedSlides parameter with amount of slides to loop (duplicate). SlidesPerView: "auto"\'" is currently not compatible with multirow mode, when slidesPerColumn greater than 1', 'e-addons'),
+            'label' => __('Slides per View', 'e-addons'),
+            'description' => __('Number of slides per view (slides visible at the same time on sliders container). If you use it with "auto" value and along with loop "true" then you need to specify loopedSlides parameter with amount of slides to loop (duplicate). SlidesPerView: "auto"\'" is currently not compatible with multirow mode, when slidesPerColumn greater than 1', 'e-addons'),
             'type' => Controls_Manager::NUMBER,
             'default' => '1',
             //'tablet_default' => '',
@@ -237,7 +237,7 @@ class Carousel extends Base {
         );
         $this->add_responsive_control(
                 'slidesPerGroup', [
-            'label' => __('Slides Per Group', 'e-addons'),
+            'label' => __('Slides per Group', 'e-addons'),
             'description' => __('Set numbers of slides to define and enable group sliding. Useful to use with slidesPerView > 1', 'e-addons'),
             'type' => Controls_Manager::NUMBER,
             'default' => 1,
@@ -294,7 +294,7 @@ class Carousel extends Base {
         $this->add_control(
                 'useNavigation', [
             'label' => __('Use Navigation', 'e-addons'),
-            'description' => __('Set "yes", you will use the navigation arrows.', 'e-addons'),
+            'description' => __('Enable to use the navigation arrows.', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
             'default' => 'yes',
             'frontend_available' => true,
@@ -625,8 +625,8 @@ class Carousel extends Base {
 
         $this->add_control(
                 'useNavigation_animationHover', [
-            'label' => __('Use animation in rollover', 'e-addons'),
-            'description' => __('If "yes", a short animation will take place at the rollover.', 'e-addons'),
+            'label' => __('Use rollover animation', 'e-addons'),
+            'description' => __('Enable for a short animation on rollover.', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
             'default' => 'yes',
             'prefix_class' => 'hoveranim-',
@@ -649,7 +649,7 @@ class Carousel extends Base {
         $this->add_control(
                 'usePagination', [
             'label' => __('Use Pagination', 'e-addons'),
-            'description' => __('If "yes", use the slide progression display system ("bullets", "fraction", "progress").', 'e-addons'),
+            'description' => __('Enable to use the slide progression display system ("bullets", "fraction", "progress").', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
             'default' => 'yes',
             'frontend_available' => true,
@@ -714,7 +714,7 @@ class Carousel extends Base {
         );
         $this->add_control(
                 'fraction_current_color', [
-            'label' => __('current Number Color', 'e-addons'),
+            'label' => __('Current Number Color', 'e-addons'),
             'type' => Controls_Manager::COLOR,
             'default' => '',
             'selectors' => [
@@ -756,7 +756,6 @@ class Carousel extends Base {
                 Group_Control_Typography::get_type(), [
             'name' => 'fraction_typography_current',
             'label' => __('Current Number Typography', 'e-addons'),
-            'default' => '',
             'selector' => '{{WRAPPER}} .swiper-pagination-fraction .swiper-pagination-current',
             'condition' => [
                 $this->get_control_id('usePagination') => 'yes',
@@ -769,7 +768,6 @@ class Carousel extends Base {
                 Group_Control_Typography::get_type(), [
             'name' => __('fraction_typography_separator', 'e-addons'),
             'label' => 'Separator Typography',
-            'default' => '',
             'selector' => '{{WRAPPER}} .swiper-pagination-fraction .separator',
             'condition' => [
                 $this->get_control_id('usePagination') => 'yes',
@@ -823,7 +821,7 @@ class Carousel extends Base {
         $this->add_control(
                 'dynamicBullets', [
             'label' => __('dynamicBullets', 'e-addons'),
-            'description' => __('Good to enable if you use bullets pagination with a lot of slides. So it will keep only few bullets visible at the same time.', 'e-addons'),
+            'description' => __('Useful when you use bullets pagination with a lot of slides. So it will keep only few bullets visible at the same time.', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
             'default' => 'yes',
             'frontend_available' => true,
@@ -866,10 +864,6 @@ class Carousel extends Base {
                 'bullets_numbers', [
             'label' => __('Show numbers', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
-            'default' => '',
-            'label_on' => __('Yes', 'e-addons'),
-            'label_off' => __('No', 'e-addons'),
-            'return_value' => 'yes',
             'frontend_available' => true,
             'condition' => [
                 $this->get_control_id('usePagination') => 'yes',
@@ -884,7 +878,6 @@ class Carousel extends Base {
                 'bullets_number_color', [
             'label' => __('Numbers Color', 'e-addons'),
             'type' => Controls_Manager::COLOR,
-            'default' => '',
             'selectors' => [
                 '{{WRAPPER}} .swiper-pagination-bullets .swiper-pagination-bullet .swiper-pagination-bullet-title' => 'color: {{VALUE}}',
             ],
@@ -1309,10 +1302,6 @@ class Carousel extends Base {
             'label' => __('Use Scrollbar', 'e-addons'),
             'description' => __('If "yes", you will use a scrollbar that displays navigation', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
-            'default' => '',
-            'label_on' => __('Yes', 'e-addons'),
-            'label_off' => __('No', 'e-addons'),
-            'return_value' => 'yes',
                 ]
         );
         $this->add_control(
@@ -1352,7 +1341,6 @@ class Carousel extends Base {
                 'scrollbar_color', [
             'label' => __('Bar Color', 'e-addons'),
             'type' => Controls_Manager::COLOR,
-            'default' => '',
             'selectors' => [
                 '{{WRAPPER}} .swiper-scrollbar .swiper-scrollbar-drag' => 'background: {{VALUE}};',
             ],
@@ -1657,7 +1645,7 @@ class Carousel extends Base {
         $this->add_control(
                 'centeredSlides', [
             'label' => __('Centered Slides', 'e-addons'),
-            'description' => __('If true, then active slide will be centered, not always on the left side.', 'e-addons'),
+            'description' => __('When enabled active slide will be centered, not on the left as default.', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
             'frontend_available' => true,
             'separator' => 'before',
@@ -1692,7 +1680,7 @@ class Carousel extends Base {
         $this->add_control(
                 'grabCursor', [
             'label' => __('Grab Cursor', 'e-addons'),
-            'description' => __('This option may a little improve desktop usability. If true, user will see the "grab" cursor when hover on Swiper.', 'e-addons'),
+            'description' => __('This option may a little improve desktop usability. If enabled user will see the "grab" cursor when hover on Swiper.', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
             'frontend_available' => true,
             'separator' => 'before'
@@ -1702,7 +1690,7 @@ class Carousel extends Base {
         $this->add_control(
                 'keyboardControl', [
             'label' => __('Keyboard Control', 'e-addons'),
-            'description' => __('Set to true to enable keyboard control', 'e-addons'),
+            'description' => __('Enable keyboard control', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
             'frontend_available' => true,
                 ]

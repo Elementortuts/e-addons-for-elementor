@@ -65,6 +65,7 @@ final class Assets {
                 foreach ($css as $acss) {
                     list($path, $url) = explode($wp_plugin_dir . DIRECTORY_SEPARATOR, $acss, 2);
                     //var_dump(DIRECTORY_SEPARATOR.PLUGINDIR.DIRECTORY_SEPARATOR.$url); die();
+					$url = str_replace('/-', '/', $url);
                     // Register styles
                     wp_register_style(
                             pathinfo($acss, PATHINFO_FILENAME), plugins_url($url)
@@ -80,6 +81,7 @@ final class Assets {
                 $wp_plugin_dir = str_replace('/', DIRECTORY_SEPARATOR, WP_PLUGIN_DIR);
                 foreach ($js as $ajs) {
                     list($path, $url) = explode($wp_plugin_dir . DIRECTORY_SEPARATOR, $ajs, 2);
+					$url = str_replace('/-', '/', $url);
                     $handle = pathinfo($ajs, PATHINFO_FILENAME);
                     if (!wp_script_is($handle, 'registered')) {
                         // Register scripts

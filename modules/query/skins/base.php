@@ -75,7 +75,7 @@ class Base extends Base_Skin {
         $this->start_controls_section(
                 'section_blocks_style',
                 [
-                    'label' => __('Blocks Style', 'e-addons'),
+                    'label' => __('Block Style', 'e-addons'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'style_items!' => 'template',
@@ -114,7 +114,7 @@ class Base extends Base_Skin {
                 [
                     'type' => Controls_Manager::RAW_HTML,
                     'show_label' => false,
-                    'raw' => '<i class="fas fa-arrows-alt" aria-hidden="true"></i> ' . __('Flex Alignnment', 'e-addons'),
+                    'raw' => '<i class="fas fa-arrows-alt" aria-hidden="true"></i> ' . __('Flex Alignment', 'e-addons'),
                     'separator' => 'before',
                     'content_classes' => 'e-add-inner-heading',
                 /* 'condition' => [
@@ -124,7 +124,7 @@ class Base extends Base_Skin {
         );
         $this->add_responsive_control(
                 'blocks_align_flex', [
-            'label' => __('Flex Align-items', 'e-addons'),
+            'label' => __('Flex Items Align', 'e-addons'),
             'type' => Controls_Manager::SELECT,
             'default' => '',
             'options' => [
@@ -146,7 +146,7 @@ class Base extends Base_Skin {
         );
         $this->add_responsive_control(
                 'blocks_align_justify', [
-            'label' => __('Flex justify-content', 'e-addons'),
+            'label' => __('Flex Justify Content', 'e-addons'),
             'type' => Controls_Manager::SELECT,
             'default' => '',
             'options' => [
@@ -282,14 +282,12 @@ class Base extends Base_Skin {
     }
 
     public function render() {
-        $this->parent->render();
 
-        /** @p enquequo gli script e gli style... */
-        $this->enqueue();
-        
         if (!$this->parent) {
             return;
         }
+
+        $this->parent->render();
 
         /** @p elaboro la query... */
         $this->parent->query_the_elements();
@@ -299,6 +297,9 @@ class Base extends Base_Skin {
         $querytype = $this->parent->get_querytype();
 
         if ($this->has_results($query, $querytype)) {
+
+            /** @p enquequo gli script e gli style... */
+            $this->enqueue();
 
             $this->render_loop_start();
 

@@ -293,17 +293,21 @@ abstract class Module_Base extends Module {
     public function register_script($hanlde, $path, $deps = [], $version = '', $footer = true) {
         $assets_name = $this->get_reflection()->getNamespaceName();
         $tmp = explode('\\', $assets_name);
-        $module = implode(DIRECTORY_SEPARATOR, $tmp);
+        $module = implode('/', $tmp);
         $module = Utils::camel_to_slug($module);
-        wp_register_script($hanlde, WP_PLUGIN_URL . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . $path, $deps, $version, $footer);
+		$url = WP_PLUGIN_URL . '/' . $module . '/' . $path;
+		$url = str_replace('/-', '/', $url);
+        wp_register_script($hanlde, $url, $deps, $version, $footer);
     }
-
+	
     public function register_style($hanlde, $path, $deps = [], $version = '', $media = 'all') {
         $assets_name = $this->get_reflection()->getNamespaceName();
         $tmp = explode('\\', $assets_name);
-        $module = implode(DIRECTORY_SEPARATOR, $tmp);
+        $module = implode('/', $tmp);
         $module = Utils::camel_to_slug($module);
-        wp_register_style($hanlde, WP_PLUGIN_URL . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . $path, $deps, $version, $media);
+		$url = WP_PLUGIN_URL . '/' . $module . '/' . $path;
+		$url = str_replace('/-', '/', $url);
+        wp_register_style($hanlde, $url, $deps, $version, $media);
     }
 
 }
