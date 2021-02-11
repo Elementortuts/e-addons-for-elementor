@@ -23,13 +23,27 @@ trait Hover {
         //
         $this->start_controls_section(
                 'section_hover_effect', [
-            'label' => '<i class="eaddicon eicon-image-rollover" aria-hidden="true"></i> ' . __('Hover effect', 'e-addons'),
-            'tab' => Controls_Manager::TAB_CONTENT,
-            'condition' => [
-                '_skin' => ['grid', 'filters', 'carousel', 'dualslider'],
-                'style_items!' => 'template',
-            ],
-                ]
+                    'label' => '<i class="eaddicon eicon-image-rollover" aria-hidden="true"></i> ' . __('Hover effect', 'e-addons'),
+                    'tab' => Controls_Manager::TAB_CONTENT,
+                    /*'condition' => [
+                        '_skin' => ['grid', 'filters', 'carousel', 'dualslider'],
+                        'style_items!' => 'template',
+                    ],*/
+                    'conditions' => [
+                        'terms' => [
+                            [
+                                'name' => 'style_items',
+                                'operator' => '!=',
+                                'value' => 'template',
+                            ],
+                            [
+                                'name' => '_skin',
+                                'operator' => 'in',
+                                'value' => ['grid', 'filters', 'carousel', 'dualslider'],
+                            ]
+                        ]
+                    ]
+            ]
         );
         $this->start_controls_tabs('items_this_tab');
 

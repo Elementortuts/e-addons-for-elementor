@@ -27,27 +27,125 @@ trait Custommeta {
                 [
                     'type' => Controls_Manager::RAW_HTML,
                     'show_label' => false,
-                    'raw' => '<i class="fas fa-exclamation-circle"></i> ' . __('Select the ' . $type_q . ' custom meta field', 'e-addons'),
+                    'raw' => '<i class="fas fa-exclamation-circle"></i> ' . __('Select the custom meta field', 'e-addons'),
                     'content_classes' => 'e-add-info-panel',
                     'condition' => [
                         'query_type' => 'custommeta_source',
                     ],
                 ]
         );
-        // @p custommeta_source from meta field ..non più tramite acf
         $target->add_control(
-                'custommeta_source_key', [
-            'label' => __('Custom Field', 'e-addons'),
-            'type' => 'e-query',
-            'placeholder' => __('Search Post Custom Field', 'e-addons'),
-            'label_block' => true,
-            'query_type' => 'metas',
-            'object_type' => $type_q, //'post', //'term',//'user',//'post', //$type_q,,
-            'default' => '',
-            'condition' => [
-                'query_type' => 'custommeta_source',
-            ],
-                ]
+            'custommeta_source_querytype', [
+                'label' => __('Custom Field key type from:', 'e-addons'),
+                'type' => Controls_Manager::SELECT,
+                'default' => $type_q,
+                'options' => [
+                    'post' => __('Post', 'e-addons'), //
+                    'term' => __('Term', 'e-addons'),
+                    'user' => __('User', 'e-addons'), //
+                    'attachment' => __('Media attachment', 'e-addons'), //
+                    //'comment' => __(Comment,'e-addons'),
+                ],
+                'condition' => [
+                    'query_type' => 'custommeta_source',
+                ],
+            ]
+        );
+        // @p custommeta_source from meta field ..non più tramite acf
+        /*$target->add_control(
+            'custommeta_source_key', [
+                'label' => __('Custom Field', 'e-addons'),
+                'type' => 'e-query',
+                'placeholder' => __('Search Post Custom Field', 'e-addons'),
+                'label_block' => true,
+                'query_type' => 'metas',
+                'object_type' => $type_q, //'post', //'term',//'user',//'post', //$type_q,,
+                'default' => '',
+                'condition' => [
+                    'query_type' => 'custommeta_source',
+                    'custommeta_source_querytype' => ''
+                ],
+            ]
+        );*/
+        // ---------------- post
+        $target->add_control(
+            'custommeta_source_key_post', [
+                'label' => __('Post Custom Field', 'e-addons'),
+                'type' => 'e-query',
+                'placeholder' => __('Search Post Custom Field', 'e-addons'),
+                'label_block' => true,
+                'query_type' => 'metas',
+                'object_type' => 'post',
+                'default' => '',
+                'condition' => [
+                    'query_type' => 'custommeta_source',
+                    'custommeta_source_querytype' => 'post'
+                ],
+            ]
+        );
+        // ---------------- term
+        $target->add_control(
+            'custommeta_source_key_term', [
+                'label' => __('Term Custom Field', 'e-addons'),
+                'type' => 'e-query',
+                'placeholder' => __('Search Term Custom Field', 'e-addons'),
+                'label_block' => true,
+                'query_type' => 'metas',
+                'object_type' => 'term',
+                'default' => '',
+                'condition' => [
+                    'query_type' => 'custommeta_source',
+                    'custommeta_source_querytype' => 'term'
+                ],
+            ]
+        );
+        // ---------------- user
+        $target->add_control(
+            'custommeta_source_key_user', [
+                'label' => __('User Custom Field', 'e-addons'),
+                'type' => 'e-query',
+                'placeholder' => __('Search User Custom Field', 'e-addons'),
+                'label_block' => true,
+                'query_type' => 'metas',
+                'object_type' => 'user',
+                'default' => '',
+                'condition' => [
+                    'query_type' => 'custommeta_source',
+                    'custommeta_source_querytype' => 'user'
+                ],
+            ]
+        );
+        // ---------------- post
+        $target->add_control(
+            'custommeta_source_key_media', [
+                'label' => __('Media Custom Field', 'e-addons'),
+                'type' => 'e-query',
+                'placeholder' => __('Search Post Custom Field', 'e-addons'),
+                'label_block' => true,
+                'query_type' => 'metas',
+                'object_type' => 'post',
+                'default' => '',
+                'condition' => [
+                    'query_type' => 'custommeta_source',
+                    'custommeta_source_querytype' => 'attachment'
+                ],
+            ]
+        );
+        // ---------------- attachment
+        $target->add_control(
+            'custommeta_source_key', [
+                'label' => __('Custom Field', 'e-addons'),
+                'type' => 'e-query',
+                'placeholder' => __('Search Mediia Attachment Custom Field', 'e-addons'),
+                'label_block' => true,
+                'query_type' => 'metas',
+                'object_type' => 'attachment',
+                'default' => '',
+                'condition' => [
+                    'query_type' => 'custommeta_source',
+                    'custommeta_source_querytype' => 'attachment'
+                ],
+            ]
         );
         /*
           $target->add_control(
