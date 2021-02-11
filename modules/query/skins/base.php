@@ -523,7 +523,7 @@ class Base extends Base_Skin {
     }
 
     // FIELDS
-    protected function render_items_content($useimg) {
+    protected function render_items_content($useimg = true) {
         $_items = $this->parent->get_settings_for_display('list_items');
         $querytype = $this->parent->get_querytype();
         //

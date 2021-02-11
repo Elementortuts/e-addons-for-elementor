@@ -95,6 +95,18 @@ class Query extends Module_Base {
         $this->register_style('animatecss', 'assets/lib/animate/animate.min.css');
         $this->register_style('custom-swiper', 'assets/lib/swiper/css/swiper.min.css');
         // font-awesome     
+        
+        // dataTables
+        $this->register_style('datatables-jquery', 'assets/lib/datatables/DataTables-1.10.23/css/jquery.dataTables.min.css');
+        $this->register_style('datatables-buttons', 'assets/lib/datatables/Buttons-1.6.5/css/buttons.dataTables.min.css');
+        $this->register_style('datatables-fixedHeader', 'assets/lib/datatables/FixedHeader-3.1.8/css/fixedHeader.dataTables.min.css');
+        $this->register_style('datatables-responsive', 'assets/lib/datatables/Responsive-2.2.7/css/responsive.dataTables.min.css');
+        $this->register_script('datatables-jquery', 'assets/lib/datatables/DataTables-1.10.23/js/jquery.dataTables.min.js');
+        $this->register_script('datatables-jszip', 'assets/lib/datatables/JSZip-2.5.0/jszip.min.js');        
+        $this->register_script('datatables-buttons', 'assets/lib/datatables/Buttons-1.6.5/js/dataTables.buttons.min.js');
+        $this->register_script('datatables-html5', 'assets/lib/datatables/Buttons-1.6.5/js/buttons.html5.min.js');
+        $this->register_script('datatables-fixedHeader', 'assets/lib/datatables/FixedHeader-3.1.8/js/dataTables.fixedHeader.min.js');
+        $this->register_script('datatables-responsive', 'assets/lib/datatables/Responsive-2.2.7/js/dataTables.responsive.min.js');
     }
 
     /**

@@ -13,7 +13,7 @@ trait Label {
 
         $use_label = !empty($settings['use_label_before']) ? $settings['use_label_before'] : '';
         if ($use_label) {
-            $label_text = !empty($settings['text_label_before']) ? $settings['text_label_before'] : '';
+            $label_text = !empty($settings['item_label']) ? $settings['item_label'] : '';
 
             $start_label = '<span class="e-add-label-before">';
             $end_label = '</span>';

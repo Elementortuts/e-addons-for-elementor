@@ -229,7 +229,7 @@ trait Items_Advanced {
             ]
                 ]
         );
-        $target->add_control(
+        /*$target->add_control(
                 'text_label_before', [
             'label' => __('Before Text', 'elementor'),
             'type' => Controls_Manager::TEXT,
@@ -239,7 +239,7 @@ trait Items_Advanced {
                 'use_label_before' => 'yes'
             ]
                 ]
-        );
+        );*/
     }
 
 }
