@@ -115,28 +115,12 @@ trait Custommeta {
                 ],
             ]
         );
-        // ---------------- post
+        // ---------------- attachment
         $target->add_control(
             'custommeta_source_key_media', [
                 'label' => __('Media Custom Field', 'e-addons'),
                 'type' => 'e-query',
-                'placeholder' => __('Search Post Custom Field', 'e-addons'),
-                'label_block' => true,
-                'query_type' => 'metas',
-                'object_type' => 'post',
-                'default' => '',
-                'condition' => [
-                    'query_type' => 'custommeta_source',
-                    'custommeta_source_querytype' => 'attachment'
-                ],
-            ]
-        );
-        // ---------------- attachment
-        $target->add_control(
-            'custommeta_source_key', [
-                'label' => __('Custom Field', 'e-addons'),
-                'type' => 'e-query',
-                'placeholder' => __('Search Mediia Attachment Custom Field', 'e-addons'),
+                'placeholder' => __('Search Media Custom Field', 'e-addons'),
                 'label_block' => true,
                 'query_type' => 'metas',
                 'object_type' => 'attachment',
@@ -147,6 +131,22 @@ trait Custommeta {
                 ],
             ]
         );
+        // ---------------- attachment
+        /*$target->add_control(
+            'custommeta_source_key', [
+                'label' => __('Custom Field', 'e-addons'),
+                'type' => 'e-query',
+                'placeholder' => __('Search Media Attachment Custom Field', 'e-addons'),
+                'label_block' => true,
+                'query_type' => 'metas',
+                'object_type' => 'attachment',
+                'default' => '',
+                'condition' => [
+                    'query_type' => 'custommeta_source',
+                    'custommeta_source_querytype' => 'attachment'
+                ],
+            ]
+        );*/
         /*
           $target->add_control(
           'custommeta_source_key', [

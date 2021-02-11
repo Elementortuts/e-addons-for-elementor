@@ -186,6 +186,7 @@ trait Wordpress {
     }
 
     public static function get_metas($obj = 'post', $like = '', $info = true) {
+        global $wpdb;
         $metas = array();
 
         $table_join = '';
@@ -216,8 +217,7 @@ trait Wordpress {
             }
         }
 
-        // FROM DB
-        global $wpdb;
+        // FROM DB        
         $table = $wpdb->prefix . $obj . 'meta';
         if ($obj == 'user') {
             if (defined('CUSTOM_USER_META_TABLE')) {
@@ -229,7 +229,7 @@ trait Wordpress {
             $query .= " WHERE meta_key LIKE '%" . $like . "%'";
         }
         $query .= $table_join;
-
+        //var_dump($query); die();
         $results = $wpdb->get_results($query);
         if (!empty($results)) {
             $db_metas = array();
