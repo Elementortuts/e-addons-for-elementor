@@ -41,7 +41,7 @@ class Table extends Base {
     }
 
     public function get_icon() {
-        return 'eadd-queryviews-table';
+        return 'eadd-skin-table';
     }
 
     public function register_additional_controls() {

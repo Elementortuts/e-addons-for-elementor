@@ -180,6 +180,32 @@ class Query extends Base_Widget {
                 ],
             ]
         );
+        // skin: Table
+        $this->add_control(
+            'skin_dis_table',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'show_label' => false,
+                'raw' => '<i class="eaddicon-skin eadd-skin-table"></i>',
+                'content_classes' => 'e-add-skin-dis',
+                'condition' => [
+                    '_skin' => 'table'
+                ],
+            ]
+        );
+        // skin: simple list
+        $this->add_control(
+            'skin_dis_simplelist',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'show_label' => false,
+                'raw' => '<i class="eaddicon-skin eadd-skin-simple-list"></i>',
+                'content_classes' => 'e-add-skin-dis',
+                'condition' => [
+                    '_skin' => 'simplelist'
+                ],
+            ]
+        );
         // skin: Dualslider
         $this->add_control(
             'skin_dis_dualslider',
