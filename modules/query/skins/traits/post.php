@@ -75,7 +75,7 @@ trait Post {
         }
     }
 
-    protected function render_item_content($settings) {
+    protected function render_item_content($settings, $excerpt = false) {
         // Settings ------------------------------
         $textcontent_limit = $settings['textcontent_limit'];
         //
@@ -97,9 +97,9 @@ trait Post {
                 }
                 break;
             case 'post':
-                $content_type = $settings['content_type'];
+                //$content_type = $settings['content_type'];
                 //
-                if ($content_type == 1) {
+                if (!$excerpt) {
                     if ($textcontent_limit) {
                         echo $this->limit_content($textcontent_limit);
                     } else {
@@ -107,7 +107,7 @@ trait Post {
                     }
                 }
                 // Excerpt
-                if ($content_type == 0) {
+                if ($excerpt) {
                     $post = get_post();
                     echo $post->post_excerpt; //$this->limit_excerpt( $settings['textcontent_limit'] ); //
         

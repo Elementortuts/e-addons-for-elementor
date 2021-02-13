@@ -426,7 +426,7 @@ trait Items_Content {
     public function controls_items_contentdescription_content($target, $type) {
 
         if ($type == 'post') {
-            $target->add_control(
+            /*$target->add_control(
                     'content_type', [
                 'label' => __('Content type', 'e-addons'),
                 'type' => Controls_Manager::CHOOSE,
@@ -452,7 +452,7 @@ trait Items_Content {
                     ]
                 ]
                     ]
-            );
+            );*/
             $target->add_control(
                     'textcontent_limit', [
                 'label' => __('Number of characters', 'e-addons'),
@@ -466,10 +466,10 @@ trait Items_Content {
                             'operator' => 'in',
                             'value' => ['item_content'],
                         ],
-                        [
+                        /*[
                             'name' => 'content_type',
                             'value' => '1',
-                        ]
+                        ]*/
                     ]
                 ]
                     ]

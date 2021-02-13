@@ -558,6 +558,8 @@ class Base extends Base_Skin {
                         break;
                     case 'item_termstaxonomy': $this->render_item_termstaxonomy($item);
                         break;
+                    case 'item_excerpt': $this->render_item_content($item, true);
+                        break;
                     case 'item_content': $this->render_item_content($item);
                         break;
                     case 'item_posttype': $this->render_item_posttype($item);

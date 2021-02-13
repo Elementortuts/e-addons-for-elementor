@@ -35,6 +35,7 @@ trait Items_Advanced {
                             'item_readmore',
                             'item_termstaxonomy',
                             'item_content',
+                            'item_excerpt',
                             'item_description',
                             'item_taxonomy',
                             'item_custommeta',
