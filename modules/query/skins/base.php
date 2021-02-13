@@ -79,6 +79,7 @@ class Base extends Base_Skin {
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'style_items!' => 'template',
+                        '_skin!' => 'table',
                     ]
                 ]
         );
@@ -263,7 +264,7 @@ class Base extends Base_Skin {
                 }
                 break;
             case 'term':
-                if (empty($query) || is_wp_error($query)) {
+                if (empty($query) || empty($query->get_terms()) || is_wp_error($query->get_terms())) {                    
                     return false;
                 }
                 break;
@@ -297,7 +298,7 @@ class Base extends Base_Skin {
         $querytype = $this->parent->get_querytype();
 
         if ($this->has_results($query, $querytype)) {
-
+            
             /** @p enquequo gli script e gli style... */
             $this->enqueue();
 
@@ -340,11 +341,15 @@ class Base extends Base_Skin {
                     break;
                 case 'term':
                     foreach ($query->get_terms() as $term) {
-                        $this->current_permalink = get_term_link($term->term_id);
-                        $this->current_id = $term->term_id;
-                        $this->current_data = $term;
-                        //
-                        $this->render_element_item();
+                        if ($term && !is_wp_error($term)) {
+                            $link = get_term_link($term->term_id, $term->taxonomy);
+                            //var_dump($term->taxonomy);
+                            $this->current_permalink = $link;
+                            $this->current_id = $term->term_id;
+                            $this->current_data = $term;
+                            //
+                            $this->render_element_item();
+                        }
                     }
 
                     break;

@@ -391,7 +391,9 @@ trait Custommeta {
 
             switch ($link_to) {
                 case 'post':
-                    $href_link = $this->current_permalink;
+                    if (!is_wp_error($this->current_permalink)) {
+                        $href_link = $this->current_permalink;
+                    }
                     break;
                 case 'custom':
                     $href_link = $metaitem['link']['url'];
