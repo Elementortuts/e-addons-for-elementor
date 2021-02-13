@@ -431,7 +431,7 @@ class Timeline extends Base {
         $querytype = $this->parent->get_querytype();
 
         switch ($querytype) {
-            case 'media':
+            case 'attachment':
             case 'post':
 
                 // image

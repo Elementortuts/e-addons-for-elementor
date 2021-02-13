@@ -86,7 +86,7 @@ trait Post {
         echo '<div class="e-add-post-content">';
         // Content
         switch ($querytype) {
-            case 'media':
+            case 'attachment':
                 $content = $this->current_data->post_content;
                 if($content){
                     if ($textcontent_limit) {

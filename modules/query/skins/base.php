@@ -251,7 +251,7 @@ class Base extends Base_Skin {
 
     public function has_results($query, $querytype) {
         switch ($querytype) {
-            case 'media':
+            case 'attachment':
             case 'post':
                 if (!$query->found_posts) {
                     return false;
@@ -304,7 +304,7 @@ class Base extends Base_Skin {
             $this->render_loop_start();
 
             switch ($querytype) {
-                case 'media':
+                case 'attachment':
                 case 'post':
                     /** @p qui identifico se mi trovo in un loop, altrimenti uso la wp_query */
                     if ($query->in_the_loop) {
@@ -488,7 +488,7 @@ class Base extends Base_Skin {
 
         //QUERY_MEDIA //////////////////
         //@p l'immagine viene renderizzata sempre per il query_media widget
-        if ($querytype == 'media') {
+        if ($querytype == 'attachment') {
             $this->render_repeateritem_start('e-add-media-image', 'item_image');
             //----------------------------------
             $this->render_item_image($this->parent->get_settings_for_display());
@@ -529,7 +529,7 @@ class Base extends Base_Skin {
         //
         // QUERY_MEDIA //////////////////
         //@p l'immagine viene renderizzata sempre per il query_media widget
-        if ($querytype == 'media' && $useimg) {
+        if ($querytype == 'attachment' && $useimg) {
             $this->render_repeateritem_start('e-add-media-image', 'item_image');
             //----------------------------------
             $this->render_item_image($this->parent->get_settings_for_display());

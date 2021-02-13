@@ -30,7 +30,7 @@ trait Common {
         } else {
 
             switch($querytype){
-                case 'media':
+                case 'attachment':
                     //se mi trovo in media basta l'id dell'attachment
                     $image_id = get_the_ID();
                 break;
@@ -84,7 +84,7 @@ trait Common {
         if ($image_id) {
             // @p questa è l'mmagine via HTML
             switch($querytype){
-                case 'media':
+                case 'attachment':
                     $use_link = !empty($settings['gallery_link']) && $settings['gallery_link'] != 'none' ? $settings['gallery_link'] : '';                    
                     $page_permalink = false;
                     //@p se il lightbox è attivo $page_permalink va in false
@@ -118,7 +118,7 @@ trait Common {
         $html_tag = 'div';
         
         $attribute_link = '';
-        if ($use_link && $querytype != 'media' ) {
+        if ($use_link && $querytype != 'attachment' ) {
             $html_tag = 'a';
             $attribute_link = ' href="' . $this->current_permalink . '"';
         }
@@ -149,7 +149,7 @@ trait Common {
             $querytype = $this->parent->get_querytype();
 
             switch($querytype){
-                case 'media':
+                case 'attachment':
                 case 'post':
                     //se mi trovo in post
                     get_the_title() ? the_title() : the_ID();
@@ -188,7 +188,7 @@ trait Common {
         }
         $date = '';
         switch($querytype){
-            case 'media':
+            case 'attachment':
                 $date = get_the_date($date_format, '');
             break;
             case 'post':

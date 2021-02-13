@@ -169,6 +169,7 @@
 .fa.item_template-ic::before { content: "\f07c"; }
 .fa.item_counts-ic::before { content: "\f163"; }
 .fa.item_content-ic::before, 
+.fa.item_excerpt-ic::before, 
 .fa.item_description-ic::before, 
 .fa.item_descriptiontext-ic::before{ content: "\f036"; }
 .fa.item_author-ic::before { content: "\f2bd"; }

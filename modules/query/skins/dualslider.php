@@ -635,7 +635,7 @@ class Dualslider extends Carousel {
 
         if ($querytype == 'post') {
             $id_im = get_post_thumbnail_id();
-        } else if ($querytype == 'media') {
+        } else if ($querytype == 'attachment') {
             $id_im = get_the_id();
         }
         if ($id_im) {

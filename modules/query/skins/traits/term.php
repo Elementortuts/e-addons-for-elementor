@@ -19,14 +19,16 @@ trait Term {
 
     // TERMS
     protected function render_item_postscount($settings) {
-        //$term_info = $this->current_data;
+        $term_info = $this->current_data;
         //var_dump($term_info);
         //
-        if( !empty($term_info['count']) ){
+        if( !empty($term_info->count) ){
             
+            $html_tag = !empty($settings['html_tag']) ? $settings['html_tag'] : 'span';
+            echo sprintf('<%1$s class="e-add-term-count">', $html_tag);
             echo $this->render_label_before_item($settings,'Posts: ');
-            //
-            echo $term_info['count'];
+            echo $term_info->count;
+            echo sprintf('</%s>', $html_tag);
         }
     }
 

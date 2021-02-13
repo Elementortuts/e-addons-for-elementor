@@ -15,6 +15,10 @@ trait Custommeta {
 
         if (!empty($metakey)) {
             $querytype = $this->parent->get_querytype();
+            
+            if ($querytype == 'attachment') {
+                $querytype = 'post';
+            }
 
             //@p il meta è forzatamente singolo
             $meta_value = get_metadata($querytype, $this->current_id, $metakey, true);

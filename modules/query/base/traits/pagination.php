@@ -255,7 +255,7 @@ trait Pagination {
             $querytype = $this->get_querytype();
 
             switch ($querytype) {
-                case 'media':
+                case 'attachment':
                 case 'post':
                     $page_limit = $query->max_num_pages;
                     break;
