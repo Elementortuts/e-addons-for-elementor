@@ -198,20 +198,6 @@ class Table extends Base {
     public function get_container_class() {
         return 'e-add-skin-' . $this->get_id();
     }
-    
-    public function get_item_label($item) {
-        $label = $item['item_label'];
-        if (empty($label)) {
-            if ($item['item_type'] == 'item_custommeta') {
-                $label = ucfirst($item['metafield_key']);
-                $label = str_replace('-', ' ', $label);
-                $label = str_replace('_', ' ', $label);
-            } else {
-                $label = ucfirst(str_replace('item_', '', $item['item_type']));
-            }
-        }
-        return $label;
-    }
 
     protected function render_loop_start() {
         echo '<table>';

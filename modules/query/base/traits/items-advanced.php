@@ -186,14 +186,18 @@ trait Items_Advanced {
             'label' => '<i class="fas fa-minus"></i> ' . __('Before', 'e-addons'),
             'type' => Controls_Manager::SWITCHER,
             'default' => '',
-            'description' => __('Add a custom Label before the Field', 'e-addons'),
+            'description' => __('Print Label before the Field', 'e-addons'),
             'conditions' => [
                 'relation' => 'or',
                 'terms' => [
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_date', 'item_termstaxonomy', 'item_posttype', 'item_counts',
+                        'value' => [
+                            'item_date', 
+                            'item_termstaxonomy', 
+                            'item_posttype', 
+                            'item_counts',
                             'item_displayname',
                             'item_user',
                             'item_role',
