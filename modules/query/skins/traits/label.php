@@ -10,7 +10,7 @@ use EAddonsForElementor\Core\Utils;
 trait Label {
     
     public function get_item_label($item) {
-        $label = $item['item_text_label'];
+        $label = !empty($item['item_text_label']) ? $item['item_text_label'] : '';
         if (empty($label)) {
             if ($item['item_type'] == 'item_custommeta') {
                 $label = ucfirst($item['metafield_key']);
@@ -70,7 +70,7 @@ trait Label {
 
                     break;
             }
-            $use_link = !empty($settings['use_link']) ? true : false;
+            $use_link = !empty($settings['use_link']) && !is_wp_error($this->current_permalink) ? true : false;
             if ($use_link) echo '<a href="'.$this->current_permalink.'">';
             echo $html_label;
             if ($use_link) echo '</a>';

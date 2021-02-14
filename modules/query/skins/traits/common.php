@@ -69,7 +69,7 @@ trait Common {
         }
         //
         // @p definisco se l'immagine è linkata
-        $use_link = !empty($settings['use_link']) ? $settings['use_link'] : '';
+        $use_link = !empty($settings['use_link']) && !is_wp_error($this->current_permalink) ? $settings['use_link'] : '';
         
 
         // ---------------------------------------
@@ -140,7 +140,7 @@ trait Common {
         // Settings ------------------------------
         $html_tag = !empty($settings['html_tag']) ? $settings['html_tag'] : 'h3';
         //
-        $use_link = !empty($settings['use_link']) ? $settings['use_link'] : '';
+        $use_link = !empty($settings['use_link']) && !is_wp_error($this->current_permalink) ? $settings['use_link'] : '';
         // ---------------------------------------
         echo sprintf('<%1$s class="e-add-post-title">', $html_tag);
         ?>
@@ -246,7 +246,7 @@ trait Common {
             $this->parent->add_render_attribute($attribute_button, 'class', 'elementor-size-' . $readmore_size);
         }
 
-        if(!empty($this->current_permalink)){
+        if(!empty($this->current_permalink) && !is_wp_error($this->current_permalink)) {
         ?>
         <div class="e-add-post-button">
             <a <?php echo $this->parent->get_render_attribute_string($attribute_button); ?>>
