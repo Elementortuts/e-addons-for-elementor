@@ -438,6 +438,13 @@ class Timeline extends Base {
                 $p_image = wp_get_attachment_image(get_post_thumbnail_id(), 'thumbnail', false, $image_attr);
 
                 break;
+            case 'user':
+                $user_info = $this->current_data;
+                //se mi trovo in user
+
+                // @p questa è l'mmagine avatar HTML
+                $p_image = get_avatar($user_info->user_email, 200);
+                break;
             case 'term':
                 //se mi trovo in term
                 $term_info = $this->current_data;
