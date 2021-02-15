@@ -272,7 +272,6 @@ class Dualslider extends Carousel {
                     'raw' => '<i class="far fa-star"></i>&nbsp;&nbsp;' . __('Status', 'e-addons'),
                     'label_block' => false,
                     'content_classes' => 'e-add-icon-heading',
-                    'separator' => 'before',
                 ]
         );
         $this->start_controls_tabs('dualslider_status');
@@ -394,7 +393,6 @@ class Dualslider extends Carousel {
                     'raw' => '<i class="fas fa-heading"></i>&nbsp;&nbsp;' . __('Title', 'e-addons'),
                     'label_block' => false,
                     'content_classes' => 'e-add-icon-heading',
-                    'separator' => 'before',
                 ]
         );
         $this->add_control(
@@ -454,7 +452,6 @@ class Dualslider extends Carousel {
                     'raw' => '<i class="far fa-image"></i>&nbsp;&nbsp;' . __('Image', 'e-addons'),
                     'label_block' => false,
                     'content_classes' => 'e-add-icon-heading',
-                    'separator' => 'before',
                 ]
         );
         $this->add_control(
