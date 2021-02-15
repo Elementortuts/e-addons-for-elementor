@@ -32,6 +32,7 @@ trait Items_Advanced {
                         'operator' => '!in',
                         'value' => ['item_posttype',
                             'item_date',
+                            'item_registered',
                             'item_readmore',
                             'item_termstaxonomy',
                             'item_content',
@@ -77,6 +78,7 @@ trait Items_Advanced {
                         'operator' => 'in',
                         'value' => ['item_title',
                             'item_date',
+                            'item_registered',
                             'item_posttype',
                             'item_taxonomy',
                             'item_user',
@@ -125,7 +127,8 @@ trait Items_Advanced {
                         'operator' => 'in',
                         'value' => [
                             'item_termstaxonomy',
-                            'item_date'
+                            'item_date',
+                            'item_registered',
                         ],
                     ]
                 ]
@@ -196,6 +199,7 @@ trait Items_Advanced {
                         'operator' => 'in',
                         'value' => [
                             'item_date', 
+                            'item_registered',
                             'item_termstaxonomy', 
                             'item_posttype', 
                             'item_counts',

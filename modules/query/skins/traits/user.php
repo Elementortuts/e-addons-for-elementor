@@ -144,6 +144,11 @@ trait User {
                 echo $this->render_label_before_item($settings,'Description: ');
                 echo $user_info->description;
                 break;
+            case 'registered' :
+                //echo 'sono la user_registered';
+                echo $this->render_label_before_item($settings,'Registered: ');
+                echo $user_info->user_registered;
+                break;
         }
         echo $end_a . sprintf('</%s>', $html_tag);
     }

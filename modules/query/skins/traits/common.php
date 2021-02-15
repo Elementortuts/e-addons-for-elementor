@@ -207,6 +207,10 @@ trait Common {
                         break;
                 }
             break;
+            case 'user':
+                $date = $this->current_data->user_registered;
+                $date = date($date_format, strtotime($date));
+                break;
             case 'items':
                 //se mi trovo in item_list
                 //$date = $this->current_data['sl_date'];

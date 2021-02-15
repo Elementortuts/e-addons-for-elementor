@@ -42,7 +42,7 @@ trait Items_Style {
                     ],
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} {{CURRENT_ITEM}}' => 'text-align: {{VALUE}};',
+                        '{{WRAPPER}} {{CURRENT_ITEM}}' => 'text-align: {{VALUE}} !important;',
                     ],
                     'conditions' => [
                         'terms' => [
@@ -310,6 +310,7 @@ trait Items_Style {
                         'value' => ['item_image', 'item_avatar', 'item_author',
                             'item_posttype',
                             'item_date',
+                            'item_registered',
                             'item_readmore',
                             'item_termstaxonomy',
                             'item_content',
@@ -359,9 +360,13 @@ trait Items_Style {
                     [
                         'name' => 'item_type',
                         'operator' => '!in',
-                        'value' => ['item_image', 'item_avatar', 'item_author',
+                        'value' => [
+                            'item_image', 
+                            'item_avatar', 
+                            'item_author',
                             'item_posttype',
                             'item_date',
+                            'item_registered',
                             'item_readmore',
                             'item_termstaxonomy',
                             'item_content',
@@ -778,7 +783,12 @@ trait Items_Style {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_termstaxonomy', 'item_date', 'item_custommeta'],
+                        'value' => [
+                            'item_termstaxonomy', 
+                            'item_date', 
+                            'item_registered',
+                            'item_custommeta'
+                        ],
                     ],
                     [
                         'relation' => 'and',
@@ -842,7 +852,12 @@ trait Items_Style {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_termstaxonomy', 'item_date', 'item_custommeta'],
+                        'value' => [
+                            'item_termstaxonomy', 
+                            'item_date', 
+                            'item_registered',
+                            'item_custommeta'
+                        ],
                     ],
                     [
                         'relation' => 'and',

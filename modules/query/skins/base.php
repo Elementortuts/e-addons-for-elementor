@@ -589,6 +589,8 @@ class Base extends Base_Skin {
                         break;
                     case 'item_bio': $this->render_item_userdata('bio', $item);
                         break;
+                    case 'item_registered': $this->render_item_date($item); //render_item_userdata('registered', $item);
+                        break;
                     //----------------------------------
                     // terms
                     case 'item_counts': $this->render_item_postscount($item);
@@ -820,12 +822,14 @@ class Base extends Base_Skin {
         return '';
     }
 
-    protected function limit_content($limit) {
+    protected function limit_content($limit = 100) {
         $post = get_post();
         $content = $post->post_content; //do_shortcode($post['post_content']); //$content_post->post_content; //
-        //
-        $content = substr(wp_strip_all_tags($content), 0, $limit) . ' ...'; //
-
+        $content = wp_strip_all_tags($content);
+        if (strlen($content) > $limit) {
+            $content = substr($content, 0, $limit) . '...'; //
+            // TODO preserve words
+        }
         return $content;
     }
 
