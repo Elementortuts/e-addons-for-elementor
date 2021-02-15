@@ -154,7 +154,7 @@ class Table extends Base {
         $this->end_controls_section();
     }
 
-    public function add_common_controls($selector = 'table', $selector_id = 'table') {
+    public function add_common_controls($selector = 'table', $selector_id = 'table', $conditions = array()) {
 
         $selector_cell = '{{WRAPPER}} ' . $selector . '>td, {{WRAPPER}} ' . $selector . '>th';
         if (strpos($selector, 'td') !== false || strpos($selector, 'th') !== false) {
@@ -170,6 +170,7 @@ class Table extends Base {
                 'selectors' => [
                     $selector => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+                'condition' => $conditions,
                     ]
             );
         }
@@ -181,6 +182,7 @@ class Table extends Base {
             'selectors' => [
                 $selector_cell => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+                'condition' => $conditions,
                 ]
         );
         $this->add_responsive_control(
@@ -207,6 +209,7 @@ class Table extends Base {
             'selectors' => [
                 '{{WRAPPER}} ' . $selector => 'text-align: {{VALUE}};',
             ],
+                'condition' => $conditions,
                 ]
         );
         $this->add_group_control(
@@ -214,6 +217,7 @@ class Table extends Base {
             'name' => $selector_id . '_typography',
             'label' => __('Typography', 'e-addons'),
             'selector' => '{{WRAPPER}} ' . $selector,
+                'condition' => $conditions,
                 ]
         );
         $this->add_control(
@@ -223,6 +227,7 @@ class Table extends Base {
             'selectors' => [
                 '{{WRAPPER}} ' . $selector => 'color: {{VALUE}};'
             ],
+                'condition' => $conditions,
                 ]
         );
         $this->add_control(
@@ -232,12 +237,14 @@ class Table extends Base {
             'selectors' => [
                 '{{WRAPPER}} ' . $selector => 'background-color: {{VALUE}};'
             ],
+                'condition' => $conditions,
                 ]
         );
         $this->add_group_control(
                 Group_Control_Border::get_type(), [
             'name' => $selector_id . '_border',
             'selector' => $selector_cell,
+                'condition' => $conditions,
                 ]
         );
     }
@@ -454,7 +461,7 @@ class Table extends Base {
         $selector_id = 'table_th_style';
         $this->add_common_controls($selector, $selector_id . '_normal');
 
-
+        $conditions_datatables = array($this->get_id().'_datatables!' => '');
         $this->add_control(
                 'datatables_heading', [
             'type' => Controls_Manager::RAW_HTML,
@@ -462,47 +469,48 @@ class Table extends Base {
             'raw' => '<i class="fas fa-header"></i> <b>' . __('Datatables', 'e-addons') . '</b>',
             'content_classes' => 'e-add-inner-heading',
             'separator' => 'before',
-            'condition' => [
-                'table_datatables!' => '',
-            ]
+            'condition' => $conditions_datatables,
                 ]
         );
+        
+        $conditions_datatables_info = $conditions_datatables;
+        $conditions_datatables_info[$this->get_id().'_info!'] = '';
         $this->add_control(
                 'datatables_info_heading', [
             'type' => Controls_Manager::HEADING,
             'label' =>  __('Info', 'e-addons'),
-            'condition' => [
-                'table_datatables!' => '',
-            ]
+            'condition' => $conditions_datatables_info,
                 ]
         );
         $selector_id = 'datatables_info';
         $selector = '.dataTables_wrapper .dataTables_info';
-        $this->add_common_controls($selector, $selector_id);
+        $this->add_common_controls($selector, $selector_id, $conditions_datatables_info);
+        
+        $conditions_datatables_filter = $conditions_datatables;
+        $conditions_datatables_filter[$this->get_id().'_searching!'] = '';
         $this->add_control(
                 'datatables_filter_heading', [
             'type' => Controls_Manager::HEADING,
-            'label' =>  __('Filter', 'e-addons'),
-            'condition' => [
-                'table_datatables!' => '',
-            ]
+            'label' =>  __('Search', 'e-addons'),
+            'condition' => $conditions_datatables_filter,
                 ]
         );
         $selector_id = 'datatables_filter';
         $selector = '.dataTables_wrapper .dataTables_filter input';
-        $this->add_common_controls($selector, $selector_id);
+        $this->add_common_controls($selector, $selector_id, $conditions_datatables_filter);
+        
+        $conditions_datatables_buttons = $conditions_datatables;
+        $conditions_datatables_buttons[$this->get_id().'_buttons!'] = '';
         $this->add_control(
                 'datatables_buttons_heading', [
             'type' => Controls_Manager::HEADING,
             'label' =>  __('Buttons', 'e-addons'),
-            'condition' => [
-                'table_datatables!' => '',
-            ]
+            'condition' => $conditions_datatables_buttons,
                 ]
         );
         $selector_id = 'datatables_buttons';
         $selector = '.dataTables_wrapper .dt-buttons button';
-        $this->add_common_controls($selector, $selector_id);
+        $this->add_common_controls($selector, $selector_id, $conditions_datatables_buttons);
 
 
         $this->end_controls_section();
