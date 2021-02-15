@@ -182,19 +182,20 @@ class Table extends Base {
             $selector_cell = '{{WRAPPER}} ' . $selector;
         }
         
-        
-        $this->add_responsive_control(
-                $selector_id . '_padding', [
-            'label' => __('Padding', 'e-addons'),
-            'type' => Controls_Manager::DIMENSIONS,
-            'size_units' => ['px', '%', 'em'],
-            'selectors' => [
-                $selector_cell => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'separator' => 'before',
-            'condition' => $conditions,
-                ]
-        );
+        if ($selector != 'table') {
+            $this->add_responsive_control(
+                    $selector_id . '_padding', [
+                'label' => __('Padding', 'e-addons'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    $selector_cell => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'before',
+                'condition' => $conditions,
+                    ]
+            );
+        }
         if (strpos($selector_id, 'datatables') !== false) {
             $selector_cell = '{{WRAPPER}} ' . $selector;
             $this->add_responsive_control(
@@ -410,7 +411,7 @@ class Table extends Base {
 
         $this->end_controls_tabs();
         
-        $this->add_common_controls($selector, $selector_id);
+        //$this->add_common_controls($selector, $selector_id);
 
         // TD
         // normal
