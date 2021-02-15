@@ -194,3 +194,4 @@
 .fa.item_uploadedto-ic::before { content: "\f56f"; }
 .fa.item_imagemeta-ic::before { content: "\f87c"; }
 .fa.item_mimetype-ic::before { content: "\f86d"; }
+.fa.item_imageoricon-ic::before { content: "\f1c5"; }
