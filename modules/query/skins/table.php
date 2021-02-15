@@ -157,7 +157,7 @@ class Table extends Base {
     public function add_common_controls($selector = 'table', $selector_id = 'table', $conditions = array()) {
 
         $selector_cell = '{{WRAPPER}} ' . $selector . '>td, {{WRAPPER}} ' . $selector . '>th';
-        if (strpos($selector, 'td') !== false || strpos($selector, 'th') !== false) {
+        if ($selector == 'table' || strpos($selector, 'td') !== false || strpos($selector, 'th') !== false) {
             $selector_cell = '{{WRAPPER}} ' . $selector;
         }
         if (strpos($selector_id, 'datatables') !== false) {
@@ -182,7 +182,7 @@ class Table extends Base {
             'selectors' => [
                 $selector_cell => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                'condition' => $conditions,
+            'condition' => $conditions,
                 ]
         );
         $this->add_responsive_control(
@@ -209,7 +209,7 @@ class Table extends Base {
             'selectors' => [
                 '{{WRAPPER}} ' . $selector => 'text-align: {{VALUE}};',
             ],
-                'condition' => $conditions,
+            'condition' => $conditions,
                 ]
         );
         $this->add_group_control(
@@ -217,7 +217,7 @@ class Table extends Base {
             'name' => $selector_id . '_typography',
             'label' => __('Typography', 'e-addons'),
             'selector' => '{{WRAPPER}} ' . $selector,
-                'condition' => $conditions,
+            'condition' => $conditions,
                 ]
         );
         $this->add_control(
@@ -227,7 +227,7 @@ class Table extends Base {
             'selectors' => [
                 '{{WRAPPER}} ' . $selector => 'color: {{VALUE}};'
             ],
-                'condition' => $conditions,
+            'condition' => $conditions,
                 ]
         );
         $this->add_control(
@@ -237,14 +237,26 @@ class Table extends Base {
             'selectors' => [
                 '{{WRAPPER}} ' . $selector => 'background-color: {{VALUE}};'
             ],
-                'condition' => $conditions,
+            'condition' => $conditions,
                 ]
         );
         $this->add_group_control(
                 Group_Control_Border::get_type(), [
             'name' => $selector_id . '_border',
             'selector' => $selector_cell,
-                'condition' => $conditions,
+            'condition' => $conditions,
+                ]
+        );
+
+        $this->add_control(
+                $selector_id . '_border_radius', [
+            'label' => __('Border Radius', 'e-addons'),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'em'],
+            'selectors' => [
+                '{{WRAPPER}} ' . $selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'condition' => $conditions,
                 ]
         );
     }
@@ -311,16 +323,7 @@ class Table extends Base {
         );
         $this->add_common_controls();
 
-        $this->add_control(
-                'table_border_radius', [
-            'label' => __('Border Radius', 'e-addons'),
-            'type' => Controls_Manager::DIMENSIONS,
-            'size_units' => ['px', '%', 'em'],
-            'selectors' => [
-                '{{WRAPPER}} table' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-                ]
-        );
+
 
         $this->add_responsive_control(
                 'border_spacing',
@@ -461,7 +464,7 @@ class Table extends Base {
         $selector_id = 'table_th_style';
         $this->add_common_controls($selector, $selector_id . '_normal');
 
-        $conditions_datatables = array($this->get_id().'_datatables!' => '');
+        $conditions_datatables = array($this->get_id() . '_datatables!' => '');
         $this->add_control(
                 'datatables_heading', [
             'type' => Controls_Manager::RAW_HTML,
@@ -472,39 +475,39 @@ class Table extends Base {
             'condition' => $conditions_datatables,
                 ]
         );
-        
+
         $conditions_datatables_info = $conditions_datatables;
-        $conditions_datatables_info[$this->get_id().'_info!'] = '';
+        $conditions_datatables_info[$this->get_id() . '_info!'] = '';
         $this->add_control(
                 'datatables_info_heading', [
             'type' => Controls_Manager::HEADING,
-            'label' =>  __('Info', 'e-addons'),
+            'label' => __('Info', 'e-addons'),
             'condition' => $conditions_datatables_info,
                 ]
         );
         $selector_id = 'datatables_info';
         $selector = '.dataTables_wrapper .dataTables_info';
         $this->add_common_controls($selector, $selector_id, $conditions_datatables_info);
-        
+
         $conditions_datatables_filter = $conditions_datatables;
-        $conditions_datatables_filter[$this->get_id().'_searching!'] = '';
+        $conditions_datatables_filter[$this->get_id() . '_searching!'] = '';
         $this->add_control(
                 'datatables_filter_heading', [
             'type' => Controls_Manager::HEADING,
-            'label' =>  __('Search', 'e-addons'),
+            'label' => __('Search', 'e-addons'),
             'condition' => $conditions_datatables_filter,
                 ]
         );
         $selector_id = 'datatables_filter';
         $selector = '.dataTables_wrapper .dataTables_filter input';
         $this->add_common_controls($selector, $selector_id, $conditions_datatables_filter);
-        
+
         $conditions_datatables_buttons = $conditions_datatables;
-        $conditions_datatables_buttons[$this->get_id().'_buttons!'] = '';
+        $conditions_datatables_buttons[$this->get_id() . '_buttons!'] = '';
         $this->add_control(
                 'datatables_buttons_heading', [
             'type' => Controls_Manager::HEADING,
-            'label' =>  __('Buttons', 'e-addons'),
+            'label' => __('Buttons', 'e-addons'),
             'condition' => $conditions_datatables_buttons,
                 ]
         );
