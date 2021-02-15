@@ -62,14 +62,13 @@ class Table extends Base {
         );
 
         $this->add_control(
-                'datatables',
+                'datatables', 
                 [
                     'label' => __('Use DataTables', 'e-addons'),
                     'type' => Controls_Manager::SWITCHER,
                     'frontend_available' => true,
                 ]
         );
-
 
         $this->add_control(
                 'searching',
@@ -465,38 +464,58 @@ class Table extends Base {
         $this->add_common_controls($selector, $selector_id . '_normal');
 
         $conditions_datatables = array($this->get_id() . '_datatables!' => '');
+        
         $this->add_control(
-                'datatables_heading', [
-            'type' => Controls_Manager::RAW_HTML,
-            'show_label' => false,
-            'raw' => '<i class="fas fa-header"></i> <b>' . __('Datatables', 'e-addons') . '</b>',
-            'content_classes' => 'e-add-inner-heading',
-            'separator' => 'before',
-            'condition' => $conditions_datatables,
-                ]
-        );
-
+            'datatables_heading',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'show_label' => false,
+                'raw' => '<i class="fas fa-table"></i>&nbsp;&nbsp;' . __('Datatables', 'e-addons'),
+                'label_block' => false,
+                'content_classes' => 'e-add-icon-heading',
+                'condition' => $conditions_datatables,
+            ]
+    );
         $conditions_datatables_info = $conditions_datatables;
         $conditions_datatables_info[$this->get_id() . '_info!'] = '';
-        $this->add_control(
+        /*$this->add_control(
                 'datatables_info_heading', [
             'type' => Controls_Manager::HEADING,
             'label' => __('Info', 'e-addons'),
             'condition' => $conditions_datatables_info,
                 ]
+        );*/
+        $this->add_control(
+            'datatables_info_heading', [
+                'type' => Controls_Manager::RAW_HTML,
+                'show_label' => false,
+                'raw' => '<i class="fas fa-info"></i> <b>' . __('Info', 'e-addons') . '</b>',
+                'content_classes' => 'e-add-inner-heading',                'condition' => $conditions_datatables_info,
+            ]
         );
+        
         $selector_id = 'datatables_info';
         $selector = '.dataTables_wrapper .dataTables_info';
         $this->add_common_controls($selector, $selector_id, $conditions_datatables_info);
 
         $conditions_datatables_filter = $conditions_datatables;
         $conditions_datatables_filter[$this->get_id() . '_searching!'] = '';
-        $this->add_control(
+        /*$this->add_control(
                 'datatables_filter_heading', [
             'type' => Controls_Manager::HEADING,
             'label' => __('Search', 'e-addons'),
             'condition' => $conditions_datatables_filter,
                 ]
+        );*/
+        $this->add_control(
+            'datatables_filter_heading', [
+                'type' => Controls_Manager::RAW_HTML,
+                'show_label' => false,
+                'raw' => '<i class="fas fa-search"></i> <b>' . __('Search', 'e-addons') . '</b>',
+                'content_classes' => 'e-add-inner-heading',
+                'separator' => 'before',
+                'condition' => $conditions_datatables_filter,
+            ]
         );
         $selector_id = 'datatables_filter';
         $selector = '.dataTables_wrapper .dataTables_filter input';
@@ -504,12 +523,22 @@ class Table extends Base {
 
         $conditions_datatables_buttons = $conditions_datatables;
         $conditions_datatables_buttons[$this->get_id() . '_buttons!'] = '';
-        $this->add_control(
+        /*$this->add_control(
                 'datatables_buttons_heading', [
             'type' => Controls_Manager::HEADING,
             'label' => __('Buttons', 'e-addons'),
             'condition' => $conditions_datatables_buttons,
                 ]
+        );*/
+        $this->add_control(
+            'datatables_buttons_heading', [
+                'type' => Controls_Manager::RAW_HTML,
+                'show_label' => false,
+                'raw' => '<i class="fas fa-mouse-pointer"></i> <b>' . __('Buttons', 'e-addons') . '</b>',
+                'content_classes' => 'e-add-inner-heading',
+                'separator' => 'before',
+                'condition' => $conditions_datatables_filter,
+            ]
         );
         $selector_id = 'datatables_buttons';
         $selector = '.dataTables_wrapper .dt-buttons button';
