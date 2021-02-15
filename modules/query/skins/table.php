@@ -152,73 +152,8 @@ class Table extends Base {
 
         $this->end_controls_section();
     }
-
-    public function add_common_controls($selector = 'table', $selector_id = 'table', $conditions = array()) {
-
-        $selector_cell = '{{WRAPPER}} ' . $selector . '>td, {{WRAPPER}} ' . $selector . '>th';
-        if ($selector == 'table' || strpos($selector, 'td') !== false || strpos($selector, 'th') !== false) {
-            $selector_cell = '{{WRAPPER}} ' . $selector;
-        }
-        if (strpos($selector_id, 'datatables') !== false) {
-            $selector_cell = '{{WRAPPER}} ' . $selector;
-            $this->add_responsive_control(
-                    $selector_id . '_margin', [
-                'label' => __('Margin', 'e-addons'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em'],
-                'selectors' => [
-                    $selector => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition' => $conditions,
-                    ]
-            );
-        }
-        $this->add_responsive_control(
-                $selector_id . '_padding', [
-            'label' => __('Padding', 'e-addons'),
-            'type' => Controls_Manager::DIMENSIONS,
-            'size_units' => ['px', '%', 'em'],
-            'selectors' => [
-                $selector_cell => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'condition' => $conditions,
-                ]
-        );
-        $this->add_responsive_control(
-                $selector_id . '_align', [
-            'label' => __('Text Alignment', 'e-addons'),
-            'type' => Controls_Manager::CHOOSE,
-            'toggle' => true,
-            'options' => [
-                'left' => [
-                    'title' => __('Left', 'e-addons'),
-                    'icon' => 'fa fa-align-left',
-                ],
-                'center' => [
-                    'title' => __('Center', 'e-addons'),
-                    'icon' => 'fa fa-align-center',
-                ],
-                'right' => [
-                    'title' => __('Right', 'e-addons'),
-                    'icon' => 'fa fa-align-right',
-                ]
-            ],
-            'default' => 'left',
-            'prefix_class' => 'e-add-align%s-',
-            'selectors' => [
-                '{{WRAPPER}} ' . $selector => 'text-align: {{VALUE}};',
-            ],
-            'condition' => $conditions,
-                ]
-        );
-        $this->add_group_control(
-                Group_Control_Typography::get_type(), [
-            'name' => $selector_id . '_typography',
-            'label' => __('Typography', 'e-addons'),
-            'selector' => '{{WRAPPER}} ' . $selector,
-            'condition' => $conditions,
-                ]
-        );
+    
+    public function add_special_controls($selector = 'table', $selector_id = 'table', $conditions = array()) {
         $this->add_control(
                 $selector_id . '_color', [
             'label' => __('Color', 'e-addons'),
@@ -239,6 +174,80 @@ class Table extends Base {
             'condition' => $conditions,
                 ]
         );
+    }
+    public function add_common_controls($selector = 'table', $selector_id = 'table', $conditions = array()) {
+
+        $selector_cell = '{{WRAPPER}} ' . $selector . '>td, {{WRAPPER}} ' . $selector . '>th';
+        if ($selector == 'table' || strpos($selector, 'td') !== false || strpos($selector, 'th') !== false) {
+            $selector_cell = '{{WRAPPER}} ' . $selector;
+        }
+        
+        
+        $this->add_responsive_control(
+                $selector_id . '_padding', [
+            'label' => __('Padding', 'e-addons'),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'em'],
+            'selectors' => [
+                $selector_cell => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'separator' => 'before',
+            'condition' => $conditions,
+                ]
+        );
+        if (strpos($selector_id, 'datatables') !== false) {
+            $selector_cell = '{{WRAPPER}} ' . $selector;
+            $this->add_responsive_control(
+                    $selector_id . '_margin', [
+                'label' => __('Margin', 'e-addons'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    $selector => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => $conditions,
+                    ]
+            );
+        }
+        
+        if ($selector_id == 'table' || $selector_id == 'table_th_style') {
+            $this->add_responsive_control(
+                    $selector_id . '_align', [
+                'label' => __('Text Alignment', 'e-addons'),
+                'type' => Controls_Manager::CHOOSE,
+                'toggle' => true,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'e-addons'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'e-addons'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'e-addons'),
+                        'icon' => 'fa fa-align-right',
+                    ]
+                ],
+                'default' => 'left',
+                'prefix_class' => 'e-add-align%s-',
+                'selectors' => [
+                    '{{WRAPPER}} ' . $selector => 'text-align: {{VALUE}};',
+                ],
+                'condition' => $conditions,
+                    ]
+            );
+            $this->add_group_control(
+                    Group_Control_Typography::get_type(), [
+                'name' => $selector_id . '_typography',
+                'label' => __('Typography', 'e-addons'),
+                'selector' => '{{WRAPPER}} ' . $selector,
+                'condition' => $conditions,
+                    ]
+            );
+        }
+        
         $this->add_group_control(
                 Group_Control_Border::get_type(), [
             'name' => $selector_id . '_border',
@@ -247,17 +256,19 @@ class Table extends Base {
                 ]
         );
 
-        $this->add_control(
-                $selector_id . '_border_radius', [
-            'label' => __('Border Radius', 'e-addons'),
-            'type' => Controls_Manager::DIMENSIONS,
-            'size_units' => ['px', '%', 'em'],
-            'selectors' => [
-                '{{WRAPPER}} ' . $selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'condition' => $conditions,
-                ]
-        );
+        if ($selector_id == 'table' || $selector_id == 'table_th_style' || strpos($selector_id, 'datatables') !== false) {
+            $this->add_control(
+                    $selector_id . '_border_radius', [
+                'label' => __('Border Radius', 'e-addons'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} ' . $selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => $conditions,
+                    ]
+            );
+        }
     }
 
     protected function register_style_controls() {
@@ -370,7 +381,7 @@ class Table extends Base {
             'label' => __('Normal', 'e-addons'),
                 ]
         );
-        $this->add_common_controls($selector, $selector_id . '_normal');
+        $this->add_special_controls($selector, $selector_id . '_normal');
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -378,7 +389,7 @@ class Table extends Base {
             'label' => __('Even', 'e-addons'),
                 ]
         );
-        $this->add_common_controls($selector . ':nth-child(even)>td', $selector_id . '_even');
+        $this->add_special_controls($selector . ':nth-child(even)>td', $selector_id . '_even');
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -386,7 +397,7 @@ class Table extends Base {
             'label' => __('Odd', 'e-addons'),
                 ]
         );
-        $this->add_common_controls($selector . ':nth-child(odd)>td', $selector_id . '_odd');
+        $this->add_special_controls($selector . ':nth-child(odd)>td', $selector_id . '_odd');
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -394,10 +405,12 @@ class Table extends Base {
             'label' => __('Hover', 'e-addons'),
                 ]
         );
-        $this->add_common_controls($selector . ':hover>td', $selector_id . '_hover');
+        $this->add_special_controls($selector . ':hover>td', $selector_id . '_hover');
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
+        
+        $this->add_common_controls($selector, $selector_id);
 
         // TD
         // normal
@@ -423,7 +436,7 @@ class Table extends Base {
             'label' => __('Normal', 'e-addons'),
                 ]
         );
-        $this->add_common_controls($selector, $selector_id . '_normal');
+        $this->add_special_controls($selector, $selector_id . '_normal');
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -431,7 +444,7 @@ class Table extends Base {
             'label' => __('Even', 'e-addons'),
                 ]
         );
-        $this->add_common_controls($selector . ':nth-child(even)', $selector_id . '_even');
+        $this->add_special_controls($selector . ':nth-child(even)', $selector_id . '_even');
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -439,11 +452,12 @@ class Table extends Base {
             'label' => __('Odd', 'e-addons'),
                 ]
         );
-        $this->add_common_controls($selector . ':nth-child(odd)', $selector_id . '_odd');
+        $this->add_special_controls($selector . ':nth-child(odd)', $selector_id . '_odd');
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
-
+        
+        $this->add_common_controls($selector, $selector_id);
         // TH
         // normal
         // even
@@ -461,7 +475,8 @@ class Table extends Base {
 
         $selector = 'table>thead>tr>th, table.fixedHeader-floating>thead>tr>th';
         $selector_id = 'table_th_style';
-        $this->add_common_controls($selector, $selector_id . '_normal');
+        $this->add_special_controls($selector, $selector_id);
+        $this->add_common_controls($selector, $selector_id);
 
         $conditions_datatables = array($this->get_id() . '_datatables!' => '');
         
@@ -496,6 +511,7 @@ class Table extends Base {
         
         $selector_id = 'datatables_info';
         $selector = '.dataTables_wrapper .dataTables_info';
+        $this->add_special_controls($selector, $selector_id, $conditions_datatables_info);
         $this->add_common_controls($selector, $selector_id, $conditions_datatables_info);
 
         $conditions_datatables_filter = $conditions_datatables;
@@ -519,6 +535,7 @@ class Table extends Base {
         );
         $selector_id = 'datatables_filter';
         $selector = '.dataTables_wrapper .dataTables_filter input';
+        $this->add_special_controls($selector, $selector_id, $conditions_datatables_filter);
         $this->add_common_controls($selector, $selector_id, $conditions_datatables_filter);
 
         $conditions_datatables_buttons = $conditions_datatables;
@@ -542,8 +559,26 @@ class Table extends Base {
         );
         $selector_id = 'datatables_buttons';
         $selector = '.dataTables_wrapper .dt-buttons button';
+        //$this->add_special_controls($selector, $selector_id, $conditions_datatables_buttons);
+        $this->start_controls_tabs($selector_id);
+        $this->start_controls_tab(
+                $selector_id . '_normal', [
+            'label' => __('Normal', 'e-addons'),
+            'condition' => $conditions_datatables_buttons,
+                ]
+        );
+        $this->add_special_controls($selector, $selector_id . '_normal');
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+                $selector_id . '_hover', [
+            'label' => __('Hover', 'e-addons'),
+            'condition' => $conditions_datatables_buttons,
+                ]
+        );
+        $this->add_special_controls($selector.':hover', $selector_id . '_hover');
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
         $this->add_common_controls($selector, $selector_id, $conditions_datatables_buttons);
-
 
         $this->end_controls_section();
     }
