@@ -20,7 +20,10 @@ trait Custommeta {
 
     // -------------- Custommeta SOURCE query_type Posts/Users/Terms ---------
     //@p leggo un campo personalizzato di tipo relationship oppure users oppure terms nel post, user o termine in cuii mi trovo
-    public function custommeta_source_items($target, $type_q = 'post') {
+    public function custommeta_source_items($target, $type_q = '') {
+        if (!$type_q) {
+            $type_q = $this->get_querytype();
+        }
 
         $target->add_control(
                 'avviso_meta_custommeta_source',
@@ -165,7 +168,10 @@ trait Custommeta {
     }
 
     // -------------- Custom Fields for Posts/Users/Terms ---------
-    public function custommeta_items($target, $type_q = 'post') {
+    public function custommeta_items($target, $type_q = '') {
+        if (!$type_q) {
+            $type_q = $this->get_querytype();
+        }
 
         //Key
         $target->add_control(

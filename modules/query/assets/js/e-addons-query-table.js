@@ -36,6 +36,14 @@ jQuery(window).on('elementor/frontend/init', () => {
                 ];
             }
             
+            let lang = [];
+            if (Boolean(elementSettings['table_searching'])) {
+                lang = {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search..."
+                }
+            }
+            
             table.DataTable({
                 order: [],
 
@@ -46,10 +54,12 @@ jQuery(window).on('elementor/frontend/init', () => {
                 responsive: Boolean(elementSettings['table_responsive']),
                 
                 searching: Boolean(elementSettings['table_searching']),
+                language: lang,
                 ordering: Boolean(elementSettings['table_ordering']),
                 
                 paging: false,
             });
+            
         }
 
         bindEvents() {

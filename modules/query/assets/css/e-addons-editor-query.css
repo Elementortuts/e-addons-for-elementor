@@ -188,6 +188,7 @@
 .fa.item_email-ic::before { content: "\f0e0"; }
 .fa.item_website-ic::before { content: "\f0ac"; }
 .fa.item_bio-ic::before { content: "\f036"; }
+.fa.item_registered-ic::before { content: "\f073"; }
 .fa.item_alternativetext-ic::before { content: "\f4ad"; }
 .fa.item_caption-ic::before { content: "\f15c"; }
 .fa.item_uploadedto-ic::before { content: "\f56f"; }

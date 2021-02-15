@@ -65,7 +65,10 @@ trait Items_Content {
       item_readmore
      */
 
-    public function controls_items_image_content($target, $type) {
+    public function controls_items_image_content($target, $type = '') {
+        if (!$type) {
+            $type = $this->get_querytype();
+        }
 
         //@p se mi trovo in post scelgo tra Featured o Custom image 
         //@p se mi trovo in user scelgo tra Avatar o Custom image
@@ -442,7 +445,10 @@ trait Items_Content {
         
     }
     // +********************* Post: Title / Term: Title / User: User,Role,FirstName, LastName, DisplayName, NickName
-    public function controls_items_title_content($target, $type) {
+    public function controls_items_title_content($target, $type = '') {
+        if (!$type) {
+            $type = $this->get_querytype();
+        }
         $defval = 'h3';
         if ($type == 'user') {
             $defval = '';
@@ -492,7 +498,10 @@ trait Items_Content {
     }
 
     // +********************* Post: Content/Excerpt / term: Description / User: Biography-Description
-    public function controls_items_contentdescription_content($target, $type) {
+    public function controls_items_contentdescription_content($target, $type = '') {
+        if (!$type) {
+            $type = $this->get_querytype();
+        }
 
         if ($type == 'post') {
             /*$target->add_control(
@@ -660,7 +669,10 @@ trait Items_Content {
     }
 
     // +********************* Date
-    public function controls_items_date_content($target, $type) {
+    public function controls_items_date_content($target, $type = '') {
+        if (!$type) {
+            $type = $this->get_querytype();
+        }
         if ($type == 'post') {
             $target->add_control(
                     'date_type', [
@@ -692,7 +704,8 @@ trait Items_Content {
                 'terms' => [
                     [
                         'name' => 'item_type',
-                        'value' => 'item_date',
+                        'operator' => 'in',
+                        'value' => ['item_date', 'item_registered'],
                     ]
                 ]
             ]
