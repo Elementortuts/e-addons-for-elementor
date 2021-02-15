@@ -18,13 +18,27 @@ use Elementor\Group_Control_Background;
 trait Item {
     
     protected function render_item_subtitle($settings) {
-        if($this->current_data['sl_subtitle'])
+        if(!empty($this->current_data['sl_subtitle']))
         echo $this->current_data['sl_subtitle'];
     }
 
     protected function render_item_descriptiontext($settings) {
-        if($this->current_data['sl_descriptiontext'])
+        if(!empty($this->current_data['sl_descriptiontext']))
         echo $this->current_data['sl_descriptiontext'];
     }
 
+    protected function render_item_imageoricon($settings) {
+        $imageoricon = '';
+        if(!empty($this->current_data['sl_image_or_icon'])){
+            switch ($this->current_data['sl_image_or_icon']) {
+                case 'icon':
+                    $imageoricon = $this->render_item_icon($settings ,'sl_icon' ,'slicon','e-add-query-icon');
+                    break;
+                case 'image':
+                    $imageoricon = $this->render_item_image($settings);
+                    break;
+                }
+        }    
+        echo $imageoricon;
+    }
 }

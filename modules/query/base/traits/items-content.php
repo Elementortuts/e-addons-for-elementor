@@ -76,26 +76,26 @@ trait Items_Content {
             } else if ($type == 'user') {
                 $defIm = 'avatar';
             }
-
+            
             $target->add_control(
-                    'image_type', [
-                'label' => __('Image type', 'e-addons'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'featuredimage' => __($defIm . ' image', 'e-addons'),
-                    'customimage' => __('Custom meta image', 'e-addons'),
-                ],
-                'default' => $defIm . 'image',
-                'conditions' => [
-                    'terms' => [
-                        [
-                            'name' => 'item_type',
-                            'operator' => 'in',
-                            'value' => ['item_image', 'item_avatar'],
+                'image_type', [
+                    'label' => __('Image type', 'e-addons'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => [
+                        'featuredimage' => __($defIm . ' image', 'e-addons'),
+                        'customimage' => __('Custom meta image', 'e-addons'),
+                    ],
+                    'default' => $defIm . 'image',
+                    'conditions' => [
+                        'terms' => [
+                            [
+                                'name' => 'item_type',
+                                'operator' => 'in',
+                                'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
+                            ]
                         ]
                     ]
                 ]
-                    ]
             );
 
             $target->add_control(
@@ -112,7 +112,7 @@ trait Items_Content {
                         [
                             'name' => 'item_type',
                             'operator' => 'in',
-                            'value' => ['item_image', 'item_avatar'],
+                            'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
                         ],
                         [
                             'name' => 'image_type',
@@ -137,14 +137,26 @@ trait Items_Content {
                     'terms' => [
                         [
                             'name' => 'item_type',
-                            'value' => 'item_image',
+                            'operator' => 'in',
+                            'value' => ['item_image', 'item_imageoricon']
                         ]
                     ]
                 ]
                     ]
             );
         }
-
+        $target->add_control(
+            'image_content_heading', [
+                'type' => Controls_Manager::RAW_HTML,
+                'show_label' => false,
+                'raw' => '<i class="fas fa-image"></i> <b>' . __('Image', 'e-addons') . '</b>',
+                'content_classes' => 'e-add-inner-heading',
+                'separator' => 'before',
+                'condition' => [
+                    'item_type' => 'item_imageoricon'
+                ]
+            ]
+        );
         $target->add_group_control(
                 Group_Control_Image_Size::get_type(), [
             'name' => 'thumbnail_size',
@@ -154,7 +166,8 @@ trait Items_Content {
                 'terms' => [
                     [
                         'name' => 'item_type',
-                        'value' => 'item_image',
+                        'operator' => 'in',
+                        'value' => ['item_image', 'item_imageoricon']
                     ]
                 ]
             ]
@@ -170,13 +183,15 @@ trait Items_Content {
                     'terms' => [
                         [
                             'name' => 'item_type',
-                            'value' => 'item_avatar',
+                            'operator' => 'in',
+                            'value' => ['item_avatar', 'item_imageoricon']
                         ]
                     ]
                 ]
                     ]
             );
         }
+        
         $target->add_responsive_control(
                 'ratio_image', [
             'label' => __('Image Ratio', 'e-addons'),
@@ -196,7 +211,7 @@ trait Items_Content {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_image', 'item_avatar'],
+                        'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
                     ],
                     [
                         'name' => 'use_bgimage',
@@ -236,7 +251,7 @@ trait Items_Content {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_image', 'item_avatar'],
+                        'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
                     ],
                     [
                         'name' => 'use_bgimage',
@@ -257,7 +272,7 @@ trait Items_Content {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_image', 'item_avatar'],
+                        'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
                     ]
                 ]
             ],
@@ -286,7 +301,7 @@ trait Items_Content {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_image', 'item_avatar'],
+                        'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
                     ],
                     [
                         'name' => 'use_bgimage',
@@ -309,7 +324,7 @@ trait Items_Content {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_image', 'item_avatar'],
+                        'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
                     ]
                 ]
             ]
@@ -326,7 +341,7 @@ trait Items_Content {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_image', 'item_avatar'],
+                        'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
                     ],
                     [
                         'name' => 'use_overlay',
@@ -359,7 +374,7 @@ trait Items_Content {
                     [
                         'name' => 'item_type',
                         'operator' => 'in',
-                        'value' => ['item_image', 'item_avatar'],
+                        'value' => ['item_image', 'item_imageoricon', 'item_avatar'],
                     ],
                     [
                         'name' => 'use_overlay',
@@ -371,7 +386,61 @@ trait Items_Content {
                 ]
         );
     }
+    // ----------------------------------------------------------
+    public function controls_items_icon_content($target) {
+        //Icon color-size
+        $target->add_control(
+                'icon_style_heading', [
+            'type' => Controls_Manager::RAW_HTML,
+            'show_label' => false,
+            'raw' => '<i class="fas fa-star"></i> <b>' . __('Icon', 'e-addons') . '</b>',
+            'content_classes' => 'e-add-inner-heading',
+            'separator' => 'before',
+            'condition' => [
+                'item_type' => 'item_imageoricon'
+            ]
+                ]
+        );
+        
 
+        $target->add_control(
+                'color_item_icon', [
+            'label' => __('Icon Color', 'e-addons'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} {{CURRENT_ITEM}} .e-add-query-icon' => 'color: {{VALUE}};',
+            ],
+            'condition' => [
+                'item_type' => 'item_imageoricon'
+            ]
+
+                ]
+        );
+        $target->add_responsive_control(
+                'icon_size', [
+            'label' => __('Icon size', 'e-addons'),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [
+                'size' => '',
+                'unit' => 'px',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 10,
+                    'max' => 300,
+                    'step' => 1
+                ],
+            ],
+            'selectors' => [
+                '{{WRAPPER}} {{CURRENT_ITEM}} .e-add-query-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+            ],
+            'condition' => [
+                'item_type' => 'item_imageoricon'
+            ]
+                ]
+        );
+        
+    }
     // +********************* Post: Title / Term: Title / User: User,Role,FirstName, LastName, DisplayName, NickName
     public function controls_items_title_content($target, $type) {
         $defval = 'h3';

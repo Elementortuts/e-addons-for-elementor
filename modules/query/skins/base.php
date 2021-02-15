@@ -515,6 +515,13 @@ class Base extends Base_Skin {
                         //----------------------------------
                         $this->render_repeateritem_end();
                     }
+                    if ($item_type == 'item_imageoricon') {
+                        $this->render_repeateritem_start($_id, $item_type);
+                        //----------------------------------
+                        $this->render_item_imageoricon($item);
+                        //----------------------------------
+                        $this->render_repeateritem_end();
+                    }
                     if ($item_type == 'item_avatar') {
                         $this->render_repeateritem_start($_id, $item_type);
                         //----------------------------------
@@ -614,6 +621,11 @@ class Base extends Base_Skin {
                     case 'item_subtitle': $this->render_item_subtitle($item);
                         break;
                     case 'item_descriptiontext': $this->render_item_descriptiontext($item);
+                        break;
+                    case 'item_imageoricon': 
+                        if ($useimg) {
+                            $this->render_item_imageoricon($item);
+                        }
                         break;
                     //----------------------------------
                     // posts/user/terms

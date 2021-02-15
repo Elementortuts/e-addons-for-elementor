@@ -264,6 +264,13 @@ trait Common {
     }
     // per gestire l'icona 
     protected function render_item_icon($metaitem,$icon5_key,$icon4_key,$class_icon = '') {
+        
+        $querytype = $this->parent->get_querytype();
+        if( $querytype == 'items'){
+            $ic = $this->current_data['sl_icon'];
+            $metaitem[$icon5_key] = $ic;
+        }
+        
         $migrated = isset($metaitem['__fa4_migrated'][$icon5_key]);
         $is_new = empty($metaitem[$icon4_key]) && Icons_Manager::is_migration_allowed();
         //
