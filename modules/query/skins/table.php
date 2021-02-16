@@ -62,7 +62,7 @@ class Table extends Base {
         );
 
         $this->add_control(
-                'datatables', 
+                'datatables',
                 [
                     'label' => __('Use DataTables', 'e-addons'),
                     'type' => Controls_Manager::SWITCHER,
@@ -161,7 +161,7 @@ class Table extends Base {
 
         $this->end_controls_section();
     }
-    
+
     public function add_special_controls($selector = 'table', $selector_id = 'table', $conditions = array()) {
         $this->add_control(
                 $selector_id . '_color', [
@@ -184,13 +184,14 @@ class Table extends Base {
                 ]
         );
     }
+
     public function add_common_controls($selector = 'table', $selector_id = 'table', $conditions = array()) {
 
         $selector_cell = '{{WRAPPER}} ' . $selector . '>td, {{WRAPPER}} ' . $selector . '>th';
         if ($selector == 'table' || strpos($selector, 'td') !== false || strpos($selector, 'th') !== false) {
             $selector_cell = '{{WRAPPER}} ' . $selector;
         }
-        
+
         if ($selector != 'table') {
             $this->add_responsive_control(
                     $selector_id . '_padding', [
@@ -219,7 +220,7 @@ class Table extends Base {
                     ]
             );
         }
-        
+
         if ($selector_id == 'table' || $selector_id == 'table_th_style') {
             $this->add_responsive_control(
                     $selector_id . '_align', [
@@ -257,7 +258,7 @@ class Table extends Base {
                     ]
             );
         }
-        
+
         $this->add_group_control(
                 Group_Control_Border::get_type(), [
             'name' => $selector_id . '_border',
@@ -343,7 +344,24 @@ class Table extends Base {
         );
         $this->add_common_controls();
 
-
+        $this->add_responsive_control(
+                'vertical_align',
+                [
+                    'label' => __('Vertical align', 'e-addons'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => [
+                        '' => __('Default', 'e-addons'),
+                        //'baseline' => __('Baseline', 'e-addons'),
+                        'top' => __('Top', 'e-addons'),
+                        'middle' => __('Middle', 'e-addons'),
+                        'top' => __('Bottom', 'e-addons'),
+                    ],
+                    'selectors' => [
+                        //'{{WRAPPER}} .e-add-posts-container' => 'column-gap: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} table td, {{WRAPPER}} table th' => 'vertical-align: {{VALUE}}',
+                    ],
+                ]
+        );
 
         $this->add_responsive_control(
                 'border_spacing',
@@ -419,9 +437,8 @@ class Table extends Base {
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
-        
-        //$this->add_common_controls($selector, $selector_id);
 
+        //$this->add_common_controls($selector, $selector_id);
         // TD
         // normal
         // even
@@ -466,7 +483,7 @@ class Table extends Base {
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
-        
+
         $this->add_common_controls($selector, $selector_id);
         // TH
         // normal
@@ -489,36 +506,36 @@ class Table extends Base {
         $this->add_common_controls($selector, $selector_id);
 
         $conditions_datatables = array($this->get_id() . '_datatables!' => '');
-        
+
         $this->add_control(
-            'datatables_heading',
-            [
-                'type' => Controls_Manager::RAW_HTML,
-                'show_label' => false,
-                'raw' => '<i class="fas fa-table"></i>&nbsp;&nbsp;' . __('Datatables', 'e-addons'),
-                'label_block' => false,
-                'content_classes' => 'e-add-icon-heading',
-                'condition' => $conditions_datatables,
-            ]
-    );
+                'datatables_heading',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'show_label' => false,
+                    'raw' => '<i class="fas fa-table"></i>&nbsp;&nbsp;' . __('Datatables', 'e-addons'),
+                    'label_block' => false,
+                    'content_classes' => 'e-add-icon-heading',
+                    'condition' => $conditions_datatables,
+                ]
+        );
         $conditions_datatables_info = $conditions_datatables;
         $conditions_datatables_info[$this->get_id() . '_info!'] = '';
-        /*$this->add_control(
-                'datatables_info_heading', [
-            'type' => Controls_Manager::HEADING,
-            'label' => __('Info', 'e-addons'),
-            'condition' => $conditions_datatables_info,
-                ]
-        );*/
+        /* $this->add_control(
+          'datatables_info_heading', [
+          'type' => Controls_Manager::HEADING,
+          'label' => __('Info', 'e-addons'),
+          'condition' => $conditions_datatables_info,
+          ]
+          ); */
         $this->add_control(
-            'datatables_info_heading', [
-                'type' => Controls_Manager::RAW_HTML,
-                'show_label' => false,
-                'raw' => '<i class="fas fa-info"></i> <b>' . __('Info', 'e-addons') . '</b>',
-                'content_classes' => 'e-add-inner-heading',                'condition' => $conditions_datatables_info,
-            ]
+                'datatables_info_heading', [
+            'type' => Controls_Manager::RAW_HTML,
+            'show_label' => false,
+            'raw' => '<i class="fas fa-info"></i> <b>' . __('Info', 'e-addons') . '</b>',
+            'content_classes' => 'e-add-inner-heading', 'condition' => $conditions_datatables_info,
+                ]
         );
-        
+
         $selector_id = 'datatables_info';
         $selector = '.dataTables_wrapper .dataTables_info';
         $this->add_special_controls($selector, $selector_id, $conditions_datatables_info);
@@ -526,22 +543,22 @@ class Table extends Base {
 
         $conditions_datatables_filter = $conditions_datatables;
         $conditions_datatables_filter[$this->get_id() . '_searching!'] = '';
-        /*$this->add_control(
+        /* $this->add_control(
+          'datatables_filter_heading', [
+          'type' => Controls_Manager::HEADING,
+          'label' => __('Search', 'e-addons'),
+          'condition' => $conditions_datatables_filter,
+          ]
+          ); */
+        $this->add_control(
                 'datatables_filter_heading', [
-            'type' => Controls_Manager::HEADING,
-            'label' => __('Search', 'e-addons'),
+            'type' => Controls_Manager::RAW_HTML,
+            'show_label' => false,
+            'raw' => '<i class="fas fa-search"></i> <b>' . __('Search', 'e-addons') . '</b>',
+            'content_classes' => 'e-add-inner-heading',
+            'separator' => 'before',
             'condition' => $conditions_datatables_filter,
                 ]
-        );*/
-        $this->add_control(
-            'datatables_filter_heading', [
-                'type' => Controls_Manager::RAW_HTML,
-                'show_label' => false,
-                'raw' => '<i class="fas fa-search"></i> <b>' . __('Search', 'e-addons') . '</b>',
-                'content_classes' => 'e-add-inner-heading',
-                'separator' => 'before',
-                'condition' => $conditions_datatables_filter,
-            ]
         );
         $selector_id = 'datatables_filter';
         $selector = '.dataTables_wrapper .dataTables_filter input';
@@ -550,22 +567,22 @@ class Table extends Base {
 
         $conditions_datatables_buttons = $conditions_datatables;
         $conditions_datatables_buttons[$this->get_id() . '_buttons!'] = '';
-        /*$this->add_control(
-                'datatables_buttons_heading', [
-            'type' => Controls_Manager::HEADING,
-            'label' => __('Buttons', 'e-addons'),
-            'condition' => $conditions_datatables_buttons,
-                ]
-        );*/
+        /* $this->add_control(
+          'datatables_buttons_heading', [
+          'type' => Controls_Manager::HEADING,
+          'label' => __('Buttons', 'e-addons'),
+          'condition' => $conditions_datatables_buttons,
+          ]
+          ); */
         $this->add_control(
-            'datatables_buttons_heading', [
-                'type' => Controls_Manager::RAW_HTML,
-                'show_label' => false,
-                'raw' => '<i class="fas fa-mouse-pointer"></i> <b>' . __('Buttons', 'e-addons') . '</b>',
-                'content_classes' => 'e-add-inner-heading',
-                'separator' => 'before',
-                'condition' => $conditions_datatables_filter,
-            ]
+                'datatables_buttons_heading', [
+            'type' => Controls_Manager::RAW_HTML,
+            'show_label' => false,
+            'raw' => '<i class="fas fa-mouse-pointer"></i> <b>' . __('Buttons', 'e-addons') . '</b>',
+            'content_classes' => 'e-add-inner-heading',
+            'separator' => 'before',
+            'condition' => $conditions_datatables_filter,
+                ]
         );
         $selector_id = 'datatables_buttons';
         $selector = '.dataTables_wrapper .dt-buttons button';
@@ -585,7 +602,7 @@ class Table extends Base {
             'condition' => $conditions_datatables_buttons,
                 ]
         );
-        $this->add_special_controls($selector.':hover', $selector_id . '_hover');
+        $this->add_special_controls($selector . ':hover', $selector_id . '_hover');
         $this->end_controls_tab();
         $this->end_controls_tabs();
         $this->add_common_controls($selector, $selector_id, $conditions_datatables_buttons);
@@ -639,7 +656,7 @@ class Table extends Base {
         $item_class = ' ' . $this->get_item_class();
         ?>
         <tr<?php
-        echo ' class="e-add-post e-add-post-item e-add-post-item-' . $this->parent->get_id() . $item_class.'"';
+        echo ' class="e-add-post e-add-post-item e-add-post-item-' . $this->parent->get_id() . $item_class . '"';
         //post_class(['e-add-post e-add-post-item e-add-post-item-' . $this->parent->get_id() . $item_class]);
         echo $data_post_id . $data_post_index;
         ?>><?php
