@@ -633,6 +633,9 @@ class Table extends Base {
             echo '<thead><tr>';
             $_items = $this->parent->get_settings_for_display('list_items');
             // ITEMS ///////////////////////
+            if ($this->parent->get_querytype() == 'attachment') {
+                echo '<th>' . __('Media') . '</th>';
+            } 
             foreach ($_items as $item) {
                 $label = $this->get_item_label($item);
                 echo '<th>' . $label . '</th>';
