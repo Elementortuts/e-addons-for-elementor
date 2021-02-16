@@ -67,6 +67,9 @@ class Table extends Base {
                     'label' => __('Use DataTables', 'e-addons'),
                     'type' => Controls_Manager::SWITCHER,
                     'frontend_available' => true,
+                    'condition' => [
+                        'infiniteScroll_enable' => '',
+                    ]
                 ]
         );
 
@@ -78,6 +81,7 @@ class Table extends Base {
                     'frontend_available' => true,
                     'condition' => [
                         $this->get_id() . '_datatables!' => '',
+                        'infiniteScroll_enable' => '',
                     ]
                 ]
         );
@@ -89,6 +93,7 @@ class Table extends Base {
                     'frontend_available' => true,
                     'condition' => [
                         $this->get_id() . '_datatables!' => '',
+                        'infiniteScroll_enable' => '',
                     ]
                 ]
         );
@@ -100,6 +105,7 @@ class Table extends Base {
                     'frontend_available' => true,
                     'condition' => [
                         $this->get_id() . '_datatables!' => '',
+                        'infiniteScroll_enable' => '',
                     ]
                 ]
         );
@@ -114,6 +120,7 @@ class Table extends Base {
                     ],
                     'condition' => [
                         $this->get_id() . '_datatables!' => '',
+                        'infiniteScroll_enable' => '',
                     ]
                 ]
         );
@@ -125,6 +132,7 @@ class Table extends Base {
                     'frontend_available' => true,
                     'condition' => [
                         $this->get_id() . '_datatables!' => '',
+                        'infiniteScroll_enable' => '',
                     ]
                 ]
         );
@@ -145,6 +153,7 @@ class Table extends Base {
                     'condition' => [
                         $this->get_id() . '_datatables!' => '',
                         $this->get_id() . '_hide_header' => '',
+                        'infiniteScroll_enable' => '',
                     ]
                 ]
         );
@@ -614,7 +623,7 @@ class Table extends Base {
             echo '</tr></thead>';
         }
 
-        echo '<tbody>';
+        echo '<tbody class="e-add-posts-wrapper">';
     }
 
     protected function render_loop_end() {
@@ -622,7 +631,18 @@ class Table extends Base {
     }
 
     public function render_item_start($key = 'post') {
-        echo '<tr>';
+        //@p data post ID
+        $data_post_id = ' data-e-add-post-id="' . $this->current_id . '"';
+        //@p data post INDEX
+        $data_post_index = ' data-e-add-post-index="' . $this->counter . '"';
+        //@p una classe personalizzata per lo skin
+        $item_class = ' ' . $this->get_item_class();
+        ?>
+        <tr<?php
+        echo ' class="e-add-post e-add-post-item e-add-post-item-' . $this->parent->get_id() . $item_class.'"';
+        //post_class(['e-add-post e-add-post-item e-add-post-item-' . $this->parent->get_id() . $item_class]);
+        echo $data_post_id . $data_post_index;
+        ?>><?php
     }
 
     public function render_item_end() {
